@@ -603,6 +603,7 @@ if (require.main === module) {
 
 module.exports = {
   app,
+  start,
   loadState,
   computeScore,
   signAccessToken,
