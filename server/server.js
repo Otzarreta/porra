@@ -1,6 +1,6 @@
-/* ═══════════════════════════════════════════════════════
-   PORRA MUNDIAL 2026 — BACKEND EXPRESS
-═══════════════════════════════════════════════════════ */
+/* ==========================================================================
+   Porra Mundial 2026 - backend Express
+========================================================================== */
 const express = require('express');
 const path = require('path');
 const fs = require('fs').promises;
@@ -8,77 +8,94 @@ const crypto = require('crypto');
 
 const {computeScore} = require('./scoring.js');
 const {scrape365Scores, SCRAPE_INTERVAL_MS} = require('./scraper.js');
+const {
+  GROUP_ORDER,
+  GROUP_FIXTURES,
+  TEAM_IDS,
+  BRACKET_MATCHES,
+  normalizeGroupPredictions,
+  normalizeName,
+  normalizeScore,
+  isScoreComplete,
+  resolveBracketMatches,
+  getTeamName,
+} = require('../public/fixtures.js');
+
+const ACCESS_TOKEN_TTL_MS = 1000 * 60 * 60 * 24 * 60; // 60 dias
+const MAX_GOALS_PER_MATCH = 50;
+const MAX_PLAYER_GOALS = 100;
 
 const ROOT = path.join(__dirname, '..');
 const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(__dirname, 'data');
-const PORRAS_FILE  = path.join(DATA_DIR, 'porras.json');
+const PORRAS_FILE = path.join(DATA_DIR, 'porras.json');
 const RESULTS_FILE = path.join(DATA_DIR, 'results.json');
-const META_FILE    = path.join(DATA_DIR, 'meta.json');
+const META_FILE = path.join(DATA_DIR, 'meta.json');
+const PLAYERS_FILE = path.join(DATA_DIR, 'players.json');
 
-// Default deadline: 1h antes del primer partido (11 jun 2026, ~17:00 ET)
 const DEFAULT_DEADLINE = '2026-06-11T19:00:00Z';
 const PORT = process.env.PORT || 3000;
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || null;
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || ADMIN_TOKEN || 'porra-local-dev-secret';
 
-/* ═════════════════════════════════════════
-   ESTADO EN MEMORIA (persistido en disco)
-═════════════════════════════════════════ */
-let porras = {};           // {id: {...porraData, updatedAt}}
-let results = null;        // resultados reales (o null)
+let porras = {};
+let players = [];
+let results = null;
 let metaState = {
   deadline: DEFAULT_DEADLINE,
-  lastScrape: null,        // {ok, at, error?}
+  lastScrape: null,
 };
 
-/* ═════════════════════════════════════════
-   PERSISTENCIA ATÓMICA
-═════════════════════════════════════════ */
-async function readJson(file, fallback) {
+async function readJson(file, fallback, createIfMissing = false) {
   try {
     const txt = await fs.readFile(file, 'utf8');
     return JSON.parse(txt);
   } catch (err) {
-    if (err.code === 'ENOENT') return fallback;
-    throw err;
+    if (err.code !== 'ENOENT') throw err;
+    if (createIfMissing) await writeJsonAtomic(file, fallback);
+    return fallback;
   }
 }
 
 async function writeJsonAtomic(file, data) {
-  const tmp = file + '.' + crypto.randomBytes(4).toString('hex') + '.tmp';
+  const tmp = `${file}.${crypto.randomBytes(4).toString('hex')}.tmp`;
   await fs.writeFile(tmp, JSON.stringify(data, null, 2), 'utf8');
   await fs.rename(tmp, file);
 }
 
+const writeQueues = new Map();
+
+function writeJsonSerialized(file, data) {
+  const prev = writeQueues.get(file) || Promise.resolve();
+  const next = prev.catch(() => {}).then(() => writeJsonAtomic(file, data));
+  writeQueues.set(file, next);
+  next.finally(() => {
+    if (writeQueues.get(file) === next) writeQueues.delete(file);
+  });
+  return next;
+}
+
 async function loadState() {
   await fs.mkdir(DATA_DIR, {recursive: true});
-  porras    = await readJson(PORRAS_FILE,  {});
-  results   = await readJson(RESULTS_FILE, null);
-  metaState = {...metaState, ...(await readJson(META_FILE, {}))};
+  porras = await readJson(PORRAS_FILE, {}, true);
+  players = sanitizePlayers(await readJson(PLAYERS_FILE, [], true));
+  results = await readJson(RESULTS_FILE, null, true);
+  metaState = {...metaState, ...(await readJson(META_FILE, metaState, true))};
 }
 
 const isLocked = () => Date.now() > Date.parse(metaState.deadline);
 
-/* ═════════════════════════════════════════
-   APP
-═════════════════════════════════════════ */
 const app = express();
-app.use(express.json({limit: '256kb'}));
+app.use(express.json({limit: '2mb'}));
 app.use(express.static(path.join(ROOT, 'public')));
 
-// Health
-app.get('/api/health', (_req, res) => res.json({ok:true, uptime: process.uptime()}));
+app.get('/api/health', (_req, res) => res.json({ok: true, uptime: process.uptime()}));
 
-// Meta
-app.get('/api/meta', (_req, res) => {
-  res.json({
-    deadline: metaState.deadline,
-    locked: isLocked(),
-    lastScrape: metaState.lastScrape,
-    count: Object.keys(porras).length,
-  });
-});
+app.get('/api/meta', (_req, res) => res.json(publicMeta()));
 
-// Listado de porras (resumen)
+app.get('/api/players', (_req, res) => res.json(players));
+
+app.get('/api/results', (_req, res) => res.json(results || null));
+
 app.get('/api/porras', (_req, res) => {
   const list = Object.values(porras).map(p => ({
     id: p.id,
@@ -88,76 +105,122 @@ app.get('/api/porras', (_req, res) => {
   res.json(list);
 });
 
-// Una porra
 app.get('/api/porras/:id', (req, res) => {
-  const p = porras[req.params.id];
-  if (!p) return res.status(404).json({error: 'not_found'});
-  res.json(p);
+  const porra = porras[req.params.id];
+  if (!porra) return res.status(404).json({error: 'not_found'});
+
+  const payload = getAccessPayload(req);
+  const admin = isAdminRequest(req);
+  if (!admin && payload?.porraId !== porra.id) {
+    return res.status(401).json({error: 'unauthorized'});
+  }
+
+  res.json(porra);
 });
 
-// Crear/actualizar
+app.post('/api/access', async (req, res) => {
+  const email = normalizeEmail(req.body?.email);
+  const requestedPlayer = sanitizeStr(req.body?.player, 80).trim();
+  if (!email) return res.status(400).json({error: 'email_required'});
+
+  let porra = findPorraByEmail(email);
+  if (!porra) {
+    if (isLocked()) {
+      return res.status(423).json({error: 'locked', message: 'El plazo de envio ha finalizado.'});
+    }
+    const player = requestedPlayer || email.split('@')[0];
+    porra = createEmptyPorra({email, player});
+    porras[porra.id] = porra;
+    await writeJsonSerialized(PORRAS_FILE, porras);
+  } else if (!isLocked() && requestedPlayer && requestedPlayer !== porra.player) {
+    porra.player = requestedPlayer;
+    porra.updatedAt = new Date().toISOString();
+    await writeJsonSerialized(PORRAS_FILE, porras);
+  }
+
+  res.json({
+    porra,
+    accessToken: signAccessToken({porraId: porra.id, email}),
+    meta: publicMeta(),
+  });
+});
+
 app.post('/api/porras', async (req, res) => {
-  const data = req.body || {};
-  let {id} = data;
-
-  if (id && !porras[id]) {
-    // si trae id pero no existe (¿borrado?), lo regeneramos
-    id = null;
-  }
-
+  const payload = getAccessPayload(req);
+  if (!payload) return res.status(401).json({error: 'access_token_required'});
   if (isLocked()) {
-    return res.status(423).json({error: 'locked', message: 'El plazo de envío ha finalizado.'});
+    return res.status(423).json({error: 'locked', message: 'El plazo de envio ha finalizado.'});
   }
 
-  if (!id) {
-    id = crypto.randomUUID();
+  const existing = porras[payload.porraId];
+  if (!existing || normalizeEmail(existing.email) !== payload.email) {
+    return res.status(401).json({error: 'invalid_access'});
   }
 
+  const data = req.body || {};
   const stored = {
-    id,
-    player: typeof data.player === 'string' ? data.player.slice(0, 80) : '',
-    groupResults: sanitizeGroupResults(data.groupResults),
+    ...existing,
+    player: sanitizeStr(data.player || existing.player, 80).trim() || existing.player,
+    groupPredictions: normalizeGroupPredictions(data.groupPredictions),
     bracketWinners: sanitizeBracketWinners(data.bracketWinners),
-    finalist1:       sanitizeStr(data.finalist1),
-    finalist2:       sanitizeStr(data.finalist2),
-    champion:        sanitizeStr(data.champion),
-    topScorerTeam:   sanitizeStr(data.topScorerTeam),
-    bestDefenseTeam: sanitizeStr(data.bestDefenseTeam),
-    topScorerPlayer: sanitizeStr(data.topScorerPlayer, 80),
-    createdAt: porras[id]?.createdAt || new Date().toISOString(),
+    topScorerTeam: sanitizeTeamId(data.topScorerTeam),
+    bestDefenseTeam: sanitizeTeamId(data.bestDefenseTeam),
+    topScorerPlayerId: sanitizePlayerId(data.topScorerPlayerId),
     updatedAt: new Date().toISOString(),
   };
 
-  porras[id] = stored;
-  await writeJsonAtomic(PORRAS_FILE, porras);
-  res.json({id, updatedAt: stored.updatedAt});
+  porras[stored.id] = stored;
+  await writeJsonSerialized(PORRAS_FILE, porras);
+
+  res.json({id: stored.id, updatedAt: stored.updatedAt});
 });
 
-// Resultados reales
-app.get('/api/results', (_req, res) => {
-  res.json(results || null);
+app.get('/api/matches/:matchId/predictions', (req, res) => {
+  const data = collectMatchPredictions(req.params.matchId);
+  if (!data) return res.status(404).json({error: 'match_not_found'});
+  res.json(data);
 });
 
-// Ranking
 app.get('/api/ranking', (_req, res) => {
   const list = Object.values(porras).map(p => {
-    const bd = computeScore(p, results);
+    const breakdown = computeScore(p, results);
     return {
       id: p.id,
-      player: p.player || '—',
-      total: bd.total,
-      breakdown: bd,
+      player: p.player || '-',
+      total: breakdown.total,
+      breakdown,
       updatedAt: p.updatedAt,
     };
-  }).sort((a, b) => b.total - a.total);
+  }).sort((a, b) => b.total - a.total || String(a.player).localeCompare(String(b.player)));
   res.json(list);
 });
 
-// Admin: forzar refresh del scrape
-app.post('/api/admin/scrape', async (req, res) => {
-  if (!ADMIN_TOKEN || req.get('x-admin-token') !== ADMIN_TOKEN) {
-    return res.status(401).json({error: 'unauthorized'});
+app.post('/api/admin/players', async (req, res) => {
+  if (!requireAdmin(req, res)) return;
+  const incoming = Array.isArray(req.body) ? req.body : req.body?.players;
+  if (!Array.isArray(incoming)) return res.status(400).json({error: 'players_array_required'});
+  players = sanitizePlayers(incoming);
+  await writeJsonSerialized(PLAYERS_FILE, players);
+  res.json({ok: true, count: players.length});
+});
+
+app.post('/api/admin/results', async (req, res) => {
+  if (!requireAdmin(req, res)) return;
+  let sanitized;
+  try {
+    sanitized = sanitizeResults(req.body);
+  } catch (err) {
+    return res.status(400).json({error: 'results_invalid', message: err.message});
   }
+  results = sanitized;
+  await writeJsonSerialized(RESULTS_FILE, results);
+  metaState.lastScrape = {ok: true, at: new Date().toISOString(), source: 'manual'};
+  await writeJsonSerialized(META_FILE, metaState);
+  res.json({ok: true});
+});
+
+app.post('/api/admin/scrape', async (req, res) => {
+  if (!requireAdmin(req, res)) return;
   try {
     await runScrape({throwOnError: true});
     res.json({ok: true, lastScrape: metaState.lastScrape});
@@ -166,71 +229,353 @@ app.post('/api/admin/scrape', async (req, res) => {
   }
 });
 
-// Admin: sobrescribir resultados manualmente
-app.post('/api/admin/results', async (req, res) => {
-  if (!ADMIN_TOKEN || req.get('x-admin-token') !== ADMIN_TOKEN) {
-    return res.status(401).json({error: 'unauthorized'});
-  }
-  results = req.body || null;
-  await writeJsonAtomic(RESULTS_FILE, results);
-  metaState.lastScrape = {ok: true, at: new Date().toISOString(), source: 'manual'};
-  await writeJsonAtomic(META_FILE, metaState);
-  res.json({ok: true});
-});
-
-/* ═════════════════════════════════════════
-   SANITIZACIÓN
-═════════════════════════════════════════ */
-function sanitizeStr(s, max=60) {
-  if (typeof s !== 'string') return '';
-  return s.slice(0, max);
+function publicMeta() {
+  return {
+    deadline: metaState.deadline,
+    locked: isLocked(),
+    lastScrape: metaState.lastScrape,
+    count: Object.keys(porras).length,
+  };
 }
 
-function sanitizeGroupResults(gr) {
+function createEmptyPorra({email, player}) {
+  const now = new Date().toISOString();
+  return {
+    id: crypto.randomUUID(),
+    email,
+    player: sanitizeStr(player, 80).trim(),
+    groupPredictions: normalizeGroupPredictions(null),
+    bracketWinners: {},
+    topScorerTeam: '',
+    bestDefenseTeam: '',
+    topScorerPlayerId: '',
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
+function findPorraByEmail(email) {
+  const normalized = normalizeEmail(email);
+  return Object.values(porras).find(porra => normalizeEmail(porra.email) === normalized) || null;
+}
+
+function normalizeEmail(value) {
+  const email = String(value || '').trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return '';
+  return email.slice(0, 160);
+}
+
+function sanitizeStr(value, max = 60) {
+  if (typeof value !== 'string') return '';
+  return value.slice(0, max);
+}
+
+function sanitizeTeamId(value) {
+  return TEAM_IDS.includes(value) ? value : '';
+}
+
+function sanitizePlayerId(value) {
+  if (typeof value !== 'string') return '';
+  return value.replace(/[^a-zA-Z0-9_.:-]/g, '').slice(0, 120);
+}
+
+function sanitizeBracketWinners(input) {
   const out = {};
-  if (!gr || typeof gr !== 'object') return out;
-  for (const g of Object.keys(gr)) {
-    const arr = gr[g];
-    if (!Array.isArray(arr)) continue;
-    out[g] = arr.slice(0, 6).map(v => (v === '1' || v === 'x' || v === '2') ? v : null);
-    while (out[g].length < 6) out[g].push(null);
+  const validMatchIds = new Set(BRACKET_MATCHES.map(match => match.id));
+  if (!input || typeof input !== 'object') return out;
+  Object.entries(input).forEach(([matchId, teamId]) => {
+    if (validMatchIds.has(matchId) && TEAM_IDS.includes(teamId)) out[matchId] = teamId;
+  });
+  return out;
+}
+
+function sanitizeResults(input) {
+  if (input === null || input === undefined) return null;
+  if (typeof input !== 'object' || Array.isArray(input)) {
+    throw new Error('results_not_object');
+  }
+  const out = {
+    groupMatches: sanitizeGroupMatches(input.groupMatches),
+    bracketAdvanced: sanitizeBracketAdvanced(input.bracketAdvanced),
+    teamGoals: sanitizeTeamGoals(input.teamGoals),
+    playerGoals: sanitizePlayerGoals(input.playerGoals),
+    lastUpdated: typeof input.lastUpdated === 'string' ? input.lastUpdated.slice(0, 40) : new Date().toISOString(),
+    source: typeof input.source === 'string' ? input.source.slice(0, 40) : 'manual',
+  };
+  if (input.sourceMeta && typeof input.sourceMeta === 'object' && !Array.isArray(input.sourceMeta)) {
+    out.sourceMeta = sanitizeSourceMeta(input.sourceMeta);
   }
   return out;
 }
 
-function sanitizeBracketWinners(bw) {
+function sanitizeGroupMatches(input) {
   const out = {};
-  if (!bw || typeof bw !== 'object') return out;
-  for (const k of Object.keys(bw)) {
-    if (typeof bw[k] === 'string' && bw[k].length <= 60) out[k] = bw[k];
-  }
+  if (!input || typeof input !== 'object') return out;
+  GROUP_ORDER.forEach(group => {
+    const arr = Array.isArray(input[group]) ? input[group] : null;
+    if (!arr) return;
+    const matches = [];
+    arr.forEach(item => {
+      if (!item || typeof item !== 'object') return;
+      const idx = Number(item.idx);
+      const fixture = Number.isInteger(idx) ? GROUP_FIXTURES[group]?.[idx] : null;
+      if (!fixture) return;
+      const goalsHome = sanitizeGoalCount(item.goalsHome);
+      const goalsAway = sanitizeGoalCount(item.goalsAway);
+      const declared = ['1', 'x', '2'].includes(item.result) ? item.result : null;
+      const derived = derivedResult(goalsHome, goalsAway);
+      const result = declared || derived;
+      if (!result) return;
+      const match = {
+        idx,
+        home: fixture.homeId,
+        away: fixture.awayId,
+        goalsHome: goalsHome == null ? null : goalsHome,
+        goalsAway: goalsAway == null ? null : goalsAway,
+        result,
+      };
+      if (typeof item.sourceGameId === 'string' || typeof item.sourceGameId === 'number') {
+        match.sourceGameId = String(item.sourceGameId).slice(0, 80);
+      }
+      matches.push(match);
+    });
+    if (matches.length) out[group] = matches.sort((a, b) => a.idx - b.idx);
+  });
   return out;
 }
 
-/* ═════════════════════════════════════════
-   SCRAPE LOOP
-═════════════════════════════════════════ */
+function sanitizeBracketAdvanced(input) {
+  const base = {r32: [], r16: [], qf: [], sf: [], finalists: [], champion: null};
+  if (!input || typeof input !== 'object') return base;
+  ['r32', 'r16', 'qf', 'sf', 'finalists'].forEach(key => {
+    const arr = Array.isArray(input[key]) ? input[key] : [];
+    base[key] = Array.from(new Set(arr.filter(id => TEAM_IDS.includes(id))));
+  });
+  base.champion = TEAM_IDS.includes(input.champion) ? input.champion : null;
+  return base;
+}
+
+function sanitizeTeamGoals(input) {
+  const out = {};
+  if (!input || typeof input !== 'object') return out;
+  Object.entries(input).forEach(([teamId, value]) => {
+    if (!TEAM_IDS.includes(teamId) || !value || typeof value !== 'object') return;
+    const forGoals = sanitizeGoalCount(value.for);
+    const againstGoals = sanitizeGoalCount(value.against);
+    if (forGoals == null && againstGoals == null) return;
+    out[teamId] = {for: forGoals ?? 0, against: againstGoals ?? 0};
+  });
+  return out;
+}
+
+function sanitizePlayerGoals(input) {
+  const out = {};
+  if (!input || typeof input !== 'object') return out;
+  Object.entries(input).forEach(([rawId, value]) => {
+    const id = sanitizePlayerId(rawId);
+    if (!id) return;
+    const n = Number(value);
+    if (!Number.isFinite(n) || n < 0 || n > MAX_PLAYER_GOALS) return;
+    out[id] = Math.floor(n);
+  });
+  return out;
+}
+
+function sanitizeSourceMeta(input) {
+  const out = {};
+  Object.entries(input).forEach(([key, value]) => {
+    if (typeof key !== 'string' || key.length > 40) return;
+    if (value === null || ['string', 'number', 'boolean'].includes(typeof value)) {
+      out[key] = typeof value === 'string' ? value.slice(0, 200) : value;
+    } else if (Array.isArray(value)) {
+      out[key] = value.slice(0, 50).map(item => {
+        if (item === null || ['string', 'number', 'boolean'].includes(typeof item)) return item;
+        if (item && typeof item === 'object') return sanitizeSourceMeta(item);
+        return null;
+      });
+    } else if (value && typeof value === 'object') {
+      out[key] = sanitizeSourceMeta(value);
+    }
+  });
+  return out;
+}
+
+function sanitizeGoalCount(value) {
+  if (value === null || value === undefined || value === '') return null;
+  const n = Number(value);
+  if (!Number.isFinite(n) || n < 0 || n > MAX_GOALS_PER_MATCH) return null;
+  return Math.floor(n);
+}
+
+function derivedResult(home, away) {
+  if (home == null || away == null) return null;
+  if (home > away) return '1';
+  if (away > home) return '2';
+  return 'x';
+}
+
+function sanitizePlayers(input) {
+  const seen = new Set();
+  const out = [];
+  (Array.isArray(input) ? input : []).forEach(item => {
+    if (!item || typeof item !== 'object') return;
+    const name = sanitizeStr(item.name, 100).trim();
+    const teamId = sanitizeTeamId(item.teamId);
+    if (!name || !teamId) return;
+    let id = sanitizePlayerId(item.id) || `${teamId}-${slugify(name)}`;
+    if (seen.has(id)) {
+      let suffix = 2;
+      while (seen.has(`${id}-${suffix}`)) suffix += 1;
+      id = `${id}-${suffix}`;
+    }
+    seen.add(id);
+    out.push({
+      id,
+      name,
+      teamId,
+      active: item.active !== false,
+    });
+  });
+  return out.sort((a, b) => a.teamId.localeCompare(b.teamId) || a.name.localeCompare(b.name));
+}
+
+function collectMatchPredictions(matchId) {
+  const normalizedId = String(matchId || '').trim().toUpperCase();
+  const groupMatch = normalizedId.match(/^([A-L])([1-6])$/);
+  if (groupMatch) {
+    const group = groupMatch[1];
+    const idx = Number(groupMatch[2]) - 1;
+    const fixture = GROUP_FIXTURES[group]?.[idx];
+    if (!fixture) return null;
+    return {
+      matchId: normalizedId,
+      type: 'group',
+      group,
+      idx,
+      homeId: fixture.homeId,
+      awayId: fixture.awayId,
+      predictions: publicPorras().map(porra => {
+        const score = normalizeScore(porra.groupPredictions?.[group]?.[idx]);
+        return {
+          player: porra.player || '-',
+          updatedAt: porra.updatedAt,
+          complete: isScoreComplete(score),
+          homeGoals: score.homeGoals,
+          awayGoals: score.awayGoals,
+        };
+      }),
+    };
+  }
+
+  const bracketMatch = BRACKET_MATCHES.find(match => match.id === normalizedId);
+  if (!bracketMatch) return null;
+  return {
+    matchId: normalizedId,
+    type: 'bracket',
+    round: bracketMatch.round,
+    sourceLabels: bracketMatch.sources.map(source => source.label || ''),
+    predictions: publicPorras().map(porra => {
+      const resolved = resolveBracketMatches(porra.groupPredictions, porra.bracketWinners);
+      const slots = resolved.matches[normalizedId]?.slots || [];
+      const winnerId = porra.bracketWinners?.[normalizedId] || '';
+      return {
+        player: porra.player || '-',
+        updatedAt: porra.updatedAt,
+        slots,
+        slotNames: slots.map(teamId => teamId ? getTeamName(teamId) : ''),
+        winnerId,
+        winnerName: winnerId ? getTeamName(winnerId) : '',
+        complete: Boolean(winnerId),
+      };
+    }),
+  };
+}
+
+function publicPorras() {
+  return Object.values(porras).sort((a, b) => String(a.player || '').localeCompare(String(b.player || '')));
+}
+
+function slugify(value) {
+  return normalizeName(value).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || crypto.randomUUID();
+}
+
+function signAccessToken({porraId, email, ttlMs = ACCESS_TOKEN_TTL_MS, now = Date.now()} = {}) {
+  const payload = {
+    porraId,
+    email,
+    iat: now,
+    exp: now + ttlMs,
+  };
+  const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
+  const signature = crypto.createHmac('sha256', ACCESS_TOKEN_SECRET).update(body).digest('base64url');
+  return `${body}.${signature}`;
+}
+
+function verifyAccessToken(token, now = Date.now()) {
+  if (typeof token !== 'string' || !token.includes('.')) return null;
+  const [body, signature] = token.split('.');
+  const expected = crypto.createHmac('sha256', ACCESS_TOKEN_SECRET).update(body).digest('base64url');
+  if (!safeEqual(signature, expected)) return null;
+  try {
+    const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
+    if (!payload?.porraId || !payload?.email) return null;
+    if (typeof payload.exp === 'number' && payload.exp < now) return null;
+    payload.email = normalizeEmail(payload.email);
+    if (!payload.email) return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+function safeEqual(a, b) {
+  const left = Buffer.from(String(a || ''));
+  const right = Buffer.from(String(b || ''));
+  return left.length === right.length && crypto.timingSafeEqual(left, right);
+}
+
+function accessTokenFromRequest(req) {
+  const auth = req.get('authorization') || '';
+  if (auth.toLowerCase().startsWith('bearer ')) return auth.slice(7).trim();
+  return req.get('x-access-token') || req.body?.accessToken || '';
+}
+
+function getAccessPayload(req) {
+  return verifyAccessToken(accessTokenFromRequest(req));
+}
+
+function isAdminRequest(req) {
+  return Boolean(ADMIN_TOKEN && req.get('x-admin-token') === ADMIN_TOKEN);
+}
+
+function requireAdmin(req, res) {
+  if (!isAdminRequest(req)) {
+    res.status(401).json({error: 'unauthorized'});
+    return false;
+  }
+  return true;
+}
+
 async function runScrape({throwOnError = false} = {}) {
   try {
     const fresh = await scrape365Scores();
-    results = fresh;
-    await writeJsonAtomic(RESULTS_FILE, results);
+    results = sanitizeResults(fresh);
+    await writeJsonSerialized(RESULTS_FILE, results);
     metaState.lastScrape = {ok: true, at: new Date().toISOString()};
-    await writeJsonAtomic(META_FILE, metaState);
+    await writeJsonSerialized(META_FILE, metaState);
     console.log('[scrape] ok', new Date().toISOString());
   } catch (err) {
     console.error('[scrape] failed:', err.message);
     metaState.lastScrape = {ok: false, at: new Date().toISOString(), error: err.message};
-    await writeJsonAtomic(META_FILE, metaState);
+    await writeJsonSerialized(META_FILE, metaState);
     if (throwOnError) throw err;
   }
 }
 
 function scheduleScrape() {
-  // Solo durante el torneo
   const now = Date.now();
   const start = Date.parse('2026-06-11T00:00:00Z');
-  const end   = Date.parse('2026-07-20T00:00:00Z');
+  const end = Date.parse('2026-07-20T00:00:00Z');
   if (now < start || now > end) {
     console.log('[scrape] fuera de ventana del torneo, skipping cron');
     return;
@@ -239,10 +584,7 @@ function scheduleScrape() {
   setInterval(runScrape, SCRAPE_INTERVAL_MS);
 }
 
-/* ═════════════════════════════════════════
-   BOOT
-═════════════════════════════════════════ */
-(async () => {
+async function start() {
   await loadState();
   app.listen(PORT, () => {
     console.log(`Porra Mundial 2026 escuchando en http://localhost:${PORT}`);
@@ -250,7 +592,24 @@ function scheduleScrape() {
     console.log(`Porras cargadas: ${Object.keys(porras).length}`);
   });
   scheduleScrape();
-})().catch(err => {
-  console.error('Fatal boot error:', err);
-  process.exit(1);
-});
+}
+
+if (require.main === module) {
+  start().catch(err => {
+    console.error('Fatal boot error:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  app,
+  loadState,
+  computeScore,
+  signAccessToken,
+  verifyAccessToken,
+  sanitizePlayers,
+  sanitizeResults,
+  normalizeEmail,
+  collectMatchPredictions,
+  ACCESS_TOKEN_TTL_MS,
+};

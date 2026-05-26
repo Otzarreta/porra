@@ -1,14 +1,10 @@
-/* ═══════════════════════════════════════════════════════
-   API CLIENT — habla con el backend Express
-═══════════════════════════════════════════════════════ */
+/* API client para el backend Express. */
 const API = (() => {
   const base = '/api';
 
   async function request(path, opts = {}) {
-    const res = await fetch(base + path, {
-      headers: {'Content-Type': 'application/json'},
-      ...opts,
-    });
+    const headers = {'Content-Type': 'application/json', ...(opts.headers || {})};
+    const res = await fetch(base + path, {...opts, headers});
     if (!res.ok) {
       const err = new Error(`API ${res.status} ${res.statusText}`);
       err.status = res.status;
@@ -20,12 +16,20 @@ const API = (() => {
   }
 
   return {
-    getMeta:    () => request('/meta'),
-    getPorras:  () => request('/porras'),
-    getPorra:   (id) => request('/porras/' + encodeURIComponent(id)),
-    savePorra:  (data) => request('/porras', {method:'POST', body: JSON.stringify(data)}),
+    getMeta: () => request('/meta'),
+    getPlayers: () => request('/players'),
     getResults: () => request('/results'),
     getRanking: () => request('/ranking'),
+    getMatchPredictions: (matchId) => request('/matches/' + encodeURIComponent(matchId) + '/predictions'),
+    access: (email, player) => request('/access', {
+      method: 'POST',
+      body: JSON.stringify({email, player}),
+    }),
+    savePorra: (data, accessToken) => request('/porras', {
+      method: 'POST',
+      headers: accessToken ? {Authorization: `Bearer ${accessToken}`} : {},
+      body: JSON.stringify(data),
+    }),
   };
 })();
 

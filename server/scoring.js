@@ -1,88 +1,113 @@
-/* ═══════════════════════════════════════════════════════
-   SCORING — fuente única de verdad para el cálculo de puntos
-   Se usa tanto para el ranking server-side como (opcionalmente)
-   por el cliente para una estimación local.
-═══════════════════════════════════════════════════════ */
-const {GROUPS, GROUP_FIXTURES, R32, R16, QF, SF} = require('../public/fixtures.js');
+/* ==========================================================================
+   Scoring server-side de la porra.
+   Sin resultados reales no hay puntos: solo existe progreso de porra.
+========================================================================== */
+const {
+  GROUP_ORDER,
+  BRACKET_BY_ROUND,
+  resultFromPrediction,
+  normalizeName,
+} = require('../public/fixtures.js');
 
-const POINTS = {grupos:1, r32:2, r16:3, qf:4, sf:6, finalist:8, champion:10};
+const POINTS = {
+  grupos: 1,
+  r32: 2,
+  r16: 3,
+  qf: 4,
+  sf: 6,
+  finalist: 8,
+  champion: 10,
+};
 
-/**
- * computeScore(porra, results)
- *   porra:   {player, groupResults:{A:[...6],...}, bracketWinners:{m1:'México',...},
- *             finalist1, finalist2, champion, topScorerTeam, bestDefenseTeam, topScorerPlayer}
- *   results: opcional. Si no hay resultados reales, devuelve la "estimación":
- *            puntúa por cada pronóstico realizado (mismo cálculo que el cliente).
- *            Si hay results, puntúa solo los aciertos reales.
- *
- *   results: {
- *     groupMatches: {A:[{idx:0,result:'1'|'x'|'2'},...]},
- *     bracketAdvanced: {r32:['México','Brasil',...], r16:[...], qf:[...], sf:[...], finalists:[...], champion:'...'},
- *     teamGoals: {'México':{for:5,against:3},...},
- *     playerGoals: {'Lamine Yamal': 4, ...}
- *   }
- */
-function computeScore(porra, results) {
-  const bd = {grupos:0, r32:0, r16:0, qf:0, sf:0, finalists:0, champion:0, especiales:0};
+function emptyBreakdown() {
+  return {grupos: 0, r32: 0, r16: 0, qf: 0, sf: 0, finalists: 0, champion: 0, especiales: 0, total: 0};
+}
 
-  if (!results) {
-    // estimación: contar pronósticos hechos
-    Object.keys(GROUPS).forEach(g => {
-      (porra.groupResults?.[g] || []).forEach(r => { if (r) bd.grupos += POINTS.grupos; });
-    });
-    const cw = (matches, key, pts) => matches.forEach(m => { if (porra.bracketWinners?.[m.id]) bd[key] += pts; });
-    cw(R32,'r32',POINTS.r32); cw(R16,'r16',POINTS.r16); cw(QF,'qf',POINTS.qf); cw(SF,'sf',POINTS.sf);
-    if (porra.finalist1) bd.finalists += POINTS.finalist;
-    if (porra.finalist2) bd.finalists += POINTS.finalist;
-    if (porra.champion)  bd.champion  += POINTS.champion;
-    bd.total = sum(bd);
-    return bd;
-  }
+function computeScore(porra = {}, results = null) {
+  const bd = emptyBreakdown();
+  if (!results) return bd;
 
-  // Con resultados reales: comparar aciertos
-  // Grupos: 1 pt por cada 1X2 acertado
-  Object.keys(GROUPS).forEach(g => {
-    const pred = porra.groupResults?.[g] || [];
-    const real = results.groupMatches?.[g] || [];
-    real.forEach(m => {
-      if (m.result && pred[m.idx] === m.result) bd.grupos += POINTS.grupos;
-    });
-  });
+  scoreGroups(bd, porra, results);
+  scoreBracket(bd, porra, results);
+  scoreSpecials(bd, porra, results);
 
-  // Eliminatorias: por cada equipo correctamente predicho que llegó a la ronda
-  // El usuario predice un GANADOR de cada match; lo que cuenta es que ese equipo
-  // aparezca en el array de avanzados de esa ronda (sin importar posición).
-  const advR32 = new Set(results.bracketAdvanced?.r32 || []);
-  const advR16 = new Set(results.bracketAdvanced?.r16 || []);
-  const advQF  = new Set(results.bracketAdvanced?.qf  || []);
-  const advSF  = new Set(results.bracketAdvanced?.sf  || []);
-  const advFinalists = new Set(results.bracketAdvanced?.finalists || []);
-  const realChampion = results.bracketAdvanced?.champion || null;
-
-  R32.forEach(m => { const w = porra.bracketWinners?.[m.id]; if (w && advR32.has(w)) bd.r32 += POINTS.r32; });
-  R16.forEach(m => { const w = porra.bracketWinners?.[m.id]; if (w && advR16.has(w)) bd.r16 += POINTS.r16; });
-  QF .forEach(m => { const w = porra.bracketWinners?.[m.id]; if (w && advQF .has(w)) bd.qf  += POINTS.qf;  });
-  SF .forEach(m => { const w = porra.bracketWinners?.[m.id]; if (w && advSF .has(w)) bd.sf  += POINTS.sf;  });
-
-  if (porra.finalist1 && advFinalists.has(porra.finalist1)) bd.finalists += POINTS.finalist;
-  if (porra.finalist2 && advFinalists.has(porra.finalist2)) bd.finalists += POINTS.finalist;
-  if (porra.champion && porra.champion === realChampion)    bd.champion  += POINTS.champion;
-
-  // Especiales: 1 pt/gol marcado/recibido/anotado
-  const tg = results.teamGoals || {};
-  if (porra.topScorerTeam && tg[porra.topScorerTeam])  bd.especiales += tg[porra.topScorerTeam].for || 0;
-  if (porra.bestDefenseTeam && tg[porra.bestDefenseTeam]) bd.especiales += tg[porra.bestDefenseTeam].against || 0;
-  const pg = results.playerGoals || {};
-  if (porra.topScorerPlayer) {
-    const key = Object.keys(pg).find(k => normalizeName(k) === normalizeName(porra.topScorerPlayer));
-    if (key) bd.especiales += pg[key] || 0;
-  }
-
-  bd.total = sum(bd);
+  bd.total = bd.grupos + bd.r32 + bd.r16 + bd.qf + bd.sf + bd.finalists + bd.champion + bd.especiales;
   return bd;
 }
 
-function sum(bd) { return bd.grupos + bd.r32 + bd.r16 + bd.qf + bd.sf + bd.finalists + bd.champion + bd.especiales; }
-function normalizeName(s) { return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim(); }
+function scoreGroups(bd, porra, results) {
+  const groupMatches = results.groupMatches || {};
+  GROUP_ORDER.forEach(group => {
+    const realMatches = Array.isArray(groupMatches[group]) ? groupMatches[group] : [];
+    realMatches.forEach(match => {
+      const idx = Number(match.idx);
+      if (!Number.isInteger(idx) || !match.result) return;
+      const predicted = getPredictedGroupResult(porra, group, idx);
+      if (predicted && predicted === match.result) bd.grupos += POINTS.grupos;
+    });
+  });
+}
 
-module.exports = {computeScore, POINTS};
+function getPredictedGroupResult(porra, group, idx) {
+  const score = porra.groupPredictions?.[group]?.[idx];
+  const scoreResult = resultFromPrediction(score);
+  if (scoreResult) return scoreResult;
+
+  const legacy = porra.groupResults?.[group]?.[idx];
+  return resultFromPrediction(legacy);
+}
+
+function scoreBracket(bd, porra, results) {
+  const advanced = results.bracketAdvanced || {};
+  addRoundPoints(bd, 'r32', BRACKET_BY_ROUND.r32, new Set(advanced.r32 || []));
+  addRoundPoints(bd, 'r16', BRACKET_BY_ROUND.r16, new Set(advanced.r16 || []));
+  addRoundPoints(bd, 'qf', BRACKET_BY_ROUND.qf, new Set(advanced.qf || []));
+  addRoundPoints(bd, 'sf', BRACKET_BY_ROUND.sf, new Set(advanced.sf || []));
+
+  const finalists = new Set(advanced.finalists || []);
+  const predictedFinalists = getPredictedFinalists(porra);
+  predictedFinalists.forEach(teamId => {
+    if (teamId && finalists.has(teamId)) bd.finalists += POINTS.finalist;
+  });
+
+  const predictedChampion = porra.bracketWinners?.M104 || porra.champion || '';
+  if (predictedChampion && predictedChampion === advanced.champion) {
+    bd.champion += POINTS.champion;
+  }
+
+  function addRoundPoints(target, key, matches, realSet) {
+    matches.forEach(match => {
+      const predicted = porra.bracketWinners?.[match.id];
+      if (predicted && realSet.has(predicted)) target[key] += POINTS[key];
+    });
+  }
+}
+
+function getPredictedFinalists(porra) {
+  const fromBracket = [porra.bracketWinners?.M101, porra.bracketWinners?.M102].filter(Boolean);
+  if (fromBracket.length) return fromBracket;
+  return [porra.finalist1, porra.finalist2].filter(Boolean);
+}
+
+function scoreSpecials(bd, porra, results) {
+  const teamGoals = results.teamGoals || {};
+  const topTeam = porra.topScorerTeam || '';
+  const defenseTeam = porra.bestDefenseTeam || '';
+  if (topTeam && teamGoals[topTeam]) bd.especiales += Number(teamGoals[topTeam].for) || 0;
+  if (defenseTeam && teamGoals[defenseTeam]) bd.especiales += Number(teamGoals[defenseTeam].against) || 0;
+
+  const playerGoals = results.playerGoals || {};
+  const playerId = porra.topScorerPlayerId || '';
+  if (playerId && Object.prototype.hasOwnProperty.call(playerGoals, playerId)) {
+    bd.especiales += Number(playerGoals[playerId]) || 0;
+    return;
+  }
+
+  const legacyPlayer = porra.topScorerPlayer || '';
+  if (legacyPlayer) {
+    const key = Object.keys(playerGoals).find(candidate => normalizeName(candidate) === normalizeName(legacyPlayer));
+    if (key) bd.especiales += Number(playerGoals[key]) || 0;
+  }
+}
+
+module.exports = {computeScore, POINTS, emptyBreakdown};

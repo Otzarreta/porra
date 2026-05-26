@@ -19,18 +19,18 @@ test('normalize365ScoresGames maps a 365Scores group match into groupMatches', (
   assert.deepEqual(results.groupMatches.A, [
     {
       idx: 0,
-      home: 'México',
-      away: 'Sudáfrica',
+      home: 'mexico',
+      away: 'south-africa',
       goalsHome: 2,
       goalsAway: 1,
       result: '1',
       sourceGameId: 1001,
     },
   ]);
-  assert.equal(results.teamGoals['México'].for, 2);
-  assert.equal(results.teamGoals['México'].against, 1);
-  assert.equal(results.teamGoals['Sudáfrica'].for, 1);
-  assert.equal(results.teamGoals['Sudáfrica'].against, 2);
+  assert.equal(results.teamGoals.mexico.for, 2);
+  assert.equal(results.teamGoals.mexico.against, 1);
+  assert.equal(results.teamGoals['south-africa'].for, 1);
+  assert.equal(results.teamGoals['south-africa'].against, 2);
   assert.deepEqual(results.playerGoals, {});
 });
 
@@ -48,5 +48,9 @@ test('normalize365ScoresGames keeps fixture result perspective if source home/aw
   ], new Date('2026-06-11T22:00:00Z'));
 
   assert.equal(results.groupMatches.A[0].idx, 0);
+  assert.equal(results.groupMatches.A[0].home, 'mexico');
+  assert.equal(results.groupMatches.A[0].away, 'south-africa');
+  assert.equal(results.groupMatches.A[0].goalsHome, 1);
+  assert.equal(results.groupMatches.A[0].goalsAway, 0);
   assert.equal(results.groupMatches.A[0].result, '1');
 });
