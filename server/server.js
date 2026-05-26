@@ -48,11 +48,29 @@ let metaState = {
 };
 
 async function readJson(file, fallback, createIfMissing = false) {
+  let txt;
   try {
-    const txt = await fs.readFile(file, 'utf8');
-    return JSON.parse(txt);
+    txt = await fs.readFile(file, 'utf8');
   } catch (err) {
     if (err.code !== 'ENOENT') throw err;
+    if (createIfMissing) await writeJsonAtomic(file, fallback);
+    return fallback;
+  }
+
+  if (!txt.trim()) {
+    console.warn(`[readJson] ${file} esta vacio, restaurando fallback.`);
+    if (createIfMissing) await writeJsonAtomic(file, fallback);
+    return fallback;
+  }
+
+  try {
+    return JSON.parse(txt);
+  } catch (err) {
+    const backup = `${file}.corrupt-${Date.now()}`;
+    console.error(`[readJson] ${file} con JSON invalido (${err.message}). Renombrado a ${backup}, arrancando con fallback.`);
+    try { await fs.rename(file, backup); } catch (renameErr) {
+      console.error(`[readJson] no pude renombrar ${file}: ${renameErr.message}`);
+    }
     if (createIfMissing) await writeJsonAtomic(file, fallback);
     return fallback;
   }
