@@ -1668,6 +1668,11 @@ select:focus {
   .home-hero {
     min-height: 0;
     padding-top: var(--space-5);
+    padding-inline: var(--space-4);
+  }
+
+  .home-grid, .matches-panel{
+    padding-inline: var(--space-4);
   }
 
   .hero-stats {
@@ -1706,9 +1711,12 @@ select:focus {
   }
 
   .app-shell {
-    width: min(100% - 18px, 1320px);
+    width: 100%;
     padding-top: var(--space-3);
+    padding-inline: 0px;
   }
+
+
 
   h1 {
     font-size: 4rem;
@@ -1731,7 +1739,7 @@ select:focus {
   }
 
   .match-teams {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto 1fr;
     gap: 6px;
   }
 
