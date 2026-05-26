@@ -1,6 +1,6 @@
 /* global API, GROUP_ORDER, GROUPS, TEAMS, TEAM_IDS, GROUP_FIXTURES, BRACKET_BY_ROUND, BRACKET_MATCHES */
 /* global createEmptyGroupPredictions, normalizeGroupPredictions, sanitizeScoreValue, isScoreComplete */
-/* global buildGroupStandings, buildAllGroupStandings, rankThirdPlaced, resolveBracketMatches, getTeamName, getTeamFlag */
+/* global buildGroupStandings, resolveBracketMatches, getTeamName, getTeamFlag */
 
 const state = {
   meta: {locked: false, deadline: null},
@@ -89,6 +89,14 @@ function showGame() {
   document.getElementById('game-view').classList.remove('hidden');
   document.getElementById('active-player').textContent = state.player || '-';
   renderAll();
+}
+
+function returnHome() {
+  document.getElementById('game-view').classList.add('hidden');
+  document.getElementById('home-view').classList.remove('hidden');
+  document.getElementById('player-email').value = state.email || localStorage.getItem('porraEmail') || '';
+  document.getElementById('player-alias').value = state.player || localStorage.getItem('playerAlias') || '';
+  refreshRanking();
 }
 
 function logoutUser() {
@@ -474,7 +482,6 @@ function syncFormFromState() {
   renderPlayerOptions();
   refreshBracket();
   updateProgress();
-  refreshSummary();
   updateScorePanel();
   applyLockState();
 }
@@ -492,7 +499,6 @@ function collectPorra() {
 
 function markDirty() {
   updateProgress();
-  refreshSummary();
   if (!state.autosaveReady || state.meta.locked) return;
   setSaveStatus('pending', 'editando');
   clearTimeout(saveTimer);
@@ -594,22 +600,6 @@ function updateScorePanel() {
   document.getElementById('score-total').textContent = state.score || 0;
 }
 
-function refreshSummary() {
-  const standings = buildAllGroupStandings(state.groupPredictions);
-  const thirds = rankThirdPlaced(standings).slice(0, 8);
-  const champion = state.bracketWinners.M104 || '-';
-  const player = state.players.find(item => item.id === state.topScorerPlayerId);
-  document.getElementById('summary-container').innerHTML = `
-    <article><span>Jugador</span><strong>${escapeHtml(state.player || '-')}</strong></article>
-    <article><span>Puntos reales</span><strong>${state.score || 0}</strong></article>
-    <article><span>Campeón</span><strong>${champion === '-' ? '-' : `${getTeamFlag(champion)} ${escapeHtml(getTeamName(champion))}`}</strong></article>
-    <article><span>Más goleadora</span><strong>${state.topScorerTeam ? `${getTeamFlag(state.topScorerTeam)} ${escapeHtml(getTeamName(state.topScorerTeam))}` : '-'}</strong></article>
-    <article><span>Menos goleada</span><strong>${state.bestDefenseTeam ? `${getTeamFlag(state.bestDefenseTeam)} ${escapeHtml(getTeamName(state.bestDefenseTeam))}` : '-'}</strong></article>
-    <article><span>Goleador</span><strong>${player ? `${escapeHtml(player.name)} · ${getTeamName(player.teamId)}` : '-'}</strong></article>
-    <article class="wide"><span>Mejores terceros</span><strong>${thirds.map(row => `${row.thirdGroup}: ${getTeamName(row.teamId)}`).join(' · ') || '-'}</strong></article>
-  `;
-}
-
 async function refreshRanking() {
   try {
     const [ranking, meta] = await Promise.all([API.getRanking(), API.getMeta()]);
@@ -626,7 +616,6 @@ async function refreshRanking() {
     const updated = meta?.lastScrape?.at ? new Date(meta.lastScrape.at).toLocaleString('es-ES') : 'sin resultados reales';
     setText('ranking-info', `Actualización: ${updated}`);
     setText('ranking-info-game', `Actualización: ${updated}`);
-    refreshSummary();
   } catch (err) {
     console.error('ranking failed', err);
     setText('ranking-info', 'No se pudo cargar el ranking.');
@@ -656,7 +645,6 @@ function showStep(name, btn) {
   document.getElementById(`step-${name}`).classList.add('active');
   if (btn) btn.classList.add('active');
   if (name === 'ranking') refreshRanking();
-  if (name === 'summary') refreshSummary();
   if (name === 'bracket') refreshBracket();
 }
 
@@ -709,6 +697,7 @@ function escapeHtml(value) {
 }
 
 window.loginUser = loginUser;
+window.returnHome = returnHome;
 window.logoutUser = logoutUser;
 window.setGroupScore = setGroupScore;
 window.onWinnerSelect = onWinnerSelect;

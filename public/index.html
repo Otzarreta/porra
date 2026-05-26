@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Porra Mundial 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -111,9 +109,10 @@
       <button class="step-btn active" onclick="showStep('groups',this)" type="button">Grupos</button>
       <button class="step-btn" onclick="showStep('bracket',this)" type="button">Cuadro</button>
       <button class="step-btn" onclick="showStep('specials',this)" type="button">Especiales</button>
-      <button class="step-btn" onclick="showStep('summary',this)" type="button">Resumen</button>
       <button class="step-btn" onclick="showStep('ranking',this)" type="button">Ranking</button>
       <button class="step-btn" onclick="showStep('rules',this)" type="button">Reglamento</button>
+      <span class="step-spacer" aria-hidden="true"></span>
+      <button class="step-btn step-home" onclick="returnHome()" type="button"><span aria-hidden="true">⌂</span> Home</button>
     </nav>
 
     <div class="progress-strip">
@@ -161,19 +160,6 @@
           <select id="top-scorer-player-id" class="editable" size="8" onchange="onPlayerSelect()"></select>
           <div class="muted-line" id="players-status"></div>
         </article>
-      </div>
-    </section>
-
-    <section class="step-panel" id="step-summary">
-      <div class="section-title">
-        <span>Revisión</span>
-        <h2>Resumen de la porra</h2>
-      </div>
-      <div id="summary-container" class="summary-grid"></div>
-      <div class="summary-actions">
-        <button class="btn btn-primary" onclick="forceSave()" type="button">Guardar porra</button>
-        <button class="btn btn-secondary" onclick="exportPorra()" type="button">Exportar JSON</button>
-        <button class="btn btn-danger" onclick="logoutUser()" type="button">Salir</button>
       </div>
     </section>
 

@@ -8,6 +8,7 @@ const crypto = require('crypto');
 
 const {computeScore} = require('./scoring.js');
 const {scrape365Scores, SCRAPE_INTERVAL_MS} = require('./scraper.js');
+const {scrape365ScoresPlayers, mergePlayers} = require('./playerScraper.js');
 const {
   GROUP_ORDER,
   GROUP_FIXTURES,
@@ -43,6 +44,7 @@ let results = null;
 let metaState = {
   deadline: DEFAULT_DEADLINE,
   lastScrape: null,
+  lastPlayerSync: null,
 };
 
 async function readJson(file, fallback, createIfMissing = false) {
@@ -123,7 +125,19 @@ app.post('/api/access', async (req, res) => {
   const requestedPlayer = sanitizeStr(req.body?.player, 80).trim();
   if (!email) return res.status(400).json({error: 'email_required'});
 
-  let porra = findPorraByEmail(email);
+  const matches = findPorrasByEmail(email);
+  let porra = matches[0] || null;
+  let shouldPersist = false;
+  if (matches.length > 1) {
+    matches.slice(1).forEach(duplicate => {
+      delete porras[duplicate.id];
+      shouldPersist = true;
+    });
+  }
+  if (porra && porra.email !== email) {
+    porra.email = email;
+    shouldPersist = true;
+  }
   if (!porra) {
     if (isLocked()) {
       return res.status(423).json({error: 'locked', message: 'El plazo de envio ha finalizado.'});
@@ -135,6 +149,8 @@ app.post('/api/access', async (req, res) => {
   } else if (!isLocked() && requestedPlayer && requestedPlayer !== porra.player) {
     porra.player = requestedPlayer;
     porra.updatedAt = new Date().toISOString();
+    await writeJsonSerialized(PORRAS_FILE, porras);
+  } else if (shouldPersist) {
     await writeJsonSerialized(PORRAS_FILE, porras);
   }
 
@@ -204,6 +220,56 @@ app.post('/api/admin/players', async (req, res) => {
   res.json({ok: true, count: players.length});
 });
 
+app.post('/api/admin/players/sync', async (req, res) => {
+  if (!requireAdmin(req, res)) return;
+  try {
+    const sync = await scrape365ScoresPlayers({
+      teams: Array.isArray(req.body?.teams) ? req.body.teams : null,
+      startDate: sanitizeDate(req.body?.startDate),
+      endDate: sanitizeDate(req.body?.endDate),
+      requestTimeoutMs: req.body?.requestTimeoutMs,
+      teamConcurrency: req.body?.teamConcurrency,
+    });
+    const merged = mergePlayers(players, sync.players, {
+      deactivateMissing: req.body?.deactivateMissing !== false,
+      syncedTeamIds: sync.teamIds,
+    });
+    players = sanitizePlayers(merged.players);
+    await writeJsonSerialized(PLAYERS_FILE, players);
+
+    metaState.lastPlayerSync = {
+      ok: true,
+      at: new Date().toISOString(),
+      source: '365scores',
+      imported: sync.players.length,
+      count: players.length,
+      teams: sync.teamIds.length,
+      errors: sync.sourceMeta.errors,
+    };
+    await writeJsonSerialized(META_FILE, metaState);
+
+    res.json({
+      ok: true,
+      count: players.length,
+      imported: sync.players.length,
+      teams: sync.teamIds.length,
+      added: merged.added,
+      updated: merged.updated,
+      deactivated: merged.deactivated,
+      errors: sync.sourceMeta.errors,
+    });
+  } catch (err) {
+    metaState.lastPlayerSync = {
+      ok: false,
+      at: new Date().toISOString(),
+      source: '365scores',
+      error: err.message,
+    };
+    await writeJsonSerialized(META_FILE, metaState);
+    res.status(500).json({error: 'players_sync_failed', message: err.message});
+  }
+});
+
 app.post('/api/admin/results', async (req, res) => {
   if (!requireAdmin(req, res)) return;
   let sanitized;
@@ -234,6 +300,7 @@ function publicMeta() {
     deadline: metaState.deadline,
     locked: isLocked(),
     lastScrape: metaState.lastScrape,
+    lastPlayerSync: metaState.lastPlayerSync,
     count: Object.keys(porras).length,
   };
 }
@@ -254,9 +321,16 @@ function createEmptyPorra({email, player}) {
   };
 }
 
-function findPorraByEmail(email) {
+function findPorrasByEmail(email) {
   const normalized = normalizeEmail(email);
-  return Object.values(porras).find(porra => normalizeEmail(porra.email) === normalized) || null;
+  if (!normalized) return [];
+  return Object.values(porras)
+    .filter(porra => normalizeEmail(porra.email) === normalized)
+    .sort((a, b) => {
+      const right = Date.parse(b.updatedAt || b.createdAt || 0) || 0;
+      const left = Date.parse(a.updatedAt || a.createdAt || 0) || 0;
+      return right - left;
+    });
 }
 
 function normalizeEmail(value) {
@@ -277,6 +351,11 @@ function sanitizeTeamId(value) {
 function sanitizePlayerId(value) {
   if (typeof value !== 'string') return '';
   return value.replace(/[^a-zA-Z0-9_.:-]/g, '').slice(0, 120);
+}
+
+function sanitizeDate(value) {
+  if (typeof value !== 'string') return undefined;
+  return /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : undefined;
 }
 
 function sanitizeBracketWinners(input) {
@@ -429,14 +508,28 @@ function sanitizePlayers(input) {
       id = `${id}-${suffix}`;
     }
     seen.add(id);
-    out.push({
+    const player = {
       id,
       name,
       teamId,
       active: item.active !== false,
-    });
+    };
+    copyOptionalPlayerField(player, item, 'position', 60);
+    copyOptionalPlayerField(player, item, 'club', 100);
+    copyOptionalPlayerField(player, item, 'source', 40);
+    copyOptionalPlayerField(player, item, 'sourceId', 80);
+    copyOptionalPlayerField(player, item, 'sourceTeamId', 80);
+    copyOptionalPlayerField(player, item, 'sourceUrl', 240);
+    copyOptionalPlayerField(player, item, 'updatedAt', 40);
+    out.push(player);
   });
   return out.sort((a, b) => a.teamId.localeCompare(b.teamId) || a.name.localeCompare(b.name));
+}
+
+function copyOptionalPlayerField(target, source, key, max) {
+  const value = source?.[key];
+  if (value === null || value === undefined || value === '') return;
+  target[key] = sanitizeStr(String(value), max).trim();
 }
 
 function collectMatchPredictions(matchId) {
@@ -612,5 +705,6 @@ module.exports = {
   sanitizeResults,
   normalizeEmail,
   collectMatchPredictions,
+  scrape365ScoresPlayers,
   ACCESS_TOKEN_TTL_MS,
 };
