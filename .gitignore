@@ -1,0 +1,11 @@
+node_modules/
+.env
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Datos vivos de la porra. En produccion usa DATA_DIR fuera del checkout.
+server/data/*.json
+

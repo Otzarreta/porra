@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PORRA MUNDIAL 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="lock-banner">🔒 El plazo de envío ha finalizado. La porra es de solo lectura.</div>
+
+<!-- SCORE PANEL FIJO -->
+<div class="score-panel">
+  <div class="score-label">Jugador</div>
+  <div class="score-name" id="display-player">—</div>
+  <div class="score-big" id="total-pts-panel">0</div>
+  <div class="score-sub">puntos</div>
+  <div class="score-breakdown" id="score-breakdown"></div>
+  <div class="save-status" id="save-status"></div>
+</div>
+
+<header>
+  <span class="trophy-icon">🏆</span>
+  <h1>PORRA<br>MUNDIAL</h1>
+  <p class="subtitle">FIFA World Cup 2026 · USA · CAN · MEX · 11 jun – 19 jul</p>
+</header>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('grupos',this)">⚽ Grupos</button>
+  <button class="nav-tab" onclick="showTab('cuadro',this)">🗓️ Cuadro</button>
+  <button class="nav-tab" onclick="showTab('especiales',this)">⭐ Especiales</button>
+  <button class="nav-tab" onclick="showTab('puntuacion',this)">📊 Puntuación</button>
+  <button class="nav-tab" onclick="showTab('ranking',this)">🏆 Ranking</button>
+  <button class="nav-tab" onclick="showTab('reglamento',this)">📋 Reglamento</button>
+</nav>
+
+<div class="progress-wrap">
+  <span class="progress-label">Completado:</span>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-fill"></div></div>
+  <span class="progress-label" id="prog-text">0 / 0</span>
+</div>
+
+<!-- ═══════════ TAB GRUPOS ═══════════ -->
+<div class="tab-panel active" id="tab-grupos">
+  <div class="container">
+    <div class="player-setup">
+      <label for="player-name">Tu nombre o alias</label>
+      <input type="text" id="player-name" placeholder="Escribe tu nombre..." oninput="updatePlayerDisplay()">
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">PUNTUACIÓN</span>
+        <span class="section-title">Sistema de Puntos</span>
+      </div>
+      <div class="legend-grid">
+        <div class="legend-item"><div class="legend-pts">1</div><div class="legend-label">1X2 Grupos</div></div>
+        <div class="legend-item"><div class="legend-pts">2</div><div class="legend-label">Clasif. 1/16</div></div>
+        <div class="legend-item"><div class="legend-pts">3</div><div class="legend-label">Clasif. Octavos</div></div>
+        <div class="legend-item"><div class="legend-pts">4</div><div class="legend-label">Clasif. Cuartos</div></div>
+        <div class="legend-item"><div class="legend-pts">6</div><div class="legend-label">Semifinalista</div></div>
+        <div class="legend-item"><div class="legend-pts">8</div><div class="legend-label">Finalista</div></div>
+        <div class="legend-item"><div class="legend-pts">10</div><div class="legend-label">Campeón</div></div>
+        <div class="legend-item"><div class="legend-pts">★</div><div class="legend-label">Goles esp.</div></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">FASE 1</span>
+        <span class="section-title">Fase de Grupos — Pronóstico 1X2</span>
+        <span class="section-pts">1 pt por acierto</span>
+      </div>
+      <div class="alert">💡 Selecciona <strong>1</strong> (gana local), <strong>X</strong> (empate) o <strong>2</strong> (gana visitante) en cada partido. Al completar todos los grupos, la pestaña <strong>Cuadro</strong> se rellenará automáticamente con tus pronósticos.</div>
+      <div class="groups-grid" id="groups-container"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TAB CUADRO ═══════════ -->
+<div class="tab-panel" id="tab-cuadro">
+  <div class="container">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">FIFA 2026</span>
+        <span class="section-title">Cuadro Eliminatorio</span>
+        <span class="section-pts">Cruces oficiales FIFA</span>
+      </div>
+      <div class="bracket-info">
+        📌 <strong>Cómo funciona:</strong> Los 2 primeros de cada grupo + los 8 mejores terceros = 32 equipos. Los cruces de 1/16 siguen el cuadro oficial FIFA. Selecciona el <strong>ganador</strong> de cada partido para que avance automáticamente a la siguiente ronda. La puntuación solo tiene en cuenta que el equipo llegue a la ronda, no su posición en el cuadro.
+      </div>
+
+      <!-- 1/16 -->
+      <div class="bracket-section">
+        <div class="bracket-section-title">1/16 de Final <span class="bracket-section-pts">· 2 pts por equipo clasificado acertado</span></div>
+        <div class="bracket-grid bracket-cols-4" id="br-r32"></div>
+      </div>
+
+      <!-- OCTAVOS -->
+      <div class="bracket-section">
+        <div class="bracket-section-title">Octavos de Final <span class="bracket-section-pts">· 3 pts por equipo acertado</span></div>
+        <div class="bracket-grid bracket-cols-4" id="br-r16"></div>
+      </div>
+
+      <!-- CUARTOS -->
+      <div class="bracket-section">
+        <div class="bracket-section-title">Cuartos de Final <span class="bracket-section-pts">· 4 pts por equipo acertado</span></div>
+        <div class="bracket-grid bracket-cols-4c" id="br-qf"></div>
+      </div>
+
+      <!-- SEMIFINALES -->
+      <div class="bracket-section">
+        <div class="bracket-section-title">Semifinales <span class="bracket-section-pts">· 6 pts por equipo acertado</span></div>
+        <div class="bracket-grid bracket-cols-2" id="br-sf"></div>
+      </div>
+
+      <!-- FINAL -->
+      <div class="bracket-section">
+        <div class="bracket-section-title">Gran Final · 19 julio · MetLife Stadium, New Jersey</div>
+        <div class="final-wrap">
+          <div class="final-card">
+            <span class="final-card-icon">🥈</span>
+            <div class="final-card-title">Finalista 1</div>
+            <select id="finalist1" onchange="calcTotal()"><option value="">— Selecciona —</option></select>
+            <div class="pts-badge">8 pts</div>
+          </div>
+          <div class="vs-sep">VS</div>
+          <div class="final-card">
+            <span class="final-card-icon">🥈</span>
+            <div class="final-card-title">Finalista 2</div>
+            <select id="finalist2" onchange="calcTotal()"><option value="">— Selecciona —</option></select>
+            <div class="pts-badge">8 pts</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div style="font-size:2.2rem;">🏆</div>
+            <div class="final-card champ">
+              <div class="final-card-title">Campeón del Mundo</div>
+              <select id="champion" onchange="calcTotal()"><option value="">— Selecciona —</option></select>
+              <div class="pts-badge">10 pts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TAB ESPECIALES ═══════════ -->
+<div class="tab-panel" id="tab-especiales">
+  <div class="container">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">BONUS</span>
+        <span class="section-title">Pronósticos Especiales</span>
+        <span class="section-pts">Puntos según goles reales</span>
+      </div>
+      <div class="special-grid">
+        <div class="special-card">
+          <span class="special-icon">⚽</span>
+          <h3>Selección más goleadora</h3>
+          <p>Ganas <strong>1 punto por cada gol marcado</strong> por la selección que elijas durante todo el torneo.</p>
+          <select id="top-scorer-team" onchange="calcTotal()"><option value="">— Selecciona equipo —</option></select>
+        </div>
+        <div class="special-card">
+          <span class="special-icon">🛡️</span>
+          <h3>Selección menos goleada</h3>
+          <p>Ganas <strong>1 punto por cada gol recibido</strong> por el equipo elegido. Cuantos menos encaje, más puntúas.</p>
+          <select id="best-defense-team" onchange="calcTotal()"><option value="">— Selecciona equipo —</option></select>
+        </div>
+        <div class="special-card">
+          <span class="special-icon">👟</span>
+          <h3>Máximo goleador individual</h3>
+          <p>Escribe el nombre del jugador. Ganas <strong>1 punto por cada gol que marque</strong> en el torneo.</p>
+          <input type="text" id="top-scorer-player" placeholder="Nombre del jugador..." oninput="calcTotal()">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TAB PUNTUACIÓN ═══════════ -->
+<div class="tab-panel" id="tab-puntuacion">
+  <div class="container">
+    <div class="pts-total-card">
+      <h2>Puntuación Total Acumulada</h2>
+      <div class="pts-total-num" id="pts-total-big">0</div>
+      <div class="pts-total-sub" id="pts-player-name-big">— Introduce tu nombre —</div>
+    </div>
+    <div class="pts-grid" id="pts-breakdown-cards"></div>
+    <div style="background:var(--card);border:1px solid rgba(255,215,0,0.1);border-radius:12px;padding:16px;text-align:center;">
+      <p style="font-size:0.75rem;color:var(--muted2);line-height:1.7;">⚠️ Puntuación <strong style="color:var(--text);">estimada</strong> según tus pronósticos actuales. Los puntos de fases eliminatorias y especiales se confirman con los resultados reales del torneo. Los puntos de los especiales (goles) no se incluyen en el total hasta el final del torneo.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TAB RANKING ═══════════ -->
+<div class="tab-panel" id="tab-ranking">
+  <div class="container">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">LIVE</span>
+        <span class="section-title">Ranking de Jugadores</span>
+        <span class="section-pts">Actualizado con resultados reales</span>
+      </div>
+      <div class="ranking-meta">
+        <span id="ranking-info">— Cargando ranking —</span>
+        <button class="btn btn-secondary" style="padding:6px 14px;font-size:0.7rem;" onclick="refreshRanking()">🔄 Actualizar</button>
+      </div>
+      <div id="ranking-container"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TAB REGLAMENTO ═══════════ -->
+<div class="tab-panel" id="tab-reglamento">
+  <div class="container">
+    <div class="reglamento">
+
+      <div class="reg-section">
+        <h3>📜 Reglamento General</h3>
+        <ul>
+          <li>La participación en la porra tiene un coste de <strong>5 € por boleto</strong>.</li>
+          <li>El plazo máximo de envío de la porra es <strong>una hora antes del inicio del primer partido del Mundial 2026</strong> (México vs Sudáfrica, 11 de junio, Estadio Azteca). <strong>No se aceptarán porras entregadas después de este límite ni las que no estén pagadas en ese momento.</strong></li>
+          <li>Cada participante puede adquirir más de un boleto, pero cada uno debe cumplimentarse de manera independiente.</li>
+          <li>Un boleto incompleto es válido; solo puntúan los apartados rellenados.</li>
+          <li>En caso de empate en puntuación final, el desempate se resolverá por el número de goles del jugador elegido como máximo goleador y, en caso de nuevo empate, por sorteo.</li>
+        </ul>
+      </div>
+
+      <div class="reg-section">
+        <h3>💰 Reparto de Premios</h3>
+        <p>El bote total = <strong>5 € × número de boletos vendidos</strong>. Distribución:</p>
+        <div class="prize-grid">
+          <div class="prize-card gold"><div class="prize-medal">🥇</div><div class="prize-pos">1.er Clasificado</div><div class="prize-pct">65%</div><div class="prize-desc">del bote total</div></div>
+          <div class="prize-card silver"><div class="prize-medal">🥈</div><div class="prize-pos">2.º Clasificado</div><div class="prize-pct">25%</div><div class="prize-desc">del bote total</div></div>
+          <div class="prize-card bronze"><div class="prize-medal">🥉</div><div class="prize-pos">3.er Clasificado</div><div class="prize-pct">10%</div><div class="prize-desc">del bote total</div></div>
+        </div>
+        <p style="margin-top:12px;font-size:0.78rem;"><strong>Ejemplo:</strong> 20 boletos → bote = 100 €. El 1.º recibe <strong>65 €</strong>, el 2.º <strong>25 €</strong> y el 3.º <strong>10 €</strong>.<br>El pago se realizará en un plazo máximo de <strong>7 días</strong> tras la final del torneo (19 de julio).</p>
+      </div>
+
+      <div class="reg-section">
+        <h3>🏟️ Sistema de Puntuación Detallado</h3>
+        <table class="pts-table">
+          <thead><tr><th>Categoría</th><th>Descripción</th><th>Pts</th></tr></thead>
+          <tbody>
+            <tr><td>Fase de Grupos</td><td>Por cada resultado 1X2 acertado</td><td>1</td></tr>
+            <tr><td>1/16 de Final</td><td>Por cada selección que llegue a esta ronda (independientemente de su posición en el cuadro)</td><td>2</td></tr>
+            <tr><td>Octavos de Final</td><td>Por cada selección clasificada acertada</td><td>3</td></tr>
+            <tr><td>Cuartos de Final</td><td>Por cada selección clasificada acertada</td><td>4</td></tr>
+            <tr><td>Semifinales</td><td>Por cada semifinalista acertado</td><td>6</td></tr>
+            <tr><td>Finalistas</td><td>Por cada finalista acertado</td><td>8</td></tr>
+            <tr><td>Campeón</td><td>Acertar al ganador del torneo</td><td>10</td></tr>
+            <tr><td>Equipo más goleador</td><td>1 pto por cada gol marcado por el equipo elegido</td><td>⚽/gol</td></tr>
+            <tr><td>Equipo menos goleado</td><td>1 pto por cada gol recibido por el equipo elegido</td><td>🛡️/gol</td></tr>
+            <tr><td>Máximo goleador</td><td>1 pto por cada gol del jugador elegido</td><td>👟/gol</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px;font-size:0.76rem;color:var(--muted2);">⚠️ En los cruces eliminatorios, <strong style="color:var(--text);">no importa la posición en el cuadro</strong>, solo que el equipo llegue a esa ronda.</p>
+      </div>
+
+      <div class="reg-section">
+        <h3>📅 Criterios de Clasificación en Grupos</h3>
+        <p>En caso de empate en puntos, se aplican los siguientes criterios por orden:</p>
+        <ul>
+          <li>1.º Resultado directo entre los equipos empatados.</li>
+          <li>2.º Diferencia de goles en el grupo.</li>
+          <li>3.º Goles marcados en el grupo.</li>
+          <li>4.º Fair Play: amarilla −1, roja por doble amarilla −3, roja directa −5, amarilla+roja −5.</li>
+          <li>5.º Ranking FIFA.</li>
+        </ul>
+        <p style="margin-top:8px;">Los 8 mejores terceros completan los 32 clasificados a 1/16. Ser líder de grupo ofrece un camino teóricamente más favorable.</p>
+      </div>
+
+      <div class="reg-section">
+        <h3>🗓️ Grupos Oficiales — Sorteo 5 dic 2025, Washington D.C.</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin-top:10px;">
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo A</strong><br>🇲🇽 México · 🇿🇦 Sudáfrica<br>🇰🇷 Corea del Sur · 🇨🇿 Rep. Checa</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo B</strong><br>🇨🇦 Canadá · 🇧🇦 Bosnia y Herz.<br>🇶🇦 Qatar · 🇨🇭 Suiza</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo C</strong><br>🇧🇷 Brasil · 🇲🇦 Marruecos<br>🇭🇹 Haití · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo D</strong><br>🇺🇸 Estados Unidos · 🇵🇾 Paraguay<br>🇦🇺 Australia · 🇹🇷 Turquía</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo E</strong><br>🇩🇪 Alemania · 🇨🇼 Curazao<br>🇨🇮 Costa de Marfil · 🇪🇨 Ecuador</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo F</strong><br>🇳🇱 Países Bajos · 🇯🇵 Japón<br>🇸🇪 Suecia · 🇹🇳 Túnez</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo G</strong><br>🇧🇪 Bélgica · 🇪🇬 Egipto<br>🇮🇷 Irán · 🇳🇿 Nueva Zelanda</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo H</strong><br>🇪🇸 España · 🇨🇻 Cabo Verde<br>🇸🇦 Arabia Saudita · 🇺🇾 Uruguay</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo I ☠️</strong><br>🇫🇷 Francia · 🇸🇳 Senegal<br>🇮🇶 Irak · 🇳🇴 Noruega</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo J</strong><br>🇦🇷 Argentina · 🇩🇿 Argelia<br>🇦🇹 Austria · 🇯🇴 Jordania</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo K</strong><br>🇵🇹 Portugal · 🇨🇩 RD Congo<br>🇺🇿 Uzbekistán · 🇨🇴 Colombia</div>
+          <div style="background:var(--dark3);border-radius:9px;padding:10px 12px;font-size:0.78rem;"><strong style="color:var(--gold);">Grupo L</strong><br>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra · 🇭🇷 Croacia<br>🇬🇭 Ghana · 🇵🇦 Panamá</div>
+        </div>
+      </div>
+
+      <div class="reg-section">
+        <h3>⚖️ Normas adicionales</h3>
+        <ul>
+          <li>La participación implica la aceptación íntegra de este reglamento.</li>
+          <li>La organización resolverá cualquier disputa no contemplada en el reglamento.</li>
+          <li>Los pronósticos se guardan automáticamente en el servidor según vas rellenando.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn btn-primary" onclick="showSummary()">📋 Ver Resumen</button>
+  <button class="btn btn-secondary" onclick="forceSave()">💾 Forzar guardado</button>
+  <button class="btn btn-secondary" onclick="exportPorra()">⬇️ Descargar JSON</button>
+  <button class="btn btn-danger" onclick="resetAll()">🗑️ Reiniciar</button>
+</div>
+
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <h2>📋 Tu Porra</h2>
+    <div id="modal-content"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="fixtures.js" defer></script>
+<script src="api.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
