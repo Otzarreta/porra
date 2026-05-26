@@ -48,29 +48,21 @@ p {
   position: fixed;
   inset: 0;
   z-index: -2;
+  overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(0, 122, 255, 0.16), transparent 34%),
+    linear-gradient(135deg, rgba(0, 122, 255, 0.18), transparent 34%),
     linear-gradient(225deg, rgba(52, 199, 89, 0.18), transparent 38%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(235, 241, 249, 0.92));
+    var(--color-window);
 }
 
 .stadium-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, transparent 0 48%, rgba(255, 255, 255, 0.42) 48% 52%, transparent 52%),
-    repeating-linear-gradient(90deg, rgba(31, 138, 85, 0.11) 0 92px, rgba(0, 122, 255, 0.06) 92px 184px);
-  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 72%, transparent);
-}
-
-.stadium-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.32) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.26) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.32;
+  background: url("bg.avif") center / cover no-repeat;
+  filter: saturate(1.08) contrast(1.02);
+  opacity: 0.72;
+  transform: scale(1.02);
 }
 
 .app-shell {
@@ -1165,6 +1157,23 @@ select:focus {
       linear-gradient(135deg, rgba(0, 122, 255, 0.18), transparent 34%),
       linear-gradient(225deg, rgba(52, 199, 89, 0.14), transparent 38%),
       linear-gradient(180deg, #111216, #1c1d22);
+  }
+
+  .stadium-bg::before {
+    opacity: 0.42;
+    filter: saturate(0.92) contrast(1.08) brightness(0.72);
+  }
+
+  .stadium-bg::after {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.10), transparent 28%),
+      linear-gradient(90deg, transparent 0 48%, rgba(255, 255, 255, 0.08) 48% 52%, transparent 52%),
+      repeating-linear-gradient(90deg, rgba(52, 199, 89, 0.05) 0 92px, rgba(0, 122, 255, 0.04) 92px 184px),
+      linear-gradient(180deg, rgba(16, 17, 20, 0.74), rgba(16, 17, 20, 0.86) 48%, rgba(16, 17, 20, 0.78)),
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: auto, auto, auto, auto, 48px 48px, 48px 48px;
+    background-position: center;
   }
 
   .rank-total,
