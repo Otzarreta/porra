@@ -95,11 +95,12 @@ body.locked .lock-banner {
 }
 
 .home-hero {
-  min-height: min(720px, calc(100vh - 48px));
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
   gap: var(--space-6);
   align-items: center;
+  padding-top: 150px;
+  padding-bottom: var(--space-5),
 }
 
 .hero-copy {
@@ -736,7 +737,7 @@ select:focus {
   gap: var(--space-3);
   padding: var(--space-4);
   border-bottom: 1px solid var(--color-separator);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--color-field), #fff 70%), var(--color-window-strong));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-field), var(--color-fill) 70%), var(--color-window-strong));
 }
 
 .group-letter {
@@ -812,6 +813,14 @@ select:focus {
   padding: 0 4px;
   text-align: center;
   font-weight: 700;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.score-input::-webkit-outer-spin-button,
+.score-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .score-inputs span {
