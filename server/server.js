@@ -35,6 +35,7 @@ const PORRAS_FILE = path.join(DATA_DIR, 'porras.json');
 const RESULTS_FILE = path.join(DATA_DIR, 'results.json');
 const META_FILE = path.join(DATA_DIR, 'meta.json');
 const PLAYERS_FILE = path.join(DATA_DIR, 'players.json');
+const PLAYERS_SEED_FILE = path.join(__dirname, 'players-seed.json');
 
 const DEFAULT_DEADLINE = '2026-06-11T19:00:00Z';
 const PORT = process.env.PORT || 3000;
@@ -101,6 +102,14 @@ async function loadState() {
   await fs.mkdir(DATA_DIR, {recursive: true});
   porras = await readJson(PORRAS_FILE, {}, true);
   players = sanitizePlayers(await readJson(PLAYERS_FILE, [], true));
+  if (!players.length) {
+    const seed = sanitizePlayers(await readJson(PLAYERS_SEED_FILE, [], false));
+    if (seed.length) {
+      players = seed;
+      await writeJsonSerialized(PLAYERS_FILE, players);
+      console.log(`[boot] sembrados ${players.length} jugadores desde players-seed.json`);
+    }
+  }
   results = await readJson(RESULTS_FILE, null, true);
   metaState = {...metaState, ...(await readJson(META_FILE, metaState, true))};
 }
