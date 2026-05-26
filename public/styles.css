@@ -6,6 +6,17 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+img:not(.flag) {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -1690,6 +1701,10 @@ select:focus {
 }
 
 @media (max-width: 620px) {
+  body {
+    padding-inline: 0;
+  }
+
   .app-shell {
     width: min(100% - 18px, 1320px);
     padding-top: var(--space-3);
@@ -1733,9 +1748,63 @@ select:focus {
     grid-template-columns: 1fr;
   }
 
+  .home-match-grid,
+  .round-grid,
+  .round-final,
+  .special-grid,
+  .third-list {
+    grid-template-columns: 1fr;
+  }
+
   .home-match-card,
   .prediction-row {
     grid-template-columns: 1fr;
+  }
+
+  .home-match-body {
+    grid-template-columns: minmax(0, 1fr) 28px auto 28px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .home-match-body.bracket-body {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  .home-match-team strong {
+    font-size: 0.85rem;
+  }
+
+  .home-match-score {
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 0.92rem;
+  }
+
+  .game-top {
+    grid-template-columns: 1fr;
+  }
+
+  .rank-row {
+    grid-template-columns: 32px minmax(0, 1fr) 56px;
+  }
+
+  .standing-head,
+  .standing-row {
+    grid-template-columns: 26px minmax(0, 1fr) 32px 32px 32px;
+    font-size: 0.76rem;
+  }
+
+  .match-modal {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+
+  .match-modal-backdrop {
+    padding: var(--space-3);
+  }
+
+  .modal-title-id {
+    font-size: 0.7rem;
   }
 
   .match-view-tabs {
@@ -1748,5 +1817,34 @@ select:focus {
 
   .step-spacer {
     flex-basis: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .group-head {
+    grid-template-columns: 48px 1fr;
+    gap: var(--space-3);
+    padding: var(--space-4);
+  }
+
+  .group-letter {
+    height: 44px;
+    font-size: 1.6rem;
+  }
+
+  .third-item {
+    grid-template-columns: 24px auto minmax(0, 1fr);
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .third-group {
+    grid-column: 1 / -1;
+    font-size: 0.7rem;
+    padding-left: 32px;
   }
 }
