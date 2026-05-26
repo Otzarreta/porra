@@ -43,8 +43,8 @@ const state = {
   homeMatchView: 'groups',
   groupPredictions: createEmptyGroupPredictions(),
   bracketWinners: {},
+  bracketScores: {},
   topScorerTeam: '',
-  bestDefenseTeam: '',
   topScorerPlayerId: '',
   score: 0,
   autosaveReady: false,
@@ -393,18 +393,40 @@ function buildBracket() {
   rounds.forEach(([round]) => {
     const grid = document.getElementById(`round-${round}`);
     BRACKET_BY_ROUND[round].forEach(match => {
+      const kickoff = kickoffMeta(match.id);
       const card = document.createElement('article');
       card.className = 'bracket-card';
       card.id = `match-${match.id}`;
       card.innerHTML = `
-        <div class="match-id">${match.id}</div>
-        <div class="slot" id="slot-${match.id}-0">-</div>
-        <div class="slot" id="slot-${match.id}-1">-</div>
+        <div class="bracket-head">
+          <span class="match-id">${match.id}</span>
+          ${kickoff ? `<time class="match-kickoff" datetime="${kickoff.iso}"><span>${kickoff.day}</span><strong>${kickoff.time}</strong></time>` : ''}
+        </div>
+        <div class="bracket-teams">
+          <div class="slot" id="slot-${match.id}-0">-</div>
+          <div class="bracket-score">
+            <input class="editable score-input" type="number" min="0" max="99" inputmode="numeric" id="bracket-score-${match.id}-home" data-match="${match.id}" data-side="home" oninput="onBracketScore(this)">
+            <span>-</span>
+            <input class="editable score-input" type="number" min="0" max="99" inputmode="numeric" id="bracket-score-${match.id}-away" data-match="${match.id}" data-side="away" oninput="onBracketScore(this)">
+          </div>
+          <div class="slot" id="slot-${match.id}-1">-</div>
+        </div>
         <select class="editable winner-select" id="winner-${match.id}" onchange="onWinnerSelect('${match.id}')"></select>
       `;
       grid.appendChild(card);
     });
   });
+}
+
+function onBracketScore(input) {
+  if (state.meta.locked) return;
+  const matchId = input.dataset.match;
+  const side = input.dataset.side === 'home' ? 'homeGoals' : 'awayGoals';
+  const value = sanitizeScoreValue(input.value);
+  if (input.value !== '' && value === null) input.value = '';
+  const current = state.bracketScores[matchId] || {homeGoals: null, awayGoals: null};
+  state.bracketScores[matchId] = {...current, [side]: value};
+  markDirty();
 }
 
 function refreshBracket() {
@@ -429,7 +451,10 @@ function refreshBracket() {
     const slots = item?.slots || [];
     slots.forEach((teamId, index) => {
       const slot = document.getElementById(`slot-${match.id}-${index}`);
-      slot.textContent = teamId ? `${getTeamFlag(teamId)} ${getTeamName(teamId)}` : sourceLabel(match.sources[index]);
+      if (!slot) return;
+      slot.innerHTML = teamId
+        ? `${getTeamFlagImg(teamId, {className: 'flag flag-sm'})} <span>${escapeHtml(getTeamName(teamId))}</span>`
+        : `<span>${escapeHtml(sourceLabel(match.sources[index]))}</span>`;
       slot.classList.toggle('empty', !teamId);
     });
 
@@ -440,6 +465,17 @@ function refreshBracket() {
     select.value = options.includes(current) ? current : '';
     select.disabled = state.meta.locked || options.length < 2;
     document.getElementById(`match-${match.id}`).classList.toggle('invalid', match.id === 'M104' && current && !options.includes(current));
+
+    const score = state.bracketScores[match.id] || {homeGoals: null, awayGoals: null};
+    const homeInput = document.getElementById(`bracket-score-${match.id}-home`);
+    const awayInput = document.getElementById(`bracket-score-${match.id}-away`);
+    if (homeInput && awayInput) {
+      homeInput.value = score.homeGoals ?? '';
+      awayInput.value = score.awayGoals ?? '';
+      const ready = options.length === 2 && !state.meta.locked;
+      homeInput.disabled = !ready;
+      awayInput.disabled = !ready;
+    }
   });
 }
 
@@ -454,11 +490,7 @@ function renderThirdSummary(resolved) {
   el.innerHTML = `
     <div>
       <strong>Mejores terceros</strong>
-      <span>${top.map(row => `${row.thirdGroup}: ${getTeamFlag(row.teamId)} ${escapeHtml(getTeamName(row.teamId))}`).join(' · ') || '-'}</span>
-    </div>
-    <div>
-      <strong>Clave Annexe C</strong>
-      <span>${resolved.qualifiedThirdGroups.join('') || '-'}</span>
+      <span>${top.map(row => `${row.thirdGroup}: ${getTeamFlagImg(row.teamId, {className: 'flag flag-xs'})} ${escapeHtml(getTeamName(row.teamId))}`).join(' · ') || '-'}</span>
     </div>
   `;
 }
@@ -475,7 +507,6 @@ function onWinnerSelect(matchId) {
 function buildSpecialSelects() {
   const teamOptions = `<option value="">Selecciona selección</option>${TEAM_IDS.map(id => `<option value="${id}">${getTeamFlag(id)} ${escapeHtml(getTeamName(id))}</option>`).join('')}`;
   document.getElementById('top-scorer-team').innerHTML = teamOptions;
-  document.getElementById('best-defense-team').innerHTML = teamOptions;
   document.getElementById('player-team-filter').innerHTML = `<option value="">Todas las selecciones</option>${TEAM_IDS.map(id => `<option value="${id}">${getTeamFlag(id)} ${escapeHtml(getTeamName(id))}</option>`).join('')}`;
 }
 
@@ -538,7 +569,6 @@ function renderSelectedPlayer() {
 function onSpecialChange() {
   if (state.meta.locked) return;
   state.topScorerTeam = document.getElementById('top-scorer-team').value;
-  state.bestDefenseTeam = document.getElementById('best-defense-team').value;
   markDirty();
 }
 
@@ -555,12 +585,24 @@ function applyPorra(porra) {
   state.player = porra.player || state.player;
   state.groupPredictions = normalizeGroupPredictions(porra.groupPredictions);
   state.bracketWinners = {...(porra.bracketWinners || {})};
+  state.bracketScores = normalizeBracketScores(porra.bracketScores);
   state.topScorerTeam = porra.topScorerTeam || '';
-  state.bestDefenseTeam = porra.bestDefenseTeam || '';
   state.topScorerPlayerId = porra.topScorerPlayerId || '';
   document.getElementById('active-player').textContent = state.player || '-';
   syncFormFromState();
   markSaved(porra.updatedAt);
+}
+
+function normalizeBracketScores(input) {
+  const out = {};
+  if (!input || typeof input !== 'object') return out;
+  Object.entries(input).forEach(([matchId, value]) => {
+    if (!value || typeof value !== 'object') return;
+    const homeGoals = sanitizeScoreValue(value.homeGoals);
+    const awayGoals = sanitizeScoreValue(value.awayGoals);
+    out[String(matchId).toUpperCase()] = {homeGoals, awayGoals};
+  });
+  return out;
 }
 
 function syncFormFromState() {
@@ -575,7 +617,6 @@ function syncFormFromState() {
     renderGroupStandings(group);
   });
   document.getElementById('top-scorer-team').value = state.topScorerTeam;
-  document.getElementById('best-defense-team').value = state.bestDefenseTeam;
   renderPlayerOptions();
   refreshBracket();
   updateProgress();
@@ -588,8 +629,8 @@ function collectPorra() {
     player: state.player,
     groupPredictions: state.groupPredictions,
     bracketWinners: state.bracketWinners,
+    bracketScores: state.bracketScores,
     topScorerTeam: state.topScorerTeam,
-    bestDefenseTeam: state.bestDefenseTeam,
     topScorerPlayerId: state.topScorerPlayerId,
   };
 }
@@ -684,9 +725,8 @@ function updateProgress() {
     total += 1;
     if (state.bracketWinners[match.id]) done += 1;
   });
-  total += 3;
+  total += 2;
   if (state.topScorerTeam) done += 1;
-  if (state.bestDefenseTeam) done += 1;
   if (state.topScorerPlayerId) done += 1;
   const pct = total ? Math.round((done / total) * 100) : 0;
   document.getElementById('progress-text').textContent = `${pct}%`;
@@ -798,6 +838,7 @@ window.returnHome = returnHome;
 window.logoutUser = logoutUser;
 window.setGroupScore = setGroupScore;
 window.onWinnerSelect = onWinnerSelect;
+window.onBracketScore = onBracketScore;
 window.onSpecialChange = onSpecialChange;
 window.onPlayerSelect = onPlayerSelect;
 window.renderPlayerOptions = renderPlayerOptions;

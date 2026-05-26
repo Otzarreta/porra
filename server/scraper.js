@@ -203,6 +203,7 @@ function normalize365ScoresGames(games, now = new Date()) {
     sf: new Set(),
     finalists: new Set(),
   };
+  const knockoutMatches = {r32: [], r16: [], qf: [], sf: [], final: []};
   const teamGoals = {};
   let champion = null;
   let finishedGames = 0;
@@ -258,6 +259,14 @@ function normalize365ScoresGames(games, now = new Date()) {
       bracketSets[bucket].add(winner);
       if (bucket === 'sf') bracketSets.finalists.add(winner);
     }
+    knockoutMatches[bucket].push({
+      homeId: home,
+      awayId: away,
+      goalsHome: homeScore,
+      goalsAway: awayScore,
+      winner,
+      sourceGameId: game.id || game.gameId || null,
+    });
     knockoutGames++;
   }
 
@@ -277,6 +286,7 @@ function normalize365ScoresGames(games, now = new Date()) {
       finalists: Array.from(bracketSets.finalists),
       champion,
     },
+    knockoutMatches,
     teamGoals,
     playerGoals: {},
     lastUpdated: now.toISOString(),

@@ -219,11 +219,12 @@ app.post('/api/porras', async (req, res) => {
     player: sanitizeStr(data.player || existing.player, 80).trim() || existing.player,
     groupPredictions: normalizeGroupPredictions(data.groupPredictions),
     bracketWinners: sanitizeBracketWinners(data.bracketWinners),
+    bracketScores: sanitizeBracketScores(data.bracketScores),
     topScorerTeam: sanitizeTeamId(data.topScorerTeam),
-    bestDefenseTeam: sanitizeTeamId(data.bestDefenseTeam),
     topScorerPlayerId: sanitizePlayerId(data.topScorerPlayerId),
     updatedAt: new Date().toISOString(),
   };
+  delete stored.bestDefenseTeam;
 
   porras[stored.id] = stored;
   await writeJsonSerialized(PORRAS_FILE, porras);
@@ -332,8 +333,8 @@ function createEmptyPorra({email, player}) {
     player: sanitizeStr(player, 80).trim(),
     groupPredictions: normalizeGroupPredictions(null),
     bracketWinners: {},
+    bracketScores: {},
     topScorerTeam: '',
-    bestDefenseTeam: '',
     topScorerPlayerId: '',
     createdAt: now,
     updatedAt: now,
@@ -387,6 +388,20 @@ function sanitizeBracketWinners(input) {
   return out;
 }
 
+function sanitizeBracketScores(input) {
+  const out = {};
+  const validMatchIds = new Set(BRACKET_MATCHES.map(match => match.id));
+  if (!input || typeof input !== 'object') return out;
+  Object.entries(input).forEach(([matchId, value]) => {
+    if (!validMatchIds.has(matchId) || !value || typeof value !== 'object') return;
+    const homeGoals = sanitizeGoalCount(value.homeGoals);
+    const awayGoals = sanitizeGoalCount(value.awayGoals);
+    if (homeGoals == null && awayGoals == null) return;
+    out[matchId] = {homeGoals, awayGoals};
+  });
+  return out;
+}
+
 function sanitizeKickoffs(input) {
   const out = {};
   if (!input || typeof input !== 'object') return out;
@@ -415,8 +430,10 @@ function sanitizeResults(input) {
   const out = {
     groupMatches: sanitizeGroupMatches(input.groupMatches),
     bracketAdvanced: sanitizeBracketAdvanced(input.bracketAdvanced),
+    knockoutMatches: sanitizeKnockoutMatches(input.knockoutMatches),
     teamGoals: sanitizeTeamGoals(input.teamGoals),
     playerGoals: sanitizePlayerGoals(input.playerGoals),
+    topScorerPlayerId: sanitizePlayerId(input.topScorerPlayerId),
     lastUpdated: typeof input.lastUpdated === 'string' ? input.lastUpdated.slice(0, 40) : new Date().toISOString(),
     source: typeof input.source === 'string' ? input.source.slice(0, 40) : 'manual',
   };
@@ -471,6 +488,26 @@ function sanitizeBracketAdvanced(input) {
   });
   base.champion = TEAM_IDS.includes(input.champion) ? input.champion : null;
   return base;
+}
+
+function sanitizeKnockoutMatches(input) {
+  const out = {r32: [], r16: [], qf: [], sf: [], final: []};
+  if (!input || typeof input !== 'object') return out;
+  Object.keys(out).forEach(round => {
+    const arr = Array.isArray(input[round]) ? input[round] : [];
+    arr.forEach(item => {
+      if (!item || typeof item !== 'object') return;
+      const homeId = TEAM_IDS.includes(item.homeId) ? item.homeId : null;
+      const awayId = TEAM_IDS.includes(item.awayId) ? item.awayId : null;
+      if (!homeId || !awayId || homeId === awayId) return;
+      const goalsHome = sanitizeGoalCount(item.goalsHome);
+      const goalsAway = sanitizeGoalCount(item.goalsAway);
+      if (goalsHome == null || goalsAway == null) return;
+      const winner = TEAM_IDS.includes(item.winner) ? item.winner : (goalsHome > goalsAway ? homeId : goalsAway > goalsHome ? awayId : null);
+      out[round].push({homeId, awayId, goalsHome, goalsAway, winner});
+    });
+  });
+  return out;
 }
 
 function sanitizeTeamGoals(input) {

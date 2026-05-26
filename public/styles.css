@@ -478,7 +478,7 @@ select:focus {
 
 .home-match-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(375px, 1fr));
   gap: var(--space-4);
 }
 
@@ -1109,8 +1109,36 @@ select:focus {
 
 .bracket-card {
   display: grid;
+  gap: 8px;
+  padding: var(--space-4);
+}
+
+.bracket-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--space-2);
-  padding: var(--space-3);
+}
+
+.bracket-teams {
+  display: grid;
+  gap: 6px;
+}
+
+.bracket-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.bracket-score .score-input {
+  width: 56px;
+}
+
+.bracket-score span {
+  color: var(--color-tertiary);
+  font-weight: 600;
 }
 
 .bracket-card.invalid {

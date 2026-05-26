@@ -147,10 +147,6 @@
           <h3>Selección más goleadora</h3>
           <select id="top-scorer-team" class="editable" onchange="onSpecialChange()"></select>
         </article>
-        <article class="special-card">
-          <h3>Selección menos goleada</h3>
-          <select id="best-defense-team" class="editable" onchange="onSpecialChange()"></select>
-        </article>
         <article class="special-card player-picker">
           <h3>Máximo goleador individual</h3>
           <div class="player-selected" id="player-selected" aria-live="polite">
@@ -186,15 +182,24 @@
         <p>La porra puede quedar incompleta; solo puntúan apartados con pronóstico guardado y resultado real disponible.</p>
         <h3>Sistema de puntos</h3>
         <table>
+          <thead>
+            <tr><th>Fase</th><th>Ganador</th><th>Marcador exacto</th></tr>
+          </thead>
           <tbody>
-            <tr><td>Fase de grupos</td><td>1 punto por signo 1/X/2 acertado</td></tr>
-            <tr><td>1/16</td><td>2 puntos por ganador acertado</td></tr>
-            <tr><td>Octavos</td><td>3 puntos por ganador acertado</td></tr>
-            <tr><td>Cuartos</td><td>4 puntos por ganador acertado</td></tr>
-            <tr><td>Semifinales</td><td>6 puntos por semifinalista acertado</td></tr>
-            <tr><td>Finalistas</td><td>8 puntos por finalista acertado</td></tr>
-            <tr><td>Campeón</td><td>10 puntos por campeón acertado</td></tr>
-            <tr><td>Especiales</td><td>1 punto por gol según selección o jugador elegido</td></tr>
+            <tr><td>Fase de grupos</td><td>1 pto</td><td>2 ptos</td></tr>
+            <tr><td>1/16</td><td>2 ptos</td><td>3 ptos</td></tr>
+            <tr><td>Octavos</td><td>2 ptos</td><td>3 ptos</td></tr>
+            <tr><td>Cuartos</td><td>3 ptos</td><td>4 ptos</td></tr>
+            <tr><td>Semifinales</td><td>3 ptos</td><td>4 ptos</td></tr>
+            <tr><td>Final</td><td>10 ptos</td><td>15 ptos</td></tr>
+          </tbody>
+        </table>
+        <p>El marcador exacto sustituye a los puntos por ganador (no se suman).</p>
+        <h3>Especiales</h3>
+        <table>
+          <tbody>
+            <tr><td>Selección más goleadora</td><td>10 ptos si aciertas</td></tr>
+            <tr><td>Máximo goleador del torneo</td><td>10 ptos si aciertas</td></tr>
           </tbody>
         </table>
         <h3>Clasificación</h3>
