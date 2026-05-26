@@ -8,7 +8,8 @@
     "start": "node app.js",
     "test": "node --test",
     "dev": "node --watch server/server.js",
-    "sync:players": "node server/sync-players-local.js"
+    "sync:players": "node server/sync-players-local.js",
+    "sync:fixtures": "node server/sync-fixtures-local.js"
   },
   "engines": {
     "node": ">=18"

@@ -905,6 +905,74 @@ ABCDEFGH:HGBCAFDE
     return TEAMS[teamId]?.flag || '';
   }
 
+  const TEAM_ISO = {
+    'mexico': 'mx',
+    'south-africa': 'za',
+    'south-korea': 'kr',
+    'czech-republic': 'cz',
+    'canada': 'ca',
+    'bosnia-herzegovina': 'ba',
+    'qatar': 'qa',
+    'switzerland': 'ch',
+    'brazil': 'br',
+    'morocco': 'ma',
+    'haiti': 'ht',
+    'scotland': 'gb-sct',
+    'usa': 'us',
+    'paraguay': 'py',
+    'australia': 'au',
+    'turkey': 'tr',
+    'germany': 'de',
+    'curacao': 'cw',
+    'ivory-coast': 'ci',
+    'ecuador': 'ec',
+    'netherlands': 'nl',
+    'japan': 'jp',
+    'sweden': 'se',
+    'tunisia': 'tn',
+    'belgium': 'be',
+    'egypt': 'eg',
+    'iran': 'ir',
+    'new-zealand': 'nz',
+    'spain': 'es',
+    'cape-verde': 'cv',
+    'saudi-arabia': 'sa',
+    'uruguay': 'uy',
+    'france': 'fr',
+    'senegal': 'sn',
+    'iraq': 'iq',
+    'norway': 'no',
+    'argentina': 'ar',
+    'algeria': 'dz',
+    'austria': 'at',
+    'jordan': 'jo',
+    'portugal': 'pt',
+    'dr-congo': 'cd',
+    'uzbekistan': 'uz',
+    'colombia': 'co',
+    'england': 'gb-eng',
+    'croatia': 'hr',
+    'ghana': 'gh',
+    'panama': 'pa',
+  };
+
+  const FLAG_CDN_BASE = 'https://flagcdn.com';
+
+  function getTeamFlagImgUrl(teamId, width = 80) {
+    const iso = TEAM_ISO[teamId];
+    if (!iso) return '';
+    return `${FLAG_CDN_BASE}/w${width}/${iso}.png`;
+  }
+
+  function getTeamFlagImg(teamId, options = {}) {
+    const url = getTeamFlagImgUrl(teamId, options.width || 80);
+    if (!url) return TEAMS[teamId]?.flag || '';
+    const name = TEAMS[teamId]?.name || teamId;
+    const cls = options.className ? ` class="${options.className}"` : '';
+    const srcset = `${getTeamFlagImgUrl(teamId, 160)} 2x, ${getTeamFlagImgUrl(teamId, 320)} 4x`;
+    return `<img src="${url}" srcset="${srcset}" alt="${name}" loading="lazy" decoding="async"${cls}>`;
+  }
+
   function normalizeName(value) {
     return String(value || '')
       .toLowerCase()
@@ -946,6 +1014,9 @@ ABCDEFGH:HGBCAFDE
     resolveBracketMatches,
     getTeamName,
     getTeamFlag,
+    getTeamFlagImg,
+    getTeamFlagImgUrl,
+    TEAM_ISO,
     normalizeName,
     R32: ROUND_OF_32,
     R16: BRACKET_BY_ROUND.r16,

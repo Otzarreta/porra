@@ -153,11 +153,14 @@
         </article>
         <article class="special-card player-picker">
           <h3>Máximo goleador individual</h3>
+          <div class="player-selected" id="player-selected" aria-live="polite">
+            <span class="player-selected-empty">Aún no has elegido jugador.</span>
+          </div>
           <div class="player-tools">
             <select id="player-team-filter" onchange="renderPlayerOptions()"></select>
-            <input id="player-search" type="search" placeholder="Buscar jugador" oninput="renderPlayerOptions()">
+            <input id="player-search" type="search" placeholder="Buscar por nombre" oninput="renderPlayerOptions()">
           </div>
-          <select id="top-scorer-player-id" class="editable" size="8" onchange="onPlayerSelect()"></select>
+          <select id="top-scorer-player-id" class="editable" onchange="onPlayerSelect()"></select>
           <div class="muted-line" id="players-status"></div>
         </article>
       </div>

@@ -1,6 +1,36 @@
 /* global API, GROUP_ORDER, GROUPS, TEAMS, TEAM_IDS, GROUP_FIXTURES, BRACKET_BY_ROUND, BRACKET_MATCHES */
 /* global createEmptyGroupPredictions, normalizeGroupPredictions, sanitizeScoreValue, isScoreComplete */
-/* global buildGroupStandings, resolveBracketMatches, getTeamName, getTeamFlag */
+/* global buildGroupStandings, resolveBracketMatches, getTeamName, getTeamFlag, getTeamFlagImg */
+
+const KICKOFF_DATE_FORMATTER = new Intl.DateTimeFormat('es-ES', {
+  timeZone: 'Europe/Madrid',
+  weekday: 'short',
+  day: '2-digit',
+  month: 'short',
+});
+
+const KICKOFF_TIME_FORMATTER = new Intl.DateTimeFormat('es-ES', {
+  timeZone: 'Europe/Madrid',
+  hour: '2-digit',
+  minute: '2-digit',
+});
+
+function formatKickoff(iso) {
+  if (!iso) return null;
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return null;
+  const day = KICKOFF_DATE_FORMATTER.format(date).replace('.', '');
+  const time = KICKOFF_TIME_FORMATTER.format(date);
+  return {day, time, iso};
+}
+
+function kickoffMeta(matchId) {
+  const entry = state.kickoffs?.[matchId];
+  if (!entry?.kickoff) return null;
+  const f = formatKickoff(entry.kickoff);
+  if (!f) return null;
+  return {...f, venue: entry.venueName || '', city: entry.venueCity || ''};
+}
 
 const state = {
   meta: {locked: false, deadline: null},
@@ -9,6 +39,7 @@ const state = {
   email: '',
   player: '',
   players: [],
+  kickoffs: {},
   homeMatchView: 'groups',
   groupPredictions: createEmptyGroupPredictions(),
   bracketWinners: {},
@@ -36,9 +67,16 @@ function init() {
 }
 
 async function loadPublicData() {
-  const [meta, players] = await Promise.all([API.getMeta(), API.getPlayers().catch(() => [])]);
+  const [meta, players, kickoffs] = await Promise.all([
+    API.getMeta(),
+    API.getPlayers().catch(() => []),
+    API.getKickoffs().catch(() => ({})),
+  ]);
   state.meta = meta || state.meta;
   state.players = Array.isArray(players) ? players : [];
+  state.kickoffs = kickoffs && typeof kickoffs === 'object' ? kickoffs : {};
+  buildGroups();
+  buildHomeMatches();
   renderMeta();
   renderPlayerOptions();
   applyLockState();
@@ -132,9 +170,11 @@ function buildGroups() {
     card.innerHTML = `
       <div class="group-head">
         <div class="group-letter">${group}</div>
-        <div>
+        <div class="group-head-text">
           <h3>${groupData.name}</h3>
-          <p>${groupData.teams.map(team => `${team.flag} ${escapeHtml(team.name)}`).join(' · ')}</p>
+          <div class="group-teams">
+            ${groupData.teams.map(team => `<span class="group-team">${getTeamFlagImg(team.id, {className: 'flag flag-sm'})}<span>${escapeHtml(team.name)}</span></span>`).join('')}
+          </div>
         </div>
       </div>
       <div class="match-list" id="matches-${group}"></div>
@@ -145,20 +185,29 @@ function buildGroups() {
     GROUP_FIXTURES[group].forEach((fixture, idx) => {
       const home = TEAMS[fixture.homeId];
       const away = TEAMS[fixture.awayId];
+      const matchId = `${group}${idx + 1}`;
+      const kickoff = kickoffMeta(matchId);
       const row = document.createElement('div');
       row.className = 'match-row';
       row.innerHTML = `
-        <span class="team left">${home.flag}<b>${escapeHtml(home.name)}</b></span>
-        <div class="score-inputs">
-          <input class="editable score-input" type="number" min="0" max="99" inputmode="numeric" data-group="${group}" data-index="${idx}" data-side="home" oninput="setGroupScore(this)">
-          <span>-</span>
-          <input class="editable score-input" type="number" min="0" max="99" inputmode="numeric" data-group="${group}" data-index="${idx}" data-side="away" oninput="setGroupScore(this)">
+        <div class="match-meta">
+          <span class="match-id">${matchId}</span>
+          ${kickoff ? `<time class="match-kickoff" datetime="${kickoff.iso}"><span>${kickoff.day}</span><strong>${kickoff.time}</strong></time>` : '<span class="match-kickoff placeholder">Por confirmar</span>'}
         </div>
-        <span class="team right"><b>${escapeHtml(away.name)}</b>${away.flag}</span>
+        <div class="match-teams">
+          <span class="team left">${getTeamFlagImg(fixture.homeId, {className: 'flag'})}<b>${escapeHtml(home.name)}</b></span>
+          <div class="score-inputs">
+            <input class="editable score-input" type="number" min="0" max="99" inputmode="numeric" data-group="${group}" data-index="${idx}" data-side="home" oninput="setGroupScore(this)">
+            <span>-</span>
+            <input class="editable score-input" type="number" min="0" max="99" inputmode="numeric" data-group="${group}" data-index="${idx}" data-side="away" oninput="setGroupScore(this)">
+          </div>
+          <span class="team right"><b>${escapeHtml(away.name)}</b>${getTeamFlagImg(fixture.awayId, {className: 'flag'})}</span>
+        </div>
       `;
       list.appendChild(row);
     });
   });
+  syncFormFromState();
 }
 
 function setGroupScore(input) {
@@ -182,7 +231,7 @@ function renderGroupStandings(group) {
     ${standings.map((row, index) => `
       <div class="standing-row ${index < 2 ? 'qualified' : index === 2 ? 'third' : ''}">
         <span>${index + 1}</span>
-        <span>${row.team.flag} ${escapeHtml(row.team.name)}</span>
+        <span class="standing-team">${getTeamFlagImg(row.team.id, {className: 'flag flag-xs'})}<span>${escapeHtml(row.team.name)}</span></span>
         <span>${row.points}</span>
         <span>${row.gd}</span>
         <span>${row.gf}</span>
@@ -202,12 +251,16 @@ function buildHomeMatches() {
           const home = TEAMS[fixture.homeId];
           const away = TEAMS[fixture.awayId];
           const matchId = `${group}${index + 1}`;
+          const kickoff = kickoffMeta(matchId);
           return `
             <button class="home-match-card" onclick="openMatchPredictions('${matchId}')" type="button">
-              <span class="home-match-id">${matchId}</span>
-              <strong>${home.flag} ${escapeHtml(home.name)}</strong>
+              <span class="home-match-head">
+                <span class="home-match-id">${matchId}</span>
+                ${kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : '<span class="home-match-kickoff placeholder">Por confirmar</span>'}
+              </span>
+              <span class="home-match-team">${getTeamFlagImg(fixture.homeId, {className: 'flag flag-sm'})}<strong>${escapeHtml(home.name)}</strong></span>
               <em>vs</em>
-              <strong>${away.flag} ${escapeHtml(away.name)}</strong>
+              <span class="home-match-team">${getTeamFlagImg(fixture.awayId, {className: 'flag flag-sm'})}<strong>${escapeHtml(away.name)}</strong></span>
             </button>
           `;
         }).join('')}
@@ -226,14 +279,20 @@ function buildHomeMatches() {
   container.innerHTML = rounds.map(([round, label]) => `
     <div class="home-match-group">
       <h3>${label}</h3>
-      ${BRACKET_BY_ROUND[round].map(match => `
+      ${BRACKET_BY_ROUND[round].map(match => {
+        const kickoff = kickoffMeta(match.id);
+        return `
         <button class="home-match-card bracket" onclick="openMatchPredictions('${match.id}')" type="button">
-          <span class="home-match-id">${match.id}</span>
+          <span class="home-match-head">
+            <span class="home-match-id">${match.id}</span>
+            ${kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : ''}
+          </span>
           <strong>${sourceLabel(match.sources[0])}</strong>
           <em>vs</em>
           <strong>${sourceLabel(match.sources[1])}</strong>
         </button>
-      `).join('')}
+      `;
+      }).join('')}
     </div>
   `).join('');
 }
@@ -415,28 +474,55 @@ function renderPlayerOptions() {
   const status = document.getElementById('players-status');
   const teamFilter = document.getElementById('player-team-filter')?.value || '';
   const query = normalizeInput(document.getElementById('player-search')?.value || '');
-  const filtered = state.players.filter(player => {
-    if (player.active === false) return false;
-    if (teamFilter && player.teamId !== teamFilter) return false;
-    if (query && !normalizeInput(`${player.name} ${getTeamName(player.teamId)}`).includes(query)) return false;
-    return true;
-  }).slice(0, 200);
 
   if (!state.players.length) {
-    select.innerHTML = '<option value="">Sin jugadores cargados por admin</option>';
+    select.innerHTML = '<option value="">Sin jugadores disponibles</option>';
     select.disabled = true;
-    status.textContent = 'La base de jugadores se carga desde admin cuando las listas estén disponibles.';
+    status.textContent = 'La base de jugadores se sincroniza con 365scores. Vuelve a intentarlo en unos minutos.';
+    renderSelectedPlayer();
     return;
   }
 
+  const filtered = state.players.filter(player => {
+    if (player.active === false) return false;
+    if (teamFilter && player.teamId !== teamFilter) return false;
+    if (query && !normalizeInput(`${player.name} ${getTeamName(player.teamId)} ${player.club || ''}`).includes(query)) return false;
+    return true;
+  }).slice(0, 300);
+
   select.disabled = state.meta.locked;
-  select.innerHTML = filtered.map(player => `<option value="${player.id}">${escapeHtml(player.name)} - ${getTeamName(player.teamId)}</option>`).join('');
+  const optionHtml = filtered.map(player => `<option value="${player.id}">${escapeHtml(player.name)} · ${getTeamName(player.teamId)}${player.club ? ` — ${escapeHtml(player.club)}` : ''}</option>`).join('');
+  const placeholder = `<option value="">${filtered.length ? 'Elige jugador…' : 'Sin coincidencias con el filtro'}</option>`;
+  let html = placeholder + optionHtml;
   if (state.topScorerPlayerId && !filtered.some(player => player.id === state.topScorerPlayerId)) {
     const selected = state.players.find(player => player.id === state.topScorerPlayerId);
-    if (selected) select.innerHTML = `<option value="${selected.id}">${escapeHtml(selected.name)} - ${getTeamName(selected.teamId)}</option>` + select.innerHTML;
+    if (selected) {
+      html = `<option value="${selected.id}">${escapeHtml(selected.name)} · ${getTeamName(selected.teamId)}${selected.club ? ` — ${escapeHtml(selected.club)}` : ''}</option>` + html;
+    }
   }
+  select.innerHTML = html;
   select.value = state.topScorerPlayerId || '';
-  status.textContent = `${filtered.length} jugadores visibles`;
+
+  const total = state.players.filter(p => p.active !== false).length;
+  status.textContent = `${filtered.length} de ${total} jugadores visibles`;
+  renderSelectedPlayer();
+}
+
+function renderSelectedPlayer() {
+  const target = document.getElementById('player-selected');
+  if (!target) return;
+  const player = state.players.find(p => p.id === state.topScorerPlayerId);
+  if (!player) {
+    target.innerHTML = '<span class="player-selected-empty">Aún no has elegido jugador.</span>';
+    return;
+  }
+  target.innerHTML = `
+    ${getTeamFlagImg(player.teamId, {className: 'flag flag-md'})}
+    <div class="player-selected-text">
+      <strong>${escapeHtml(player.name)}</strong>
+      <span>${escapeHtml(getTeamName(player.teamId))}${player.club ? ` · ${escapeHtml(player.club)}` : ''}${player.position ? ` · ${escapeHtml(player.position)}` : ''}</span>
+    </div>
+  `;
 }
 
 function onSpecialChange() {
@@ -449,6 +535,7 @@ function onSpecialChange() {
 function onPlayerSelect() {
   if (state.meta.locked) return;
   state.topScorerPlayerId = document.getElementById('top-scorer-player-id').value;
+  renderSelectedPlayer();
   markDirty();
 }
 

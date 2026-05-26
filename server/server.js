@@ -36,6 +36,7 @@ const RESULTS_FILE = path.join(DATA_DIR, 'results.json');
 const META_FILE = path.join(DATA_DIR, 'meta.json');
 const PLAYERS_FILE = path.join(DATA_DIR, 'players.json');
 const PLAYERS_SEED_FILE = path.join(__dirname, 'players-seed.json');
+const FIXTURES_SEED_FILE = path.join(__dirname, 'fixtures-seed.json');
 
 const DEFAULT_DEADLINE = '2026-06-11T19:00:00Z';
 const PORT = process.env.PORT || 3000;
@@ -44,6 +45,7 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || ADMIN_TOKEN || 'p
 
 let porras = {};
 let players = [];
+let kickoffs = {};
 let results = null;
 let metaState = {
   deadline: DEFAULT_DEADLINE,
@@ -112,6 +114,8 @@ async function loadState() {
   }
   results = await readJson(RESULTS_FILE, null, true);
   metaState = {...metaState, ...(await readJson(META_FILE, metaState, true))};
+  const fixturesSeed = await readJson(FIXTURES_SEED_FILE, null, false);
+  kickoffs = sanitizeKickoffs(fixturesSeed?.matches);
 }
 
 const isLocked = () => Date.now() > Date.parse(metaState.deadline);
@@ -129,6 +133,8 @@ app.get('/api/health', (_req, res) => res.json({ok: true, uptime: process.uptime
 app.get('/api/meta', (_req, res) => res.json(publicMeta()));
 
 app.get('/api/players', (_req, res) => res.json(players));
+
+app.get('/api/kickoffs', (_req, res) => res.json(kickoffs));
 
 app.get('/api/results', (_req, res) => res.json(results || null));
 
@@ -377,6 +383,26 @@ function sanitizeBracketWinners(input) {
   if (!input || typeof input !== 'object') return out;
   Object.entries(input).forEach(([matchId, teamId]) => {
     if (validMatchIds.has(matchId) && TEAM_IDS.includes(teamId)) out[matchId] = teamId;
+  });
+  return out;
+}
+
+function sanitizeKickoffs(input) {
+  const out = {};
+  if (!input || typeof input !== 'object') return out;
+  Object.entries(input).forEach(([rawId, value]) => {
+    if (!value || typeof value !== 'object') return;
+    const matchId = String(rawId).trim().toUpperCase();
+    if (!matchId) return;
+    const kickoff = typeof value.kickoff === 'string' ? value.kickoff.slice(0, 40) : null;
+    if (!kickoff) return;
+    out[matchId] = {
+      kickoff,
+      round: typeof value.round === 'string' ? value.round.slice(0, 20) : null,
+      group: typeof value.group === 'string' ? value.group.slice(0, 2) : null,
+      venueName: typeof value.venueName === 'string' ? value.venueName.slice(0, 80) : null,
+      venueCity: typeof value.venueCity === 'string' ? value.venueCity.slice(0, 80) : null,
+    };
   });
   return out;
 }

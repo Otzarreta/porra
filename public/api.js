@@ -18,6 +18,7 @@ const API = (() => {
   return {
     getMeta: () => request('/meta'),
     getPlayers: () => request('/players'),
+    getKickoffs: () => request('/kickoffs'),
     getResults: () => request('/results'),
     getRanking: () => request('/ranking'),
     getMatchPredictions: (matchId) => request('/matches/' + encodeURIComponent(matchId) + '/predictions'),
