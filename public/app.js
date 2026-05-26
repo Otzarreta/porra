@@ -123,18 +123,45 @@ async function loginUser(silent) {
 }
 
 function showGame() {
-  document.getElementById('home-view').classList.add('hidden');
-  document.getElementById('game-view').classList.remove('hidden');
-  document.getElementById('active-player').textContent = state.player || '-';
-  renderAll();
+  swapViews('home-view', 'game-view', () => {
+    document.getElementById('active-player').textContent = state.player || '-';
+    renderAll();
+  });
 }
 
 function returnHome() {
-  document.getElementById('game-view').classList.add('hidden');
-  document.getElementById('home-view').classList.remove('hidden');
-  document.getElementById('player-email').value = state.email || localStorage.getItem('porraEmail') || '';
-  document.getElementById('player-alias').value = state.player || localStorage.getItem('playerAlias') || '';
-  refreshRanking();
+  swapViews('game-view', 'home-view', () => {
+    document.getElementById('player-email').value = state.email || localStorage.getItem('porraEmail') || '';
+    document.getElementById('player-alias').value = state.player || localStorage.getItem('playerAlias') || '';
+    refreshRanking();
+  });
+}
+
+function swapViews(fromId, toId, onSwap) {
+  const from = document.getElementById(fromId);
+  const to = document.getElementById(toId);
+  const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || from.classList.contains('hidden')) {
+    from.classList.add('hidden');
+    to.classList.remove('hidden');
+    if (typeof onSwap === 'function') onSwap();
+    to.scrollIntoView?.({block: 'start'});
+    return;
+  }
+  from.classList.add('view-leave');
+  const finish = () => {
+    from.removeEventListener('transitionend', finish);
+    from.classList.remove('view-leave');
+    from.classList.add('hidden');
+    to.classList.remove('hidden');
+    if (typeof onSwap === 'function') onSwap();
+    to.classList.add('view-enter');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => to.classList.remove('view-enter'));
+    });
+  };
+  from.addEventListener('transitionend', finish, {once: true});
+  setTimeout(() => { if (from.classList.contains('view-leave')) finish(); }, 280);
 }
 
 function logoutUser() {
@@ -319,6 +346,7 @@ async function openMatchPredictions(matchId) {
   const title = document.getElementById('match-modal-title');
   const subtitle = document.getElementById('match-modal-subtitle');
   const body = document.getElementById('match-modal-body');
+  modal.classList.remove('closing');
   modal.classList.add('active');
   title.textContent = matchId;
   subtitle.textContent = 'Cargando pronósticos...';
@@ -337,7 +365,12 @@ function renderMatchPredictionModal(data) {
   const subtitle = document.getElementById('match-modal-subtitle');
   const body = document.getElementById('match-modal-body');
   if (data.type === 'group') {
-    title.textContent = `${data.matchId} · ${getTeamFlag(data.homeId)} ${getTeamName(data.homeId)} vs ${getTeamFlag(data.awayId)} ${getTeamName(data.awayId)}`;
+    title.innerHTML = `
+      <span class="modal-title-id">${data.matchId}</span>
+      <span class="modal-title-team">${getTeamFlagImg(data.homeId, {className: 'flag flag-md'})}<span>${escapeHtml(getTeamName(data.homeId))}</span></span>
+      <em>vs</em>
+      <span class="modal-title-team">${getTeamFlagImg(data.awayId, {className: 'flag flag-md'})}<span>${escapeHtml(getTeamName(data.awayId))}</span></span>
+    `;
     subtitle.textContent = `${data.predictions.length} pronósticos registrados`;
     body.innerHTML = data.predictions.map(item => `
       <div class="prediction-row">
@@ -348,14 +381,14 @@ function renderMatchPredictionModal(data) {
     return;
   }
 
-  title.textContent = `${data.matchId} · ${roundLabel(data.round)}`;
+  title.innerHTML = `<span class="modal-title-id">${data.matchId}</span> <span>${escapeHtml(roundLabel(data.round))}</span>`;
   subtitle.textContent = `${data.predictions.length} pronósticos registrados`;
   body.innerHTML = data.predictions.map(item => `
     <div class="prediction-row bracket">
       <span>${escapeHtml(item.player)}</span>
       <div>
         <small>${formatSlotName(item.slots?.[0], data.sourceLabels?.[0])} vs ${formatSlotName(item.slots?.[1], data.sourceLabels?.[1])}</small>
-        <strong>${item.winnerId ? `${getTeamFlag(item.winnerId)} ${escapeHtml(item.winnerName)}` : 'sin ganador'}</strong>
+        <strong>${item.winnerId ? `${getTeamFlagImg(item.winnerId, {className: 'flag flag-xs'})} ${escapeHtml(item.winnerName)}` : 'sin ganador'}</strong>
       </div>
     </div>
   `).join('') || '<div class="empty-state">Aún no hay pronósticos para este partido.</div>';
@@ -363,11 +396,16 @@ function renderMatchPredictionModal(data) {
 
 function closeMatchModal(event) {
   if (event && event.target !== document.getElementById('match-modal')) return;
-  document.getElementById('match-modal').classList.remove('active');
+  const modal = document.getElementById('match-modal');
+  modal.classList.remove('active');
+  modal.classList.add('closing');
+  setTimeout(() => modal.classList.remove('closing'), 220);
 }
 
 function formatSlotName(teamId, fallback) {
-  return teamId ? `${getTeamFlag(teamId)} ${getTeamName(teamId)}` : (fallback || '-');
+  return teamId
+    ? `${getTeamFlagImg(teamId, {className: 'flag flag-xs'})} ${escapeHtml(getTeamName(teamId))}`
+    : escapeHtml(fallback || '-');
 }
 
 function roundLabel(round) {
@@ -395,23 +433,26 @@ function buildBracket() {
     BRACKET_BY_ROUND[round].forEach(match => {
       const kickoff = kickoffMeta(match.id);
       const card = document.createElement('article');
-      card.className = 'bracket-card';
+      card.className = 'bracket-card match-row';
       card.id = `match-${match.id}`;
       card.innerHTML = `
-        <div class="bracket-head">
+        <div class="match-meta">
           <span class="match-id">${match.id}</span>
-          ${kickoff ? `<time class="match-kickoff" datetime="${kickoff.iso}"><span>${kickoff.day}</span><strong>${kickoff.time}</strong></time>` : ''}
+          ${kickoff ? `<time class="match-kickoff" datetime="${kickoff.iso}"><span>${kickoff.day}</span><strong>${kickoff.time}</strong></time>` : '<span class="match-kickoff placeholder">Por confirmar</span>'}
         </div>
-        <div class="bracket-teams">
-          <div class="slot" id="slot-${match.id}-0">-</div>
-          <div class="bracket-score">
+        <div class="match-teams">
+          <span class="team left slot" id="slot-${match.id}-0">-</span>
+          <div class="score-inputs">
             <input class="editable score-input" type="number" min="0" max="99" inputmode="numeric" id="bracket-score-${match.id}-home" data-match="${match.id}" data-side="home" oninput="onBracketScore(this)">
             <span>-</span>
             <input class="editable score-input" type="number" min="0" max="99" inputmode="numeric" id="bracket-score-${match.id}-away" data-match="${match.id}" data-side="away" oninput="onBracketScore(this)">
           </div>
-          <div class="slot" id="slot-${match.id}-1">-</div>
+          <span class="team right slot" id="slot-${match.id}-1">-</span>
         </div>
-        <select class="editable winner-select" id="winner-${match.id}" onchange="onWinnerSelect('${match.id}')"></select>
+        <div class="bracket-winner">
+          <label for="winner-${match.id}">Ganador</label>
+          <select class="editable winner-select" id="winner-${match.id}" onchange="onWinnerSelect('${match.id}')"></select>
+        </div>
       `;
       grid.appendChild(card);
     });
@@ -452,9 +493,13 @@ function refreshBracket() {
     slots.forEach((teamId, index) => {
       const slot = document.getElementById(`slot-${match.id}-${index}`);
       if (!slot) return;
-      slot.innerHTML = teamId
-        ? `${getTeamFlagImg(teamId, {className: 'flag flag-sm'})} <span>${escapeHtml(getTeamName(teamId))}</span>`
-        : `<span>${escapeHtml(sourceLabel(match.sources[index]))}</span>`;
+      if (teamId) {
+        const flag = getTeamFlagImg(teamId, {className: 'flag flag-sm'});
+        const name = `<b>${escapeHtml(getTeamName(teamId))}</b>`;
+        slot.innerHTML = index === 0 ? `${flag}${name}` : `${name}${flag}`;
+      } else {
+        slot.innerHTML = `<b class="slot-placeholder">${escapeHtml(sourceLabel(match.sources[index]))}</b>`;
+      }
       slot.classList.toggle('empty', !teamId);
     });
 
@@ -488,10 +533,21 @@ function renderThirdSummary(resolved) {
   const el = document.getElementById('third-summary');
   const top = resolved.thirdRank.slice(0, 8);
   el.innerHTML = `
-    <div>
+    <header class="third-header">
+      <span class="third-kicker">Clasificación</span>
       <strong>Mejores terceros</strong>
-      <span>${top.map(row => `${row.thirdGroup}: ${getTeamFlagImg(row.teamId, {className: 'flag flag-xs'})} ${escapeHtml(getTeamName(row.teamId))}`).join(' · ') || '-'}</span>
-    </div>
+      <small>Los 8 mejores de los 12 grupos avanzan a 1/16</small>
+    </header>
+    <ol class="third-list">
+      ${top.length ? top.map((row, idx) => `
+        <li class="third-item ${idx < 8 ? 'qualified' : ''}">
+          <span class="third-rank">${idx + 1}</span>
+          ${getTeamFlagImg(row.teamId, {className: 'flag flag-sm'})}
+          <span class="third-team">${escapeHtml(getTeamName(row.teamId))}</span>
+          <span class="third-group">Grupo ${row.thirdGroup}</span>
+        </li>
+      `).join('') : '<li class="third-empty">Aún no hay terceros clasificados.</li>'}
+    </ol>
   `;
 }
 
