@@ -88,6 +88,10 @@ const isLocked = () => Date.now() > Date.parse(metaState.deadline);
 
 const app = express();
 app.use(express.json({limit: '2mb'}));
+app.use((req, res, next) => {
+  if (req.path.endsWith('.avif')) res.type('image/avif');
+  next();
+});
 app.use(express.static(path.join(ROOT, 'public')));
 
 app.get('/api/health', (_req, res) => res.json({ok: true, uptime: process.uptime()}));
