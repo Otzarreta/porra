@@ -25,6 +25,9 @@ const {
 const ACCESS_TOKEN_TTL_MS = 1000 * 60 * 60 * 24 * 60; // 60 dias
 const MAX_GOALS_PER_MATCH = 50;
 const MAX_PLAYER_GOALS = 100;
+const PLAYER_SYNC_INTERVAL_MS = 24 * 60 * 60 * 1000;
+const PLAYER_SYNC_END = '2026-07-20T00:00:00Z';
+const PLAYER_SYNC_BOOT_DELAY_MS = 15_000;
 
 const ROOT = path.join(__dirname, '..');
 const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(__dirname, 'data');
@@ -245,49 +248,28 @@ app.post('/api/admin/players', async (req, res) => {
 app.post('/api/admin/players/sync', async (req, res) => {
   if (!requireAdmin(req, res)) return;
   try {
-    const sync = await scrape365ScoresPlayers({
+    const result = await runPlayerSync({
       teams: Array.isArray(req.body?.teams) ? req.body.teams : null,
-      startDate: sanitizeDate(req.body?.startDate),
-      endDate: sanitizeDate(req.body?.endDate),
-      requestTimeoutMs: req.body?.requestTimeoutMs,
-      teamConcurrency: req.body?.teamConcurrency,
-    });
-    const merged = mergePlayers(players, sync.players, {
       deactivateMissing: req.body?.deactivateMissing !== false,
-      syncedTeamIds: sync.teamIds,
+      syncOptions: {
+        startDate: sanitizeDate(req.body?.startDate),
+        endDate: sanitizeDate(req.body?.endDate),
+        requestTimeoutMs: req.body?.requestTimeoutMs,
+        teamConcurrency: req.body?.teamConcurrency,
+      },
+      throwOnError: true,
     });
-    players = sanitizePlayers(merged.players);
-    await writeJsonSerialized(PLAYERS_FILE, players);
-
-    metaState.lastPlayerSync = {
-      ok: true,
-      at: new Date().toISOString(),
-      source: '365scores',
-      imported: sync.players.length,
-      count: players.length,
-      teams: sync.teamIds.length,
-      errors: sync.sourceMeta.errors,
-    };
-    await writeJsonSerialized(META_FILE, metaState);
-
     res.json({
       ok: true,
       count: players.length,
-      imported: sync.players.length,
-      teams: sync.teamIds.length,
-      added: merged.added,
-      updated: merged.updated,
-      deactivated: merged.deactivated,
-      errors: sync.sourceMeta.errors,
+      imported: result.sync.players.length,
+      teams: result.sync.teamIds.length,
+      added: result.merged.added,
+      updated: result.merged.updated,
+      deactivated: result.merged.deactivated,
+      errors: result.sync.sourceMeta.errors,
     });
   } catch (err) {
-    metaState.lastPlayerSync = {
-      ok: false,
-      at: new Date().toISOString(),
-      source: '365scores',
-      error: err.message,
-    };
-    await writeJsonSerialized(META_FILE, metaState);
     res.status(500).json({error: 'players_sync_failed', message: err.message});
   }
 });
@@ -699,6 +681,55 @@ function scheduleScrape() {
   setInterval(runScrape, SCRAPE_INTERVAL_MS);
 }
 
+async function runPlayerSync({teams = null, deactivateMissing = true, syncOptions = {}, throwOnError = false} = {}) {
+  try {
+    const sync = await scrape365ScoresPlayers({...syncOptions, teams});
+    const merged = mergePlayers(players, sync.players, {
+      deactivateMissing,
+      syncedTeamIds: sync.teamIds,
+    });
+    players = sanitizePlayers(merged.players);
+    await writeJsonSerialized(PLAYERS_FILE, players);
+
+    metaState.lastPlayerSync = {
+      ok: true,
+      at: new Date().toISOString(),
+      source: '365scores',
+      imported: sync.players.length,
+      count: players.length,
+      teams: sync.teamIds.length,
+      errors: sync.sourceMeta.errors,
+    };
+    await writeJsonSerialized(META_FILE, metaState);
+    console.log(`[playerSync] ok: ${players.length} jugadores (${sync.teamIds.length} selecciones)`);
+    return {sync, merged};
+  } catch (err) {
+    console.error('[playerSync] failed:', err.message);
+    metaState.lastPlayerSync = {
+      ok: false,
+      at: new Date().toISOString(),
+      source: '365scores',
+      error: err.message,
+    };
+    await writeJsonSerialized(META_FILE, metaState);
+    if (throwOnError) throw err;
+    return null;
+  }
+}
+
+function schedulePlayerSync() {
+  const now = Date.now();
+  const end = Date.parse(PLAYER_SYNC_END);
+  if (now > end) {
+    console.log('[playerSync] fuera de ventana (post torneo), skipping cron');
+    return;
+  }
+  setTimeout(() => {
+    runPlayerSync();
+    setInterval(runPlayerSync, PLAYER_SYNC_INTERVAL_MS);
+  }, PLAYER_SYNC_BOOT_DELAY_MS);
+}
+
 async function start() {
   await loadState();
   app.listen(PORT, () => {
@@ -707,6 +738,7 @@ async function start() {
     console.log(`Porras cargadas: ${Object.keys(porras).length}`);
   });
   scheduleScrape();
+  schedulePlayerSync();
 }
 
 if (require.main === module) {
