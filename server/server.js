@@ -126,7 +126,17 @@ app.use((req, res, next) => {
   if (req.path.endsWith('.avif')) res.type('image/avif');
   next();
 });
-app.use(express.static(path.join(ROOT, 'public')));
+app.use(express.static(path.join(ROOT, 'public'), {
+  etag: true,
+  lastModified: true,
+  setHeaders(res, filePath) {
+    if (/\.(html|js|css|json)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+    }
+  },
+}));
 
 app.get('/api/health', (_req, res) => res.json({ok: true, uptime: process.uptime()}));
 
