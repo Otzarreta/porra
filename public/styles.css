@@ -833,25 +833,48 @@ select:focus {
 }
 
 .flag {
-  width: 22px;
-  height: auto;
-  border-radius: 3px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  display: inline-block;
+  width: auto;
+  height: 20px;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
+  border-radius: 3px;
+  box-shadow:
+    0 0 0 1px rgba(15, 17, 21, 0.12),
+    0 1px 2px rgba(15, 17, 21, 0.08);
   flex-shrink: 0;
+  background: rgba(15, 17, 21, 0.04);
 }
 
 .flag-xs {
-  width: 18px;
+  height: 14px;
+  border-radius: 2px;
 }
 
 .flag-sm {
-  width: 24px;
+  height: 22px;
 }
 
 .flag-md {
-  width: 40px;
+  height: 40px;
   border-radius: 5px;
+  box-shadow:
+    0 0 0 1px rgba(15, 17, 21, 0.14),
+    0 2px 6px rgba(15, 17, 21, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  .flag {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .flag-md {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.16),
+      0 2px 6px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .match-list {

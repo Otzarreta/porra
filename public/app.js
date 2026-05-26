@@ -207,7 +207,6 @@ function buildGroups() {
       list.appendChild(row);
     });
   });
-  syncFormFromState();
 }
 
 function setGroupScore(input) {

@@ -965,12 +965,13 @@ ABCDEFGH:HGBCAFDE
   }
 
   function getTeamFlagImg(teamId, options = {}) {
-    const url = getTeamFlagImgUrl(teamId, options.width || 80);
-    if (!url) return TEAMS[teamId]?.flag || '';
+    const iso = TEAM_ISO[teamId];
+    if (!iso) return TEAMS[teamId]?.flag || '';
     const name = TEAMS[teamId]?.name || teamId;
     const cls = options.className ? ` class="${options.className}"` : '';
-    const srcset = `${getTeamFlagImgUrl(teamId, 160)} 2x, ${getTeamFlagImgUrl(teamId, 320)} 4x`;
-    return `<img src="${url}" srcset="${srcset}" alt="${name}" loading="lazy" decoding="async"${cls}>`;
+    const url = `${FLAG_CDN_BASE}/w160/${iso}.png`;
+    const srcset = `${FLAG_CDN_BASE}/w320/${iso}.png 2x`;
+    return `<img src="${url}" srcset="${srcset}" alt="${name}" width="32" height="22" loading="lazy" decoding="async"${cls}>`;
   }
 
   function normalizeName(value) {
