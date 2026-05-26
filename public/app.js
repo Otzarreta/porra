@@ -251,15 +251,24 @@ function buildHomeMatches() {
           const away = TEAMS[fixture.awayId];
           const matchId = `${group}${index + 1}`;
           const kickoff = kickoffMeta(matchId);
+          const prediction = state.groupPredictions?.[group]?.[index] || {};
+          const homeGoals = Number.isFinite(prediction.homeGoals) ? prediction.homeGoals : null;
+          const awayGoals = Number.isFinite(prediction.awayGoals) ? prediction.awayGoals : null;
+          const homeSlot = homeGoals == null ? '<span class="home-match-score placeholder">–</span>' : `<span class="home-match-score">${homeGoals}</span>`;
+          const awaySlot = awayGoals == null ? '<span class="home-match-score placeholder">–</span>' : `<span class="home-match-score">${awayGoals}</span>`;
           return `
             <button class="home-match-card" onclick="openMatchPredictions('${matchId}')" type="button">
               <span class="home-match-head">
                 <span class="home-match-id">${matchId}</span>
                 ${kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : '<span class="home-match-kickoff placeholder">Por confirmar</span>'}
               </span>
-              <span class="home-match-team">${getTeamFlagImg(fixture.homeId, {className: 'flag flag-sm'})}<strong>${escapeHtml(home.name)}</strong></span>
-              <em>vs</em>
-              <span class="home-match-team">${getTeamFlagImg(fixture.awayId, {className: 'flag flag-sm'})}<strong>${escapeHtml(away.name)}</strong></span>
+              <span class="home-match-body">
+                <span class="home-match-team home">${getTeamFlagImg(fixture.homeId, {className: 'flag flag-sm'})}<strong>${escapeHtml(home.name)}</strong></span>
+                ${homeSlot}
+                <em>vs</em>
+                ${awaySlot}
+                <span class="home-match-team away"><strong>${escapeHtml(away.name)}</strong>${getTeamFlagImg(fixture.awayId, {className: 'flag flag-sm'})}</span>
+              </span>
             </button>
           `;
         }).join('')}
@@ -286,9 +295,11 @@ function buildHomeMatches() {
             <span class="home-match-id">${match.id}</span>
             ${kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : ''}
           </span>
-          <strong>${sourceLabel(match.sources[0])}</strong>
-          <em>vs</em>
-          <strong>${sourceLabel(match.sources[1])}</strong>
+          <span class="home-match-body bracket-body">
+            <strong>${sourceLabel(match.sources[0])}</strong>
+            <em>vs</em>
+            <strong>${sourceLabel(match.sources[1])}</strong>
+          </span>
         </button>
       `;
       }).join('')}
