@@ -104,7 +104,18 @@ body.locked .lock-banner {
 .game-view {
   display: grid;
   gap: var(--space-5);
+  min-width: 0;
   transition: opacity 220ms ease, transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.app-shell > section {
+  min-width: 0;
+}
+
+.home-view > *,
+.game-view > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .home-view.view-leave,
@@ -126,7 +137,7 @@ body.locked .lock-banner {
   gap: var(--space-6);
   align-items: center;
   padding-top: 150px;
-  padding-bottom: var(--space-5),
+  padding-bottom: var(--space-5);
 }
 
 .hero-copy {
@@ -149,13 +160,15 @@ body.locked .lock-banner {
 }
 
 h1 {
-  max-width: 760px;
+  max-width: 100%;
   font-family: var(--font-display);
-  font-size: clamp(4rem, 12vw, 8.5rem);
+  font-size: clamp(2.6rem, 12vw, 8.5rem);
   font-weight: 700;
   line-height: 0.88;
   letter-spacing: 0;
   color: var(--color-ink);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hero-sub {
@@ -1668,11 +1681,6 @@ select:focus {
   .home-hero {
     min-height: 0;
     padding-top: var(--space-5);
-    padding-inline: var(--space-4);
-  }
-
-  .home-grid, .matches-panel{
-    padding-inline: var(--space-4);
   }
 
   .hero-stats {
@@ -1710,12 +1718,15 @@ select:focus {
     padding-inline: 0;
   }
 
+  .stadium-bg::before{
+    background-position-x: 60%;
+  }
+
   .app-shell {
     width: 100%;
     padding-top: var(--space-3);
-    padding-inline: 0px;
+    padding-inline: var(--space-4);
   }
-
 
 
   h1 {
@@ -1740,7 +1751,7 @@ select:focus {
 
   .match-teams {
     grid-template-columns: 1fr auto 1fr;
-    gap: 6px;
+    gap: 12px;
   }
 
   .team.right {
@@ -1752,8 +1763,22 @@ select:focus {
     justify-content: flex-start;
   }
 
+  .hero-copy, .access-card, .home-hero{
+    padding-bottom: 0px
+  }
+
+  #match-modal-title{
+    flex-flow: column!important;
+    margin-bottom: var(--space-4);
+  }
+
   .group-teams {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .editable.score-input{
+    width: 30px;
+    height: 30px;
   }
 
   .home-match-grid,
@@ -1831,6 +1856,10 @@ select:focus {
 @media (max-width: 420px) {
   .hero-stats {
     grid-template-columns: 1fr;
+  }
+
+  .panel-head{
+    flex-flow: column;
   }
 
   .group-head {
