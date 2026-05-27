@@ -171,7 +171,7 @@ h1 {
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 150px));
+  grid-template-columns: repeat(3, minmax(0, 162px));
   gap: var(--space-3);
 }
 
