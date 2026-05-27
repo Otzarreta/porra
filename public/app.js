@@ -308,6 +308,7 @@ function buildHomeMatches() {
   const container = document.getElementById('home-matches-container');
   if (!container) return;
   if (state.homeMatchView === 'groups') {
+    const realShape = realGroupShape(state.realResults);
     container.innerHTML = GROUP_ORDER.map(group => `
       <div class="home-match-group">
         <h3>Grupo ${group}</h3>
@@ -316,9 +317,9 @@ function buildHomeMatches() {
           const away = TEAMS[fixture.awayId];
           const matchId = `${group}${index + 1}`;
           const kickoff = kickoffMeta(matchId);
-          const prediction = state.groupPredictions?.[group]?.[index] || {};
-          const homeGoals = Number.isFinite(prediction.homeGoals) ? prediction.homeGoals : null;
-          const awayGoals = Number.isFinite(prediction.awayGoals) ? prediction.awayGoals : null;
+          const realScore = realShape?.[group]?.[index] || {};
+          const homeGoals = Number.isFinite(realScore.homeGoals) ? realScore.homeGoals : null;
+          const awayGoals = Number.isFinite(realScore.awayGoals) ? realScore.awayGoals : null;
           const homeSlot = homeGoals == null ? '<span class="home-match-score placeholder">–</span>' : `<span class="home-match-score">${homeGoals}</span>`;
           const awaySlot = awayGoals == null ? '<span class="home-match-score placeholder">–</span>' : `<span class="home-match-score">${awayGoals}</span>`;
           return `
@@ -855,6 +856,7 @@ async function refreshRanking() {
     }
     state.realResults = realResults || null;
     refreshBracket();
+    buildHomeMatches();
     const mine = Array.isArray(ranking) ? ranking.find(row => row.id === state.porraId) : null;
     state.score = mine?.total || 0;
     updateScorePanel();
