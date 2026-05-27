@@ -1235,10 +1235,6 @@ select:focus {
   gap: var(--space-3);
 }
 
-.round-final {
-  grid-template-columns: minmax(320px, 520px);
-}
-
 .bracket-card {
   display: grid;
   gap: 10px;
