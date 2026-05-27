@@ -49,28 +49,7 @@ const state = {
   championTeam: '',
   score: 0,
   autosaveReady: false,
-  realResults: null,
 };
-
-function realGroupShape(realResults) {
-  const shape = createEmptyGroupPredictions();
-  const groupMatches = realResults?.groupMatches;
-  if (!groupMatches || typeof groupMatches !== 'object') return shape;
-  Object.keys(shape).forEach(group => {
-    const arr = Array.isArray(groupMatches[group]) ? groupMatches[group] : [];
-    arr.forEach(match => {
-      const idx = Number(match?.idx);
-      if (!Number.isInteger(idx) || idx < 0 || idx >= shape[group].length) return;
-      const homeGoals = Number(match.goalsHome);
-      const awayGoals = Number(match.goalsAway);
-      shape[group][idx] = {
-        homeGoals: Number.isInteger(homeGoals) ? homeGoals : null,
-        awayGoals: Number.isInteger(awayGoals) ? awayGoals : null,
-      };
-    });
-  });
-  return shape;
-}
 
 function bracketMatchLockMs(matchId) {
   const kickoff = state.kickoffs?.[matchId]?.kickoff;
@@ -104,16 +83,14 @@ function init() {
 }
 
 async function loadPublicData() {
-  const [meta, players, kickoffs, realResults] = await Promise.all([
+  const [meta, players, kickoffs] = await Promise.all([
     API.getMeta(),
     API.getPlayers().catch(() => []),
     API.getKickoffs().catch(() => ({})),
-    API.getResults().catch(() => null),
   ]);
   state.meta = meta || state.meta;
   state.players = Array.isArray(players) ? players : [];
   state.kickoffs = kickoffs && typeof kickoffs === 'object' ? kickoffs : {};
-  state.realResults = realResults || null;
   buildGroups();
   buildHomeMatches();
   renderMeta();
@@ -284,6 +261,7 @@ function setGroupScore(input) {
   if (input.value !== '' && value === null) input.value = '';
   state.groupPredictions[group][idx][side] = value;
   renderGroupStandings(group);
+  refreshBracket();
   markDirty();
 }
 
@@ -512,9 +490,8 @@ function onBracketScore(input) {
 }
 
 function refreshBracket() {
-  const groupShape = realGroupShape(state.realResults);
   for (let pass = 0; pass < 6; pass += 1) {
-    const resolved = resolveBracketMatches(groupShape, state.bracketWinners);
+    const resolved = resolveBracketMatches(state.groupPredictions, state.bracketWinners);
     let changed = false;
     BRACKET_MATCHES.forEach(match => {
       const slots = (resolved.matches[match.id]?.slots || []).filter(Boolean);
@@ -527,7 +504,7 @@ function refreshBracket() {
     if (!changed) break;
   }
 
-  const resolved = resolveBracketMatches(groupShape, state.bracketWinners);
+  const resolved = resolveBracketMatches(state.groupPredictions, state.bracketWinners);
   renderThirdSummary(resolved);
   BRACKET_MATCHES.forEach(match => {
     const item = resolved.matches[match.id];
@@ -577,8 +554,7 @@ function sourceLabel(source) {
 
 function renderThirdSummary(resolved) {
   const el = document.getElementById('third-summary');
-  const hasRealMatches = !!(state.realResults?.groupMatches && Object.values(state.realResults.groupMatches).some(arr => Array.isArray(arr) && arr.length));
-  const top = hasRealMatches ? resolved.thirdRank.slice(0, 8) : [];
+  const top = resolved.thirdRank.slice(0, 8);
   el.innerHTML = `
     <header class="third-header">
       <span class="third-kicker">Clasificación</span>
@@ -593,7 +569,7 @@ function renderThirdSummary(resolved) {
           <span class="third-team">${escapeHtml(getTeamName(row.teamId))}</span>
           <span class="third-group">Grupo ${row.thirdGroup}</span>
         </li>
-      `).join('') : '<li class="third-empty">Esperando resultados reales del Mundial.</li>'}
+      `).join('') : '<li class="third-empty">Completa la fase de grupos para ver los mejores terceros.</li>'}
     </ol>
   `;
 }
@@ -844,18 +820,12 @@ function updateScorePanel() {
 
 async function refreshRanking() {
   try {
-    const [ranking, meta, realResults] = await Promise.all([
-      API.getRanking(),
-      API.getMeta(),
-      API.getResults().catch(() => state.realResults),
-    ]);
+    const [ranking, meta] = await Promise.all([API.getRanking(), API.getMeta()]);
     if (meta) {
       state.meta = meta;
       renderMeta();
       applyLockState();
     }
-    state.realResults = realResults || null;
-    refreshBracket();
     buildHomeMatches();
     const mine = Array.isArray(ranking) ? ranking.find(row => row.id === state.porraId) : null;
     state.score = mine?.total || 0;
