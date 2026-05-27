@@ -468,6 +468,10 @@ select:focus {
   gap: var(--space-2);
 }
 
+#step-rules{
+  width: fit-content;
+}
+
 .rules-grid div {
   min-height: 82px;
   padding: var(--space-3);
@@ -685,6 +689,7 @@ select:focus {
 
 .scoreboard {
   min-height: 72px;
+  min-width: 72px;
   display: grid;
   place-items: center;
   border: 1px solid var(--color-separator);
