@@ -15,13 +15,15 @@ const POINTS = {
   r16: {winner: 2, exact: 3},
   qf: {winner: 3, exact: 4},
   sf: {winner: 3, exact: 4},
+  third: {winner: 3, exact: 4},
   final: {winner: 10, exact: 15},
+  championTeam: 10,
   topScorerTeam: 10,
   topScorerPlayer: 10,
 };
 
 function emptyBreakdown() {
-  return {grupos: 0, r32: 0, r16: 0, qf: 0, sf: 0, final: 0, especiales: 0, total: 0};
+  return {grupos: 0, r32: 0, r16: 0, qf: 0, sf: 0, third: 0, final: 0, especiales: 0, total: 0};
 }
 
 function computeScore(porra = {}, results = null) {
@@ -32,7 +34,7 @@ function computeScore(porra = {}, results = null) {
   scoreBracket(bd, porra, results);
   scoreSpecials(bd, porra, results);
 
-  bd.total = bd.grupos + bd.r32 + bd.r16 + bd.qf + bd.sf + bd.final + bd.especiales;
+  bd.total = bd.grupos + bd.r32 + bd.r16 + bd.qf + bd.sf + bd.third + bd.final + bd.especiales;
   return bd;
 }
 
@@ -63,9 +65,9 @@ function scoreBracket(bd, porra, results) {
   const advanced = results.bracketAdvanced || {};
   const knockoutMatches = results.knockoutMatches || {};
 
-  ['r32', 'r16', 'qf', 'sf', 'final'].forEach(round => {
+  ['r32', 'r16', 'qf', 'sf', 'third', 'final'].forEach(round => {
     const matches = BRACKET_BY_ROUND[round] || [];
-    const winnersSet = new Set((round === 'final' ? [advanced.champion].filter(Boolean) : advanced[round] || []));
+    const winnersSet = winnersForRound(round, advanced);
     const realGames = Array.isArray(knockoutMatches[round]) ? knockoutMatches[round] : [];
 
     matches.forEach(match => {
@@ -76,6 +78,12 @@ function scoreBracket(bd, porra, results) {
       bd[round] += exact ? POINTS[round].exact : POINTS[round].winner;
     });
   });
+}
+
+function winnersForRound(round, advanced) {
+  if (round === 'final') return new Set([advanced.champion].filter(Boolean));
+  if (round === 'third') return new Set(advanced.third || []);
+  return new Set(advanced[round] || []);
 }
 
 function matchExactScore(predScore, predictedWinner, realGames) {
@@ -94,6 +102,10 @@ function matchExactScore(predScore, predictedWinner, realGames) {
 
 function scoreSpecials(bd, porra, results) {
   const advanced = results.bracketAdvanced || {};
+
+  if (porra.championTeam && advanced.champion && porra.championTeam === advanced.champion) {
+    bd.especiales += POINTS.championTeam;
+  }
 
   if (porra.topScorerTeam && advanced.topScorerTeam && porra.topScorerTeam === advanced.topScorerTeam) {
     bd.especiales += POINTS.topScorerTeam;

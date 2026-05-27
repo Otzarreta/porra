@@ -33,7 +33,7 @@ function kickoffMeta(matchId) {
 }
 
 const state = {
-  meta: {locked: false, deadline: null},
+  meta: {locked: false, deadline: null, roundLocks: {}},
   accessToken: '',
   porraId: '',
   email: '',
@@ -46,9 +46,25 @@ const state = {
   bracketScores: {},
   topScorerTeam: '',
   topScorerPlayerId: '',
+  championTeam: '',
   score: 0,
   autosaveReady: false,
 };
+
+function bracketMatchLockMs(matchId) {
+  const kickoff = state.kickoffs?.[matchId]?.kickoff;
+  const ms = kickoff ? Date.parse(kickoff) : NaN;
+  if (Number.isFinite(ms)) return ms;
+  const match = BRACKET_MATCHES.find(m => m.id === matchId);
+  const fallback = match ? state.meta?.roundLocks?.[match.round] : null;
+  const fb = fallback ? Date.parse(fallback) : NaN;
+  return Number.isFinite(fb) ? fb : NaN;
+}
+
+function isBracketMatchLocked(matchId) {
+  const ms = bracketMatchLockMs(matchId);
+  return Number.isFinite(ms) && Date.now() > ms;
+}
 
 let saveTimer = null;
 let saveInFlight = false;
@@ -309,6 +325,7 @@ function buildHomeMatches() {
     ['r16', 'Octavos'],
     ['qf', 'Cuartos'],
     ['sf', 'Semifinales'],
+    ['third', 'Tercer puesto'],
     ['final', 'Final'],
   ];
   container.innerHTML = rounds.map(([round, label]) => `
@@ -409,7 +426,7 @@ function formatSlotName(teamId, fallback) {
 }
 
 function roundLabel(round) {
-  return ({r32: '1/16 de final', r16: 'Octavos', qf: 'Cuartos', sf: 'Semifinales', final: 'Final'})[round] || round;
+  return ({r32: '1/16 de final', r16: 'Octavos', qf: 'Cuartos', sf: 'Semifinales', third: 'Tercer puesto', final: 'Final'})[round] || round;
 }
 
 function buildBracket() {
@@ -419,6 +436,7 @@ function buildBracket() {
     ['r16', 'Octavos'],
     ['qf', 'Cuartos'],
     ['sf', 'Semifinales'],
+    ['third', 'Tercer puesto'],
     ['final', 'Final'],
   ];
   container.innerHTML = rounds.map(([round, label]) => `
@@ -460,8 +478,8 @@ function buildBracket() {
 }
 
 function onBracketScore(input) {
-  if (state.meta.locked) return;
   const matchId = input.dataset.match;
+  if (isBracketMatchLocked(matchId)) return;
   const side = input.dataset.side === 'home' ? 'homeGoals' : 'awayGoals';
   const value = sanitizeScoreValue(input.value);
   if (input.value !== '' && value === null) input.value = '';
@@ -506,10 +524,14 @@ function refreshBracket() {
     const select = document.getElementById(`winner-${match.id}`);
     const current = state.bracketWinners[match.id] || '';
     const options = slots.filter(Boolean);
+    const matchLocked = isBracketMatchLocked(match.id);
     select.innerHTML = `<option value="">Ganador</option>${options.map(teamId => `<option value="${teamId}">${getTeamFlag(teamId)} ${escapeHtml(getTeamName(teamId))}</option>`).join('')}`;
     select.value = options.includes(current) ? current : '';
-    select.disabled = state.meta.locked || options.length < 2;
-    document.getElementById(`match-${match.id}`).classList.toggle('invalid', match.id === 'M104' && current && !options.includes(current));
+    select.disabled = matchLocked || options.length < 2;
+    const card = document.getElementById(`match-${match.id}`);
+    card.classList.toggle('invalid', match.id === 'M104' && current && !options.includes(current));
+    card.classList.toggle('match-locked', matchLocked);
+    card.classList.toggle('match-pending', !matchLocked && options.length < 2);
 
     const score = state.bracketScores[match.id] || {homeGoals: null, awayGoals: null};
     const homeInput = document.getElementById(`bracket-score-${match.id}-home`);
@@ -517,7 +539,7 @@ function refreshBracket() {
     if (homeInput && awayInput) {
       homeInput.value = score.homeGoals ?? '';
       awayInput.value = score.awayGoals ?? '';
-      const ready = options.length === 2 && !state.meta.locked;
+      const ready = options.length === 2 && !matchLocked;
       homeInput.disabled = !ready;
       awayInput.disabled = !ready;
     }
@@ -552,7 +574,7 @@ function renderThirdSummary(resolved) {
 }
 
 function onWinnerSelect(matchId) {
-  if (state.meta.locked) return;
+  if (isBracketMatchLocked(matchId)) return;
   const value = document.getElementById(`winner-${matchId}`).value;
   if (value) state.bracketWinners[matchId] = value;
   else delete state.bracketWinners[matchId];
@@ -563,6 +585,7 @@ function onWinnerSelect(matchId) {
 function buildSpecialSelects() {
   const teamOptions = `<option value="">Selecciona selección</option>${TEAM_IDS.map(id => `<option value="${id}">${getTeamFlag(id)} ${escapeHtml(getTeamName(id))}</option>`).join('')}`;
   document.getElementById('top-scorer-team').innerHTML = teamOptions;
+  document.getElementById('champion-team').innerHTML = teamOptions;
   document.getElementById('player-team-filter').innerHTML = `<option value="">Todas las selecciones</option>${TEAM_IDS.map(id => `<option value="${id}">${getTeamFlag(id)} ${escapeHtml(getTeamName(id))}</option>`).join('')}`;
 }
 
@@ -625,6 +648,7 @@ function renderSelectedPlayer() {
 function onSpecialChange() {
   if (state.meta.locked) return;
   state.topScorerTeam = document.getElementById('top-scorer-team').value;
+  state.championTeam = document.getElementById('champion-team').value;
   markDirty();
 }
 
@@ -644,6 +668,7 @@ function applyPorra(porra) {
   state.bracketScores = normalizeBracketScores(porra.bracketScores);
   state.topScorerTeam = porra.topScorerTeam || '';
   state.topScorerPlayerId = porra.topScorerPlayerId || '';
+  state.championTeam = porra.championTeam || '';
   document.getElementById('active-player').textContent = state.player || '-';
   syncFormFromState();
   markSaved(porra.updatedAt);
@@ -673,6 +698,8 @@ function syncFormFromState() {
     renderGroupStandings(group);
   });
   document.getElementById('top-scorer-team').value = state.topScorerTeam;
+  const championEl = document.getElementById('champion-team');
+  if (championEl) championEl.value = state.championTeam;
   renderPlayerOptions();
   refreshBracket();
   updateProgress();
@@ -688,20 +715,21 @@ function collectPorra() {
     bracketScores: state.bracketScores,
     topScorerTeam: state.topScorerTeam,
     topScorerPlayerId: state.topScorerPlayerId,
+    championTeam: state.championTeam,
   };
 }
 
 function markDirty() {
   updateProgress();
-  if (!state.autosaveReady || state.meta.locked) return;
+  if (!state.autosaveReady) return;
   setSaveStatus('pending', 'editando');
   clearTimeout(saveTimer);
   saveTimer = setTimeout(doSave, 800);
 }
 
 async function doSave() {
-  if (state.meta.locked || !state.accessToken) {
-    setSaveStatus('error', state.meta.locked ? 'plazo cerrado' : 'sin acceso');
+  if (!state.accessToken) {
+    setSaveStatus('error', 'sin acceso');
     return false;
   }
   if (saveInFlight) {
@@ -731,11 +759,6 @@ async function doSave() {
 }
 
 function forceSave() {
-  if (state.meta.locked) {
-    setSaveStatus('error', 'plazo cerrado');
-    showToast('Plazo cerrado');
-    return;
-  }
   clearTimeout(saveTimer);
   doSave().then(saved => { if (saved) showToast('Porra guardada'); });
 }
@@ -781,9 +804,10 @@ function updateProgress() {
     total += 1;
     if (state.bracketWinners[match.id]) done += 1;
   });
-  total += 2;
+  total += 3;
   if (state.topScorerTeam) done += 1;
   if (state.topScorerPlayerId) done += 1;
+  if (state.championTeam) done += 1;
   const pct = total ? Math.round((done / total) * 100) : 0;
   document.getElementById('progress-text').textContent = `${pct}%`;
   document.getElementById('progress-fill').style.width = `${pct}%`;
@@ -849,7 +873,12 @@ function renderAll() {
 function applyLockState() {
   const locked = Boolean(state.meta?.locked);
   document.body.classList.toggle('locked', locked);
-  document.querySelectorAll('.editable').forEach(el => { el.disabled = locked || el.dataset.forceDisabled === 'true'; });
+  document.querySelectorAll('.score-input[data-group]').forEach(el => { el.disabled = locked; });
+  ['top-scorer-team', 'champion-team', 'top-scorer-player-id', 'player-team-filter', 'player-search'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = locked;
+  });
+  refreshBracket();
   if (locked) setSaveStatus('error', 'plazo cerrado');
 }
 

@@ -160,6 +160,7 @@
     match('M100', 'qf', winner('M95'), winner('M96')),
     match('M101', 'sf', winner('M97'), winner('M98')),
     match('M102', 'sf', winner('M99'), winner('M100')),
+    match('M103', 'third', loser('M101'), loser('M102')),
     match('M104', 'final', winner('M101'), winner('M102')),
   ];
 
@@ -169,6 +170,7 @@
     r16: BRACKET_MATCHES.filter(m => m.round === 'r16'),
     qf: BRACKET_MATCHES.filter(m => m.round === 'qf'),
     sf: BRACKET_MATCHES.filter(m => m.round === 'sf'),
+    third: BRACKET_MATCHES.filter(m => m.round === 'third'),
     final: BRACKET_MATCHES.filter(m => m.round === 'final'),
   };
 
@@ -695,6 +697,10 @@ ABCDEFGH:HGBCAFDE
     return {kind: 'winner', matchId, label: `W${matchId.slice(1)}`};
   }
 
+  function loser(matchId) {
+    return {kind: 'loser', matchId, label: `L${matchId.slice(1)}`};
+  }
+
   function parseThirdPlaceAssignments(raw) {
     const out = {};
     raw.trim().split(/\s+/).forEach(line => {
@@ -872,7 +878,7 @@ ABCDEFGH:HGBCAFDE
     BRACKET_MATCHES.forEach(matchItem => {
       const slots = matchItem.round === 'r32'
         ? tournament.slots[matchItem.id]
-        : matchItem.sources.map(source => resolveWinnerSource(source, bracketWinners));
+        : matchItem.sources.map(source => resolveAdvanceSource(source, bracketWinners, matches));
       matches[matchItem.id] = {...matchItem, slots};
     });
     return {...tournament, matches};
@@ -892,9 +898,17 @@ ABCDEFGH:HGBCAFDE
     return null;
   }
 
-  function resolveWinnerSource(source, bracketWinners) {
-    if (source.kind !== 'winner') return null;
-    return bracketWinners?.[source.matchId] || null;
+  function resolveAdvanceSource(source, bracketWinners, resolvedMatches) {
+    if (source.kind === 'winner') return bracketWinners?.[source.matchId] || null;
+    if (source.kind === 'loser') {
+      const parent = resolvedMatches?.[source.matchId];
+      const parentSlots = (parent?.slots || []).filter(Boolean);
+      const parentWinner = bracketWinners?.[source.matchId];
+      if (parentSlots.length !== 2 || !parentWinner) return null;
+      if (!parentSlots.includes(parentWinner)) return null;
+      return parentSlots.find(slot => slot !== parentWinner) || null;
+    }
+    return null;
   }
 
   function getTeamName(teamId) {

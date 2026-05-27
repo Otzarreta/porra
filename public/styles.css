@@ -1294,6 +1294,31 @@ select:focus {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-red), transparent 84%);
 }
 
+.bracket-card.match-locked {
+  opacity: 0.72;
+  filter: saturate(0.85);
+}
+
+.bracket-card.match-locked .bracket-winner::after {
+  content: 'partido en juego o jugado';
+  display: block;
+  margin-top: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+
+.bracket-card.match-pending .bracket-winner::after {
+  content: 'rivales por definir';
+  display: block;
+  margin-top: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+
 .match-id {
   color: var(--color-blue);
   font-size: 0.78rem;
@@ -1673,7 +1698,6 @@ select:focus {
 @media (max-width: 980px) {
   .home-hero,
   .home-grid,
-  .game-top,
   .third-strip {
     grid-template-columns: 1fr;
   }
@@ -1814,7 +1838,7 @@ select:focus {
   }
 
   .game-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto auto auto;
   }
 
   .rank-row {

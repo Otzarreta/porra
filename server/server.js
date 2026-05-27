@@ -39,6 +39,14 @@ const PLAYERS_SEED_FILE = path.join(__dirname, 'players-seed.json');
 const FIXTURES_SEED_FILE = path.join(__dirname, 'fixtures-seed.json');
 
 const DEFAULT_DEADLINE = '2026-06-11T19:00:00Z';
+const ROUND_LOCK_DATES = {
+  r32: '2026-06-28T00:00:00Z',
+  r16: '2026-07-04T00:00:00Z',
+  qf: '2026-07-09T00:00:00Z',
+  sf: '2026-07-14T00:00:00Z',
+  third: '2026-07-18T00:00:00Z',
+  final: '2026-07-19T00:00:00Z',
+};
 const PORT = process.env.PORT || 3000;
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || null;
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || ADMIN_TOKEN || 'porra-local-dev-secret';
@@ -119,6 +127,36 @@ async function loadState() {
 }
 
 const isLocked = () => Date.now() > Date.parse(metaState.deadline);
+
+function bracketMatchLockTime(matchId) {
+  const kickoff = kickoffs?.[matchId]?.kickoff;
+  const kickoffMs = kickoff ? Date.parse(kickoff) : NaN;
+  if (Number.isFinite(kickoffMs)) return kickoffMs;
+  const match = BRACKET_MATCHES.find(m => m.id === matchId);
+  const fallback = match ? ROUND_LOCK_DATES[match.round] : null;
+  return fallback ? Date.parse(fallback) : NaN;
+}
+
+function isBracketMatchLocked(matchId, now = Date.now()) {
+  const lockMs = bracketMatchLockTime(matchId);
+  return Number.isFinite(lockMs) && now > lockMs;
+}
+
+function mergeBracketField(existing, incoming, now = Date.now()) {
+  const out = {};
+  const ids = new Set([...Object.keys(existing || {}), ...Object.keys(incoming || {})]);
+  ids.forEach(matchId => {
+    const locked = isBracketMatchLocked(matchId, now);
+    if (locked) {
+      if (existing && existing[matchId] !== undefined) out[matchId] = existing[matchId];
+    } else if (incoming && incoming[matchId] !== undefined) {
+      out[matchId] = incoming[matchId];
+    } else if (existing && existing[matchId] !== undefined) {
+      out[matchId] = existing[matchId];
+    }
+  });
+  return out;
+}
 
 const app = express();
 app.use(express.json({limit: '2mb'}));
@@ -214,24 +252,31 @@ app.post('/api/access', async (req, res) => {
 app.post('/api/porras', async (req, res) => {
   const payload = getAccessPayload(req);
   if (!payload) return res.status(401).json({error: 'access_token_required'});
-  if (isLocked()) {
-    return res.status(423).json({error: 'locked', message: 'El plazo de envio ha finalizado.'});
-  }
 
   const existing = porras[payload.porraId];
   if (!existing || normalizeEmail(existing.email) !== payload.email) {
     return res.status(401).json({error: 'invalid_access'});
   }
 
+  const now = Date.now();
+  const groupsLocked = isLocked();
   const data = req.body || {};
+  const incomingWinners = sanitizeBracketWinners(data.bracketWinners);
+  const incomingScores = sanitizeBracketScores(data.bracketScores);
+
   const stored = {
     ...existing,
-    player: sanitizeStr(data.player || existing.player, 80).trim() || existing.player,
-    groupPredictions: normalizeGroupPredictions(data.groupPredictions),
-    bracketWinners: sanitizeBracketWinners(data.bracketWinners),
-    bracketScores: sanitizeBracketScores(data.bracketScores),
-    topScorerTeam: sanitizeTeamId(data.topScorerTeam),
-    topScorerPlayerId: sanitizePlayerId(data.topScorerPlayerId),
+    player: groupsLocked
+      ? existing.player
+      : (sanitizeStr(data.player || existing.player, 80).trim() || existing.player),
+    groupPredictions: groupsLocked
+      ? normalizeGroupPredictions(existing.groupPredictions)
+      : normalizeGroupPredictions(data.groupPredictions),
+    bracketWinners: mergeBracketField(existing.bracketWinners, incomingWinners, now),
+    bracketScores: mergeBracketField(existing.bracketScores, incomingScores, now),
+    topScorerTeam: groupsLocked ? (existing.topScorerTeam || '') : sanitizeTeamId(data.topScorerTeam),
+    topScorerPlayerId: groupsLocked ? (existing.topScorerPlayerId || '') : sanitizePlayerId(data.topScorerPlayerId),
+    championTeam: groupsLocked ? (existing.championTeam || '') : sanitizeTeamId(data.championTeam),
     updatedAt: new Date().toISOString(),
   };
   delete stored.bestDefenseTeam;
@@ -329,6 +374,7 @@ function publicMeta() {
   return {
     deadline: metaState.deadline,
     locked: isLocked(),
+    roundLocks: {...ROUND_LOCK_DATES},
     lastScrape: metaState.lastScrape,
     lastPlayerSync: metaState.lastPlayerSync,
     count: Object.keys(porras).length,
@@ -346,6 +392,7 @@ function createEmptyPorra({email, player}) {
     bracketScores: {},
     topScorerTeam: '',
     topScorerPlayerId: '',
+    championTeam: '',
     createdAt: now,
     updatedAt: now,
   };
@@ -490,9 +537,9 @@ function sanitizeGroupMatches(input) {
 }
 
 function sanitizeBracketAdvanced(input) {
-  const base = {r32: [], r16: [], qf: [], sf: [], finalists: [], champion: null};
+  const base = {r32: [], r16: [], qf: [], sf: [], third: [], finalists: [], champion: null};
   if (!input || typeof input !== 'object') return base;
-  ['r32', 'r16', 'qf', 'sf', 'finalists'].forEach(key => {
+  ['r32', 'r16', 'qf', 'sf', 'third', 'finalists'].forEach(key => {
     const arr = Array.isArray(input[key]) ? input[key] : [];
     base[key] = Array.from(new Set(arr.filter(id => TEAM_IDS.includes(id))));
   });
@@ -501,7 +548,7 @@ function sanitizeBracketAdvanced(input) {
 }
 
 function sanitizeKnockoutMatches(input) {
-  const out = {r32: [], r16: [], qf: [], sf: [], final: []};
+  const out = {r32: [], r16: [], qf: [], sf: [], third: [], final: []};
   if (!input || typeof input !== 'object') return out;
   Object.keys(out).forEach(round => {
     const arr = Array.isArray(input[round]) ? input[round] : [];
