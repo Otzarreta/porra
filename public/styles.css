@@ -22,7 +22,6 @@ body {
   min-height: 100vh;
   color: var(--color-ink);
   font-family: var(--font-text);
-  background: var(--color-window);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   padding-inline: var(--space-4)
@@ -62,9 +61,9 @@ p {
   z-index: -2;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(0, 122, 255, 0.15), transparent 34%),
-    linear-gradient(225deg, rgba(52, 199, 89, 0.15), transparent 38%),
-    var(--color-window);
+    linear-gradient(135deg, rgba(0, 122, 255, 0.18), transparent 34%),
+    linear-gradient(225deg, rgba(52, 199, 89, 0.14), transparent 38%),
+    linear-gradient(180deg, #111216, #1c1d22);
 }
 
 .stadium-bg::before {
@@ -72,6 +71,8 @@ p {
   position: absolute;
   inset: 0;
   background: url("bg.avif") center / cover no-repeat;
+  opacity: 0.42;
+  filter: saturate(0.92) contrast(1.08) brightness(0.72);
 }
 
 .app-shell {
@@ -462,8 +463,8 @@ select:focus {
 .rank-total {
   justify-self: end;
   min-width: 52px;
-  color: #fff;
-  background: var(--color-ink);
+  color: #111216;
+  background: #f5f5f7;
 }
 
 .rank-player {
@@ -663,8 +664,8 @@ select:focus {
   align-items: center;
   padding: 2px 8px;
   border-radius: 999px;
-  color: #fff;
-  background: var(--color-ink);
+  color: #111216;
+  background: #f5f5f7;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -947,10 +948,10 @@ select:focus {
   object-fit: cover;
   border-radius: 3px;
   box-shadow:
-    0 0 0 1px rgba(15, 17, 21, 0.12),
-    0 1px 2px rgba(15, 17, 21, 0.08);
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.4);
   flex-shrink: 0;
-  background: rgba(15, 17, 21, 0.04);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .flag-xs {
@@ -966,22 +967,8 @@ select:focus {
   height: 40px;
   border-radius: 5px;
   box-shadow:
-    0 0 0 1px rgba(15, 17, 21, 0.14),
-    0 2px 6px rgba(15, 17, 21, 0.12);
-}
-
-@media (prefers-color-scheme: dark) {
-  .flag {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.12),
-      0 1px 2px rgba(0, 0, 0, 0.4);
-    background: rgba(255, 255, 255, 0.04);
-  }
-  .flag-md {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.16),
-      0 2px 6px rgba(0, 0, 0, 0.5);
-  }
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .match-list {
@@ -1704,26 +1691,6 @@ select:focus {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .stadium-bg {
-    background:
-      linear-gradient(135deg, rgba(0, 122, 255, 0.18), transparent 34%),
-      linear-gradient(225deg, rgba(52, 199, 89, 0.14), transparent 38%),
-      linear-gradient(180deg, #111216, #1c1d22);
-  }
-
-  .stadium-bg::before {
-    opacity: 0.42;
-    filter: saturate(0.92) contrast(1.08) brightness(0.72);
-  }
-
-  .rank-total,
-  .home-match-id {
-    color: #111216;
-    background: #f5f5f7;
   }
 }
 
