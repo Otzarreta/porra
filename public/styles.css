@@ -827,6 +827,18 @@ select:focus {
   margin-bottom: var(--space-5);
 }
 
+.section-title.with-action {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.section-title.with-action > div {
+  display: grid;
+  gap: 6px;
+}
+
 .section-title span {
   color: var(--color-secondary);
 }

@@ -142,9 +142,12 @@
     </section>
 
     <section class="step-panel" id="step-ranking">
-      <div class="section-title">
-        <span>Live</span>
-        <h2>Ranking</h2>
+      <div class="section-title with-action">
+        <div>
+          <span>Live</span>
+          <h2>Ranking</h2>
+        </div>
+        <button class="icon-btn" onclick="refreshRanking()" title="Actualizar ranking" type="button">↻</button>
       </div>
       <div class="ranking-meta" id="ranking-info-game">Cargando ranking...</div>
       <div id="ranking-container-game" class="ranking-list"></div>
