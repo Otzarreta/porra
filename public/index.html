@@ -20,11 +20,13 @@
         <p class="hero-sub">Realiza tus pronósticos de todos los partidos de la fase de grupos y luego completa las llaves hasta llegar a tu predicción de campeón.</p>
         <div class="hero-stats">
           <div><span id="home-player-count">0</span><small>jugadores</small></div>
-          <div><span id="home-deadline">-</span><small>cierre</small></div>
+          <div><span id="home-deadline">-</span><small>cierre fase grupos</small></div>
           <div><span id="home-lock-state">abierto</span><small>estado</small></div>
         </div>
       </div>
+    </div>
 
+    <div class="home-grid">
       <form class="access-card" onsubmit="loginUser();return false;">
         <div class="card-kicker">Acceso de jugador</div>
         <label for="player-email">Correo electrónico</label>
@@ -34,9 +36,6 @@
         <button class="btn btn-primary" type="submit">Hacer mi porra</button>
         <div class="form-message" id="access-message"></div>
       </form>
-    </div>
-
-    <div class="home-grid">
       <section class="panel">
         <div class="panel-head">
           <div>
@@ -47,30 +46,6 @@
         </div>
         <div class="ranking-meta" id="ranking-info">Cargando ranking...</div>
         <div id="ranking-container" class="ranking-list compact"></div>
-      </section>
-
-      <section class="panel rules-panel">
-        <div class="panel-head">
-          <div>
-            <span class="panel-kicker">Reglamento</span>
-            <h2>Cómo se puntúa</h2>
-          </div>
-        </div>
-        <div class="rules-grid">
-          <div><strong>1</strong><span>fase de grupos</span></div>
-          <div><strong>2</strong><span>ganador 1/16</span></div>
-          <div><strong>3</strong><span>ganador octavos</span></div>
-          <div><strong>4</strong><span>ganador cuartos</span></div>
-          <div><strong>6</strong><span>semifinalista</span></div>
-          <div><strong>8</strong><span>finalista</span></div>
-          <div><strong>10</strong><span>campeón</span></div>
-          <div><strong>+g</strong><span>especiales</span></div>
-        </div>
-        <div class="rule-copy">
-          <p>Se pronostican marcadores de fase de grupos.</p>
-          <p>Los dos primeros de cada grupo y los ocho mejores terceros completan el cuadro.</p>
-          <p>Pronostica el campeón, el país menos goleado y el jugador pichichi.</p>
-        </div>
       </section>
     </div>
 

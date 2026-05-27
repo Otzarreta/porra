@@ -362,7 +362,7 @@ select:focus {
 
 .home-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.78fr);
+  grid-template-columns: 1fr 1fr 1fr;
   gap: var(--space-5);
 }
 

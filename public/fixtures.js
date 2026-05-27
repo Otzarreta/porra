@@ -841,16 +841,26 @@ ABCDEFGH:HGBCAFDE
     return Object.fromEntries(GROUP_ORDER.map(group => [group, buildGroupStandings(group, normalized[group])]));
   }
 
-  function rankThirdPlaced(standingsByGroup) {
-    return GROUP_ORDER.map(group => {
-      const row = standingsByGroup[group]?.[2];
-      return row ? {...row, thirdGroup: group} : null;
-    }).filter(Boolean).sort((a, b) => (
-      b.points - a.points ||
-      b.gd - a.gd ||
-      b.gf - a.gf ||
-      a.fallbackRank - b.fallbackRank
-    ));
+  function isGroupComplete(group, predictions = []) {
+    const fixtures = GROUP_FIXTURES[group] || [];
+    if (!fixtures.length) return false;
+    return fixtures.every((_, idx) => isScoreComplete(predictions[idx]));
+  }
+
+  function rankThirdPlaced(standingsByGroup, completeGroups = null) {
+    return GROUP_ORDER
+      .filter(group => !completeGroups || completeGroups.has(group))
+      .map(group => {
+        const row = standingsByGroup[group]?.[2];
+        return row ? {...row, thirdGroup: group} : null;
+      })
+      .filter(Boolean)
+      .sort((a, b) => (
+        b.points - a.points ||
+        b.gd - a.gd ||
+        b.gf - a.gf ||
+        a.fallbackRank - b.fallbackRank
+      ));
   }
 
   function getThirdPlaceAssignments(thirdGroups) {
@@ -859,17 +869,19 @@ ABCDEFGH:HGBCAFDE
   }
 
   function resolveTournamentSlots(groupPredictions = {}) {
-    const standingsByGroup = buildAllGroupStandings(groupPredictions);
-    const thirdRank = rankThirdPlaced(standingsByGroup);
+    const normalized = normalizeGroupPredictions(groupPredictions);
+    const standingsByGroup = buildAllGroupStandings(normalized);
+    const completeGroups = new Set(GROUP_ORDER.filter(group => isGroupComplete(group, normalized[group])));
+    const thirdRank = rankThirdPlaced(standingsByGroup, completeGroups);
     const qualifiedThirdGroups = thirdRank.slice(0, 8).map(row => row.thirdGroup);
     const thirdAssignments = getThirdPlaceAssignments(qualifiedThirdGroups) || {};
 
     const slots = {};
     ROUND_OF_32.forEach(matchItem => {
-      slots[matchItem.id] = matchItem.sources.map(source => resolveSource(source, standingsByGroup, thirdAssignments));
+      slots[matchItem.id] = matchItem.sources.map(source => resolveSource(source, standingsByGroup, thirdAssignments, completeGroups));
     });
 
-    return {standingsByGroup, thirdRank, qualifiedThirdGroups, thirdAssignments, slots};
+    return {standingsByGroup, thirdRank, qualifiedThirdGroups, thirdAssignments, completeGroups, slots};
   }
 
   function resolveBracketMatches(groupPredictions = {}, bracketWinners = {}) {
@@ -884,14 +896,16 @@ ABCDEFGH:HGBCAFDE
     return {...tournament, matches};
   }
 
-  function resolveSource(source, standingsByGroup, thirdAssignments) {
+  function resolveSource(source, standingsByGroup, thirdAssignments, completeGroups) {
     if (source.kind === 'position') {
+      if (completeGroups && !completeGroups.has(source.group)) return null;
       const row = standingsByGroup[source.group]?.[source.rank - 1];
       return row ? row.teamId : null;
     }
     if (source.kind === 'third') {
       const assignedGroup = thirdAssignments[source.winnerGroup];
       if (!assignedGroup || !source.candidates.includes(assignedGroup)) return null;
+      if (completeGroups && !completeGroups.has(assignedGroup)) return null;
       const row = standingsByGroup[assignedGroup]?.[2];
       return row ? row.teamId : null;
     }
