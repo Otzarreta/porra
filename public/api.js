@@ -22,9 +22,9 @@ const API = (() => {
     getResults: () => request('/results'),
     getRanking: () => request('/ranking', {cache: 'no-store'}),
     getMatchPredictions: (matchId) => request('/matches/' + encodeURIComponent(matchId) + '/predictions'),
-    access: (email, player) => request('/access', {
+    access: (email, player, restore) => request('/access', {
       method: 'POST',
-      body: JSON.stringify({email, player}),
+      body: JSON.stringify({email, player, restore: !!restore}),
     }),
     savePorra: (data, accessToken) => request('/porras', {
       method: 'POST',

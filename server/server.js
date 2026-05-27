@@ -97,8 +97,14 @@ async function writeJsonAtomic(file, data) {
 }
 
 const writeQueues = new Map();
+let suspendWatchUntil = 0;
+
+function suspendWatchers(ms = 1500) {
+  suspendWatchUntil = Math.max(suspendWatchUntil, Date.now() + ms);
+}
 
 function writeJsonSerialized(file, data) {
+  suspendWatchers();
   const prev = writeQueues.get(file) || Promise.resolve();
   const next = prev.catch(() => {}).then(() => writeJsonAtomic(file, data));
   writeQueues.set(file, next);
@@ -106,6 +112,48 @@ function writeJsonSerialized(file, data) {
     if (writeQueues.get(file) === next) writeQueues.delete(file);
   });
   return next;
+}
+
+async function reloadPorrasFromDisk() {
+  try {
+    const txt = await fs.readFile(PORRAS_FILE, 'utf8');
+    if (!txt.trim()) return;
+    const parsed = JSON.parse(txt);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      porras = parsed;
+      console.log(`[reload] porras.json picked up external change (${Object.keys(porras).length} porras)`);
+    }
+  } catch (err) {
+    console.warn('[reload] porras.json failed:', err.message);
+  }
+}
+
+async function reloadResultsFromDisk() {
+  try {
+    const txt = await fs.readFile(RESULTS_FILE, 'utf8');
+    if (!txt.trim()) { results = null; return; }
+    const parsed = JSON.parse(txt);
+    results = parsed === null ? null : sanitizeResults(parsed);
+    console.log('[reload] results.json picked up external change');
+  } catch (err) {
+    console.warn('[reload] results.json failed:', err.message);
+  }
+}
+
+function startStateWatchers() {
+  const fsSync = require('fs');
+  const targets = [
+    [PORRAS_FILE, reloadPorrasFromDisk],
+    [RESULTS_FILE, reloadResultsFromDisk],
+  ];
+  targets.forEach(([file, reload]) => {
+    fsSync.watchFile(file, {interval: 800, persistent: false}, (curr, prev) => {
+      if (curr.mtimeMs === prev.mtimeMs) return;
+      if (Date.now() < suspendWatchUntil) return;
+      reload();
+    });
+  });
+  console.log(`[watch] vigilando ${targets.length} archivos para cambios externos`);
 }
 
 async function loadState() {
@@ -161,6 +209,7 @@ function mergeBracketField(existing, incoming, now = Date.now()) {
 const app = express();
 app.use(express.json({limit: '2mb'}));
 app.use((req, res, next) => {
+  if (req.path.startsWith('/api/')) res.setHeader('Cache-Control', 'no-store');
   if (req.path.endsWith('.avif')) res.type('image/avif');
   next();
 });
@@ -211,6 +260,7 @@ app.get('/api/porras/:id', (req, res) => {
 app.post('/api/access', async (req, res) => {
   const email = normalizeEmail(req.body?.email);
   const requestedPlayer = sanitizeStr(req.body?.player, 80).trim();
+  const restoreOnly = req.body?.restore === true;
   if (!email) return res.status(400).json({error: 'email_required'});
 
   const matches = findPorrasByEmail(email);
@@ -227,6 +277,9 @@ app.post('/api/access', async (req, res) => {
     shouldPersist = true;
   }
   if (!porra) {
+    if (restoreOnly) {
+      return res.status(404).json({error: 'porra_not_found'});
+    }
     if (isLocked()) {
       return res.status(423).json({error: 'locked', message: 'El plazo de envio ha finalizado.'});
     }
@@ -864,6 +917,7 @@ function schedulePlayerSync() {
 
 async function start() {
   await loadState();
+  startStateWatchers();
   app.listen(PORT, () => {
     console.log(`Porra Mundial 2026 escuchando en http://localhost:${PORT}`);
     console.log(`Deadline: ${metaState.deadline} (locked=${isLocked()})`);

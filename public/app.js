@@ -126,21 +126,25 @@ async function restoreAccess() {
   const email = localStorage.getItem('porraEmail') || '';
   const alias = localStorage.getItem('playerAlias') || '';
   if (!email) return;
-  document.getElementById('player-email').value = email;
-  document.getElementById('player-alias').value = alias;
-  await loginUser(true);
+  const emailInput = document.getElementById('player-email');
+  const aliasInput = document.getElementById('player-alias');
+  if (emailInput) emailInput.value = email;
+  if (aliasInput) aliasInput.value = alias;
+  await loginUser(true, true);
 }
 
-async function loginUser(silent) {
-  const email = document.getElementById('player-email').value.trim();
-  const alias = document.getElementById('player-alias').value.trim();
+async function loginUser(silent, restore) {
+  const emailInput = document.getElementById('player-email');
+  const aliasInput = document.getElementById('player-alias');
+  const email = (emailInput?.value || localStorage.getItem('porraEmail') || '').trim();
+  const alias = (aliasInput?.value || localStorage.getItem('playerAlias') || '').trim();
   if (!email) {
     setAccessMessage('Introduce tu correo electrónico.', 'error');
     return;
   }
   setAccessMessage('Abriendo tu porra...', 'pending');
   try {
-    const res = await API.access(email, alias);
+    const res = await API.access(email, alias, restore);
     state.accessToken = res.accessToken || '';
     state.porraId = res.porra?.id || '';
     state.email = res.porra?.email || email.toLowerCase();
@@ -155,10 +159,32 @@ async function loginUser(silent) {
     await refreshRanking();
     if (!silent) showToast('Porra abierta');
   } catch (err) {
+    if (restore && err.status === 404) {
+      localStorage.removeItem('porraEmail');
+      localStorage.removeItem('playerAlias');
+      resetSessionState();
+      renderAccessCard();
+      return;
+    }
     console.error('access failed', err);
     const msg = err.status === 423 ? 'El plazo está cerrado.' : 'No se pudo abrir la porra con ese correo.';
     setAccessMessage(msg, 'error');
   }
+}
+
+function resetSessionState() {
+  state.accessToken = '';
+  state.porraId = '';
+  state.email = '';
+  state.player = '';
+  state.groupPredictions = createEmptyGroupPredictions();
+  state.bracketWinners = {};
+  state.bracketScores = {};
+  state.topScorerTeam = '';
+  state.topScorerPlayerId = '';
+  state.championTeam = '';
+  state.score = 0;
+  state.autosaveReady = false;
 }
 
 function showGame() {
@@ -170,10 +196,40 @@ function showGame() {
 
 function returnHome() {
   swapViews('game-view', 'home-view', () => {
-    document.getElementById('player-email').value = state.email || localStorage.getItem('porraEmail') || '';
-    document.getElementById('player-alias').value = state.player || localStorage.getItem('playerAlias') || '';
+    renderAccessCard();
     refreshRanking();
   });
+}
+
+function renderAccessCard() {
+  const card = document.querySelector('.access-card');
+  if (!card) return;
+  const loggedIn = Boolean(state.accessToken && state.porraId);
+  if (loggedIn) {
+    card.classList.add('logged-in');
+    card.innerHTML = `
+      <div class="card-kicker">Sesión iniciada</div>
+      <div class="access-welcome">
+        <strong>${escapeHtml(state.player || 'Jugador')}</strong>
+        <span>${escapeHtml(state.email || '')}</span>
+      </div>
+      <button class="btn btn-primary" type="button" onclick="showGame()">Continuar mi porra</button>
+      <button class="btn btn-ghost" type="button" onclick="logoutUser()">Cerrar sesión</button>
+    `;
+    return;
+  }
+  card.classList.remove('logged-in');
+  card.innerHTML = `
+    <div class="card-kicker">Acceso de jugador</div>
+    <label for="player-email">Correo electrónico</label>
+    <input id="player-email" name="player-email" type="email" autocomplete="email" placeholder="tu@email.com">
+    <label for="player-alias">Alias</label>
+    <input id="player-alias" name="player-alias" type="text" autocomplete="nickname" maxlength="80" placeholder="Tu nombre en el ranking">
+    <button class="btn btn-primary" type="submit">Hacer mi porra</button>
+    <div class="form-message" id="access-message"></div>
+  `;
+  document.getElementById('player-email').value = localStorage.getItem('porraEmail') || '';
+  document.getElementById('player-alias').value = localStorage.getItem('playerAlias') || '';
 }
 
 function swapViews(fromId, toId, onSwap) {
@@ -206,7 +262,18 @@ function swapViews(fromId, toId, onSwap) {
 function logoutUser() {
   localStorage.removeItem('porraEmail');
   localStorage.removeItem('playerAlias');
-  location.reload();
+  resetSessionState();
+  const homeHidden = document.getElementById('home-view').classList.contains('hidden');
+  if (homeHidden) {
+    swapViews('game-view', 'home-view', () => {
+      renderAccessCard();
+      refreshRanking();
+    });
+  } else {
+    renderAccessCard();
+    refreshRanking();
+  }
+  showToast('Sesión cerrada');
 }
 
 function renderMeta() {
@@ -221,6 +288,7 @@ function renderMeta() {
 
 function setAccessMessage(text, type) {
   const el = document.getElementById('access-message');
+  if (!el) return;
   el.textContent = text || '';
   el.className = `form-message ${type || ''}`;
 }
@@ -710,6 +778,7 @@ function applyPorra(porra) {
   state.championTeam = porra.championTeam || '';
   document.getElementById('active-player').textContent = state.player || '-';
   syncFormFromState();
+  renderAccessCard();
   markSaved(porra.updatedAt);
 }
 
@@ -966,6 +1035,7 @@ function escapeHtml(value) {
 window.loginUser = loginUser;
 window.returnHome = returnHome;
 window.logoutUser = logoutUser;
+window.showGame = showGame;
 window.setGroupScore = setGroupScore;
 window.onWinnerSelect = onWinnerSelect;
 window.onBracketScore = onBracketScore;
