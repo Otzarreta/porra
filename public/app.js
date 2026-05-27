@@ -49,7 +49,28 @@ const state = {
   championTeam: '',
   score: 0,
   autosaveReady: false,
+  realResults: null,
 };
+
+function realGroupShape(realResults) {
+  const shape = createEmptyGroupPredictions();
+  const groupMatches = realResults?.groupMatches;
+  if (!groupMatches || typeof groupMatches !== 'object') return shape;
+  Object.keys(shape).forEach(group => {
+    const arr = Array.isArray(groupMatches[group]) ? groupMatches[group] : [];
+    arr.forEach(match => {
+      const idx = Number(match?.idx);
+      if (!Number.isInteger(idx) || idx < 0 || idx >= shape[group].length) return;
+      const homeGoals = Number(match.goalsHome);
+      const awayGoals = Number(match.goalsAway);
+      shape[group][idx] = {
+        homeGoals: Number.isInteger(homeGoals) ? homeGoals : null,
+        awayGoals: Number.isInteger(awayGoals) ? awayGoals : null,
+      };
+    });
+  });
+  return shape;
+}
 
 function bracketMatchLockMs(matchId) {
   const kickoff = state.kickoffs?.[matchId]?.kickoff;
@@ -83,14 +104,16 @@ function init() {
 }
 
 async function loadPublicData() {
-  const [meta, players, kickoffs] = await Promise.all([
+  const [meta, players, kickoffs, realResults] = await Promise.all([
     API.getMeta(),
     API.getPlayers().catch(() => []),
     API.getKickoffs().catch(() => ({})),
+    API.getResults().catch(() => null),
   ]);
   state.meta = meta || state.meta;
   state.players = Array.isArray(players) ? players : [];
   state.kickoffs = kickoffs && typeof kickoffs === 'object' ? kickoffs : {};
+  state.realResults = realResults || null;
   buildGroups();
   buildHomeMatches();
   renderMeta();
@@ -329,11 +352,18 @@ function buildHomeMatches() {
     ['third', 'Tercer puesto'],
     ['final', 'Final'],
   ];
+  const realResolved = resolveBracketMatches(realGroupShape(state.realResults), {});
   container.innerHTML = rounds.map(([round, label]) => `
     <div class="home-match-group">
       <h3>${label}</h3>
       ${BRACKET_BY_ROUND[round].map(match => {
         const kickoff = kickoffMeta(match.id);
+        const realSlots = realResolved.matches[match.id]?.slots || [];
+        const sideLabel = (index) => {
+          const teamId = realSlots[index];
+          if (teamId) return `${getTeamFlagImg(teamId, {className: 'flag flag-sm'})} ${escapeHtml(getTeamName(teamId))}`;
+          return escapeHtml(sourceLabel(match.sources[index]));
+        };
         return `
         <button class="home-match-card bracket" onclick="openMatchPredictions('${match.id}')" type="button">
           <span class="home-match-head">
@@ -341,9 +371,9 @@ function buildHomeMatches() {
             ${kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : ''}
           </span>
           <span class="home-match-body bracket-body">
-            <strong>${sourceLabel(match.sources[0])}</strong>
+            <strong>${sideLabel(0)}</strong>
             <em>vs</em>
-            <strong>${sourceLabel(match.sources[1])}</strong>
+            <strong>${sideLabel(1)}</strong>
           </span>
         </button>
       `;
@@ -390,26 +420,34 @@ function renderMatchPredictionModal(data) {
       <span class="modal-title-team">${getTeamFlagImg(data.awayId, {className: 'flag flag-md'})}<span>${escapeHtml(getTeamName(data.awayId))}</span></span>
     `;
     subtitle.textContent = `${data.predictions.length} pronósticos registrados`;
-    body.innerHTML = data.predictions.map(item => `
-      <div class="prediction-row">
-        <span>${escapeHtml(item.player)}</span>
+    const myPlayer = (state.player || '').trim().toLowerCase();
+    body.innerHTML = data.predictions.map(item => {
+      const isMe = myPlayer && String(item.player || '').trim().toLowerCase() === myPlayer;
+      return `
+      <div class="prediction-row${isMe ? ' me' : ''}">
+        <span>${escapeHtml(item.player)}${isMe ? ' <small>(tú)</small>' : ''}</span>
         <strong>${item.complete ? `${item.homeGoals} - ${item.awayGoals}` : 'sin marcador'}</strong>
       </div>
-    `).join('') || '<div class="empty-state">Aún no hay pronósticos para este partido.</div>';
+    `;
+    }).join('') || '<div class="empty-state">Aún no hay pronósticos para este partido.</div>';
     return;
   }
 
   title.innerHTML = `<span class="modal-title-id">${data.matchId}</span> <span>${escapeHtml(roundLabel(data.round))}</span>`;
   subtitle.textContent = `${data.predictions.length} pronósticos registrados`;
-  body.innerHTML = data.predictions.map(item => `
-    <div class="prediction-row bracket">
-      <span>${escapeHtml(item.player)}</span>
+  const myPlayer = (state.player || '').trim().toLowerCase();
+  body.innerHTML = data.predictions.map(item => {
+    const isMe = myPlayer && String(item.player || '').trim().toLowerCase() === myPlayer;
+    return `
+    <div class="prediction-row bracket${isMe ? ' me' : ''}">
+      <span>${escapeHtml(item.player)}${isMe ? ' <small>(tú)</small>' : ''}</span>
       <div>
         <small>${formatSlotName(item.slots?.[0], data.sourceLabels?.[0])} vs ${formatSlotName(item.slots?.[1], data.sourceLabels?.[1])}</small>
         <strong>${item.winnerId ? `${getTeamFlagImg(item.winnerId, {className: 'flag flag-xs'})} ${escapeHtml(item.winnerName)}` : 'sin ganador'}</strong>
       </div>
     </div>
-  `).join('') || '<div class="empty-state">Aún no hay pronósticos para este partido.</div>';
+  `;
+  }).join('') || '<div class="empty-state">Aún no hay pronósticos para este partido.</div>';
 }
 
 function closeMatchModal(event) {
@@ -820,12 +858,17 @@ function updateScorePanel() {
 
 async function refreshRanking() {
   try {
-    const [ranking, meta] = await Promise.all([API.getRanking(), API.getMeta()]);
+    const [ranking, meta, realResults] = await Promise.all([
+      API.getRanking(),
+      API.getMeta(),
+      API.getResults().catch(() => state.realResults),
+    ]);
     if (meta) {
       state.meta = meta;
       renderMeta();
       applyLockState();
     }
+    state.realResults = realResults || null;
     buildHomeMatches();
     const mine = Array.isArray(ranking) ? ranking.find(row => row.id === state.porraId) : null;
     state.score = mine?.total || 0;

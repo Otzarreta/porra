@@ -1640,6 +1640,18 @@ select:focus {
   background: var(--color-window-strong);
 }
 
+.prediction-row.me {
+  border-color: color-mix(in srgb, var(--color-blue), transparent 30%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-blue), transparent 86%);
+  background: color-mix(in srgb, var(--color-blue), var(--color-window-strong) 88%);
+}
+
+.prediction-row.me span small {
+  color: var(--color-blue);
+  font-weight: 700;
+  margin-left: 6px;
+}
+
 .prediction-row span {
   min-width: 0;
   overflow: hidden;
