@@ -294,6 +294,9 @@ app.get('/api/matches/:matchId/predictions', (req, res) => {
 });
 
 app.get('/api/ranking', (_req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   const list = Object.values(porras).map(p => {
     const breakdown = computeScore(p, results);
     return {

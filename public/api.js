@@ -20,7 +20,7 @@ const API = (() => {
     getPlayers: () => request('/players'),
     getKickoffs: () => request('/kickoffs'),
     getResults: () => request('/results'),
-    getRanking: () => request('/ranking'),
+    getRanking: () => request('/ranking', {cache: 'no-store'}),
     getMatchPredictions: (matchId) => request('/matches/' + encodeURIComponent(matchId) + '/predictions'),
     access: (email, player) => request('/access', {
       method: 'POST',
