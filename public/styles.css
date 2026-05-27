@@ -62,8 +62,8 @@ p {
   z-index: -2;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(0, 122, 255, 0.18), transparent 34%),
-    linear-gradient(225deg, rgba(52, 199, 89, 0.18), transparent 38%),
+    linear-gradient(135deg, rgba(0, 122, 255, 0.15), transparent 34%),
+    linear-gradient(225deg, rgba(52, 199, 89, 0.15), transparent 38%),
     var(--color-window);
 }
 
@@ -72,9 +72,6 @@ p {
   position: absolute;
   inset: 0;
   background: url("bg.avif") center / cover no-repeat;
-  filter: saturate(1.08) contrast(1.02);
-  opacity: 0.72;
-  transform: scale(1.02);
 }
 
 .app-shell {
@@ -135,16 +132,14 @@ body.locked .lock-banner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
   gap: var(--space-6);
-  align-items: center;
-  padding-top: 150px;
-  padding-bottom: var(--space-5);
+  align-items: flex-end;
+  padding-top: 100px;
 }
 
 .hero-copy {
   display: grid;
   gap: var(--space-5);
   max-width: 760px;
-  padding: var(--space-8) 0;
 }
 
 .eyebrow,
