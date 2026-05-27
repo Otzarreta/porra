@@ -329,10 +329,11 @@ app.post('/api/porras', async (req, res) => {
     bracketScores: mergeBracketField(existing.bracketScores, incomingScores, now),
     topScorerTeam: groupsLocked ? (existing.topScorerTeam || '') : sanitizeTeamId(data.topScorerTeam),
     topScorerPlayerId: groupsLocked ? (existing.topScorerPlayerId || '') : sanitizePlayerId(data.topScorerPlayerId),
-    championTeam: groupsLocked ? (existing.championTeam || '') : sanitizeTeamId(data.championTeam),
+    worstDefenseTeam: groupsLocked ? (existing.worstDefenseTeam || '') : sanitizeTeamId(data.worstDefenseTeam),
     updatedAt: new Date().toISOString(),
   };
   delete stored.bestDefenseTeam;
+  delete stored.championTeam;
 
   porras[stored.id] = stored;
   await writeJsonSerialized(PORRAS_FILE, porras);
@@ -448,7 +449,7 @@ function createEmptyPorra({email, player}) {
     bracketScores: {},
     topScorerTeam: '',
     topScorerPlayerId: '',
-    championTeam: '',
+    worstDefenseTeam: '',
     createdAt: now,
     updatedAt: now,
   };

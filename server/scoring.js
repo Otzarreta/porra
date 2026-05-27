@@ -17,8 +17,8 @@ const POINTS = {
   sf: {winner: 3, exact: 4},
   third: {winner: 3, exact: 4},
   final: {winner: 10, exact: 15},
-  championTeam: 10,
   topScorerTeam: 10,
+  worstDefenseTeam: 10,
   topScorerPlayer: 10,
 };
 
@@ -102,20 +102,27 @@ function matchExactScore(predScore, predictedWinner, realGames) {
 
 function scoreSpecials(bd, porra, results) {
   const advanced = results.bracketAdvanced || {};
-
-  if (porra.championTeam && advanced.champion && porra.championTeam === advanced.champion) {
-    bd.especiales += POINTS.championTeam;
-  }
+  const teamGoals = results.teamGoals || {};
 
   if (porra.topScorerTeam && advanced.topScorerTeam && porra.topScorerTeam === advanced.topScorerTeam) {
     bd.especiales += POINTS.topScorerTeam;
   } else if (porra.topScorerTeam && !advanced.topScorerTeam) {
-    const teamGoals = results.teamGoals || {};
     const sorted = Object.entries(teamGoals)
       .map(([teamId, value]) => ({teamId, goals: Number(value?.for) || 0}))
       .sort((a, b) => b.goals - a.goals);
     if (sorted.length && sorted[0].teamId === porra.topScorerTeam && sorted[0].goals > 0) {
       bd.especiales += POINTS.topScorerTeam;
+    }
+  }
+
+  if (porra.worstDefenseTeam && advanced.worstDefenseTeam && porra.worstDefenseTeam === advanced.worstDefenseTeam) {
+    bd.especiales += POINTS.worstDefenseTeam;
+  } else if (porra.worstDefenseTeam && !advanced.worstDefenseTeam) {
+    const sorted = Object.entries(teamGoals)
+      .map(([teamId, value]) => ({teamId, goals: Number(value?.against) || 0}))
+      .sort((a, b) => b.goals - a.goals);
+    if (sorted.length && sorted[0].teamId === porra.worstDefenseTeam && sorted[0].goals > 0) {
+      bd.especiales += POINTS.worstDefenseTeam;
     }
   }
 

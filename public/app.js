@@ -46,7 +46,7 @@ const state = {
   bracketScores: {},
   topScorerTeam: '',
   topScorerPlayerId: '',
-  championTeam: '',
+  worstDefenseTeam: '',
   score: 0,
   autosaveReady: false,
   realResults: null,
@@ -182,7 +182,7 @@ function resetSessionState() {
   state.bracketScores = {};
   state.topScorerTeam = '';
   state.topScorerPlayerId = '';
-  state.championTeam = '';
+  state.worstDefenseTeam = '';
   state.score = 0;
   state.autosaveReady = false;
 }
@@ -692,7 +692,7 @@ function onWinnerSelect(matchId) {
 function buildSpecialSelects() {
   const teamOptions = `<option value="">Selecciona selección</option>${TEAM_IDS.map(id => `<option value="${id}">${getTeamFlag(id)} ${escapeHtml(getTeamName(id))}</option>`).join('')}`;
   document.getElementById('top-scorer-team').innerHTML = teamOptions;
-  document.getElementById('champion-team').innerHTML = teamOptions;
+  document.getElementById('worst-defense-team').innerHTML = teamOptions;
   document.getElementById('player-team-filter').innerHTML = `<option value="">Todas las selecciones</option>${TEAM_IDS.map(id => `<option value="${id}">${getTeamFlag(id)} ${escapeHtml(getTeamName(id))}</option>`).join('')}`;
 }
 
@@ -755,7 +755,7 @@ function renderSelectedPlayer() {
 function onSpecialChange() {
   if (state.meta.locked) return;
   state.topScorerTeam = document.getElementById('top-scorer-team').value;
-  state.championTeam = document.getElementById('champion-team').value;
+  state.worstDefenseTeam = document.getElementById('worst-defense-team').value;
   markDirty();
 }
 
@@ -775,7 +775,7 @@ function applyPorra(porra) {
   state.bracketScores = normalizeBracketScores(porra.bracketScores);
   state.topScorerTeam = porra.topScorerTeam || '';
   state.topScorerPlayerId = porra.topScorerPlayerId || '';
-  state.championTeam = porra.championTeam || '';
+  state.worstDefenseTeam = porra.worstDefenseTeam || '';
   document.getElementById('active-player').textContent = state.player || '-';
   syncFormFromState();
   renderAccessCard();
@@ -806,8 +806,8 @@ function syncFormFromState() {
     renderGroupStandings(group);
   });
   document.getElementById('top-scorer-team').value = state.topScorerTeam;
-  const championEl = document.getElementById('champion-team');
-  if (championEl) championEl.value = state.championTeam;
+  const worstDefenseEl = document.getElementById('worst-defense-team');
+  if (worstDefenseEl) worstDefenseEl.value = state.worstDefenseTeam;
   renderPlayerOptions();
   refreshBracket();
   updateProgress();
@@ -823,7 +823,7 @@ function collectPorra() {
     bracketScores: state.bracketScores,
     topScorerTeam: state.topScorerTeam,
     topScorerPlayerId: state.topScorerPlayerId,
-    championTeam: state.championTeam,
+    worstDefenseTeam: state.worstDefenseTeam,
   };
 }
 
@@ -915,7 +915,7 @@ function updateProgress() {
   total += 3;
   if (state.topScorerTeam) done += 1;
   if (state.topScorerPlayerId) done += 1;
-  if (state.championTeam) done += 1;
+  if (state.worstDefenseTeam) done += 1;
   const pct = total ? Math.round((done / total) * 100) : 0;
   document.getElementById('progress-text').textContent = `${pct}%`;
   document.getElementById('progress-fill').style.width = `${pct}%`;
@@ -988,7 +988,7 @@ function applyLockState() {
   const locked = Boolean(state.meta?.locked);
   document.body.classList.toggle('locked', locked);
   document.querySelectorAll('.score-input[data-group]').forEach(el => { el.disabled = locked; });
-  ['top-scorer-team', 'champion-team', 'top-scorer-player-id', 'player-team-filter', 'player-search'].forEach(id => {
+  ['top-scorer-team', 'worst-defense-team', 'top-scorer-player-id', 'player-team-filter', 'player-search'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.disabled = locked;
   });
