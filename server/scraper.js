@@ -6,6 +6,10 @@ const {GROUPS, TEAMS, GROUP_FIXTURES} = require('../public/fixtures.js');
 const SCRAPE_INTERVAL_MS = 30 * 60 * 1000;
 const COMPETITION_ID = 5930;
 const SCORES_URL = 'https://webws.365scores.com/web/games/allscores/';
+const GAME_URL = 'https://webws.365scores.com/web/game/';
+const GAME_DETAIL_CONCURRENCY = 5;
+const GOAL_EVENT_TYPE_ID = 1;
+const OWN_GOAL_SUBTYPE_ID = 2;
 const TOURNAMENT_START = '2026-06-11';
 const TOURNAMENT_END = '2026-07-19';
 const GROUP_LETTERS = Object.keys(GROUPS);
@@ -159,6 +163,11 @@ async function scrape365Scores(options = {}) {
 
   const normalized = normalize365ScoresGames(allGames);
   normalized.sourceMeta.errors = errors;
+  try {
+    normalized.playerGoals = await collectPlayerGoals(allGames, fetchImpl);
+  } catch (err) {
+    errors.push({stage: 'playerGoals', error: err.message});
+  }
   return normalized;
 }
 
@@ -190,6 +199,78 @@ async function fetchGamesForDate(date, fetchImpl) {
 
   const payload = await res.json();
   return (payload.games || []).filter(game => Number(game.competitionId) === COMPETITION_ID);
+}
+
+async function fetchGameEvents(gameId, fetchImpl) {
+  const url = new URL(GAME_URL);
+  const params = {
+    appTypeId: '5',
+    langId: '1',
+    timezoneName: 'Europe/Madrid',
+    userCountryId: '2',
+    gameId: String(gameId),
+  };
+  Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
+
+  const res = await fetchImpl(url, {
+    headers: {
+      accept: 'application/json,text/plain,*/*',
+      'user-agent': 'Mozilla/5.0 PorraMundial2026/1.0',
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error(`365Scores HTTP ${res.status} ${res.statusText}`);
+  }
+
+  const payload = await res.json();
+  return payload.game?.events || [];
+}
+
+async function collectPlayerGoals(games, fetchImpl) {
+  const finished = (games || []).filter(game =>
+    Number(game.competitionId) === COMPETITION_ID && isFinishedGame(game));
+
+  const eventsList = await mapWithConcurrency(finished, GAME_DETAIL_CONCURRENCY, async game => {
+    const gameId = game.id ?? game.gameId;
+    if (gameId == null) return [];
+    try {
+      return await fetchGameEvents(gameId, fetchImpl);
+    } catch {
+      return [];
+    }
+  });
+
+  return aggregatePlayerGoals(eventsList);
+}
+
+function aggregatePlayerGoals(eventsList) {
+  const playerGoals = {};
+  for (const events of eventsList || []) {
+    for (const event of events || []) {
+      if (event?.eventType?.id !== GOAL_EVENT_TYPE_ID) continue;
+      if (event.eventType.subTypeId === OWN_GOAL_SUBTYPE_ID) continue;
+      if (event.playerId == null) continue;
+      const id = `365-${event.playerId}`;
+      playerGoals[id] = (playerGoals[id] || 0) + 1;
+    }
+  }
+  return playerGoals;
+}
+
+async function mapWithConcurrency(items, concurrency, handler) {
+  const results = new Array(items.length);
+  let index = 0;
+  const workerCount = Math.min(concurrency, items.length);
+  const workers = Array.from({length: workerCount}, async () => {
+    while (index < items.length) {
+      const current = index;
+      index += 1;
+      results[current] = await handler(items[current], current);
+    }
+  });
+  await Promise.all(workers);
+  return results;
 }
 
 function normalize365ScoresGames(games, now = new Date()) {
@@ -457,6 +538,9 @@ module.exports = {
   scrape365Scores,
   normalize365ScoresGames,
   fetchGamesForDate,
+  fetchGameEvents,
+  collectPlayerGoals,
+  aggregatePlayerGoals,
   teamFromCompetitor,
   formatDateParam,
   result1x2,
