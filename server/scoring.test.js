@@ -77,29 +77,36 @@ test('Final: winner=10, exact=15', () => {
   assert.equal(exact.final, 15);
 });
 
-test('Especiales: 10 ptos top scorer team y 10 ptos top scorer player', () => {
+test('Especiales: 1 punto por gol marcado/recibido/anotado por la elección', () => {
   const porra = {
     topScorerTeam: 'brazil',
+    worstDefenseTeam: 'france',
     topScorerPlayerId: 'p-vinicius',
   };
   const results = {
-    bracketAdvanced: {topScorerTeam: 'brazil'},
-    topScorerPlayerId: 'p-vinicius',
-    teamGoals: {brazil: {for: 10, against: 2}},
+    teamGoals: {brazil: {for: 17, against: 2}, france: {for: 7, against: 9}},
     playerGoals: {'p-vinicius': 6},
   };
   const score = computeScore(porra, results);
-  assert.equal(score.especiales, 20);
+  // 17 goles a favor de brazil + 9 recibidos por france + 6 de vinicius
+  assert.equal(score.especiales, 32);
 });
 
-test('Especiales: top scorer team se infiere de teamGoals si no viene marcado', () => {
-  const porra = {topScorerTeam: 'brazil'};
+test('Especiales: la elección suma sus goles aunque no sea la máxima', () => {
+  const porra = {topScorerTeam: 'argentina', topScorerPlayerId: 'p-messi'};
   const results = {
-    teamGoals: {brazil: {for: 10, against: 2}, france: {for: 7, against: 3}},
-    playerGoals: {},
+    teamGoals: {brazil: {for: 20, against: 1}, argentina: {for: 12, against: 4}},
+    playerGoals: {'p-mbappe': 9, 'p-messi': 7},
   };
   const score = computeScore(porra, results);
-  assert.equal(score.especiales, 10);
+  // argentina suma sus 12 goles aunque brazil meta más; messi suma 7 aunque mbappe meta más
+  assert.equal(score.especiales, 19);
+});
+
+test('Especiales: sin goles registrados no suma', () => {
+  const porra = {topScorerTeam: 'brazil', worstDefenseTeam: 'spain', topScorerPlayerId: 'p-x'};
+  const score = computeScore(porra, {teamGoals: {}, playerGoals: {}});
+  assert.equal(score.especiales, 0);
 });
 
 test('Bracket exact: marcador desigual al real => solo puntos por ganador', () => {

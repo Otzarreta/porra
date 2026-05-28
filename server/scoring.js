@@ -6,7 +6,6 @@ const {
   GROUP_ORDER,
   BRACKET_BY_ROUND,
   resultFromPrediction,
-  normalizeName,
 } = require('../public/fixtures.js');
 
 const POINTS = {
@@ -17,9 +16,6 @@ const POINTS = {
   sf: {winner: 3, exact: 4},
   third: {winner: 3, exact: 4},
   final: {winner: 10, exact: 15},
-  topScorerTeam: 10,
-  worstDefenseTeam: 10,
-  topScorerPlayer: 10,
 };
 
 function emptyBreakdown() {
@@ -101,51 +97,25 @@ function matchExactScore(predScore, predictedWinner, realGames) {
 }
 
 function scoreSpecials(bd, porra, results) {
-  const advanced = results.bracketAdvanced || {};
   const teamGoals = results.teamGoals || {};
-
-  if (porra.topScorerTeam && advanced.topScorerTeam && porra.topScorerTeam === advanced.topScorerTeam) {
-    bd.especiales += POINTS.topScorerTeam;
-  } else if (porra.topScorerTeam && !advanced.topScorerTeam) {
-    const sorted = Object.entries(teamGoals)
-      .map(([teamId, value]) => ({teamId, goals: Number(value?.for) || 0}))
-      .sort((a, b) => b.goals - a.goals);
-    if (sorted.length && sorted[0].teamId === porra.topScorerTeam && sorted[0].goals > 0) {
-      bd.especiales += POINTS.topScorerTeam;
-    }
-  }
-
-  if (porra.worstDefenseTeam && advanced.worstDefenseTeam && porra.worstDefenseTeam === advanced.worstDefenseTeam) {
-    bd.especiales += POINTS.worstDefenseTeam;
-  } else if (porra.worstDefenseTeam && !advanced.worstDefenseTeam) {
-    const sorted = Object.entries(teamGoals)
-      .map(([teamId, value]) => ({teamId, goals: Number(value?.against) || 0}))
-      .sort((a, b) => b.goals - a.goals);
-    if (sorted.length && sorted[0].teamId === porra.worstDefenseTeam && sorted[0].goals > 0) {
-      bd.especiales += POINTS.worstDefenseTeam;
-    }
-  }
-
   const playerGoals = results.playerGoals || {};
-  const predictedPlayerId = porra.topScorerPlayerId || '';
-  if (predictedPlayerId && results.topScorerPlayerId && predictedPlayerId === results.topScorerPlayerId) {
-    bd.especiales += POINTS.topScorerPlayer;
-  } else if (predictedPlayerId && Object.keys(playerGoals).length) {
-    const sorted = Object.entries(playerGoals)
-      .map(([id, goals]) => ({id, goals: Number(goals) || 0}))
-      .sort((a, b) => b.goals - a.goals);
-    if (sorted.length && sorted[0].id === predictedPlayerId && sorted[0].goals > 0) {
-      bd.especiales += POINTS.topScorerPlayer;
-    }
-  } else if (predictedPlayerId) {
-    const legacyPlayer = porra.topScorerPlayer || '';
-    if (legacyPlayer) {
-      const key = Object.keys(playerGoals).find(candidate => normalizeName(candidate) === normalizeName(legacyPlayer));
-      if (key && playerGoals[key] > 0) {
-        const sorted = Object.entries(playerGoals).sort((a, b) => Number(b[1]) - Number(a[1]));
-        if (sorted[0][0] === key) bd.especiales += POINTS.topScorerPlayer;
-      }
-    }
+
+  // Un punto por cada gol que marque la selección elegida como más goleadora,
+  // sea o no la máxima goleadora del torneo.
+  if (porra.topScorerTeam) {
+    bd.especiales += Number(teamGoals[porra.topScorerTeam]?.for) || 0;
+  }
+
+  // Un punto por cada gol que reciba la selección elegida como más goleada,
+  // sea o no la más goleada del torneo.
+  if (porra.worstDefenseTeam) {
+    bd.especiales += Number(teamGoals[porra.worstDefenseTeam]?.against) || 0;
+  }
+
+  // Un punto por cada gol que marque el jugador elegido como máximo goleador,
+  // sea o no el máximo goleador del torneo.
+  if (porra.topScorerPlayerId) {
+    bd.especiales += Number(playerGoals[porra.topScorerPlayerId]) || 0;
   }
 }
 
