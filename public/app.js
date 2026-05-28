@@ -574,8 +574,8 @@ function buildBracket() {
           </div>
           <span class="team right slot" id="slot-${match.id}-1">-</span>
         </div>
-        <div class="bracket-winner">
-          <label for="winner-${match.id}">Ganador</label>
+        <div class="bracket-winner" id="winner-block-${match.id}" style="display:none">
+          <label for="winner-${match.id}">Ganador (empate)</label>
           <select class="editable winner-select" id="winner-${match.id}" onchange="onWinnerSelect('${match.id}')"></select>
         </div>
       `;
@@ -592,6 +592,7 @@ function onBracketScore(input) {
   if (input.value !== '' && value === null) input.value = '';
   const current = state.bracketScores[matchId] || {homeGoals: null, awayGoals: null};
   state.bracketScores[matchId] = {...current, [side]: value};
+  refreshBracket();
   markDirty();
 }
 
@@ -603,6 +604,20 @@ function refreshBracket() {
       const slots = (resolved.matches[match.id]?.slots || []).filter(Boolean);
       const winner = state.bracketWinners[match.id];
       if (winner && !slots.includes(winner)) {
+        delete state.bracketWinners[match.id];
+        changed = true;
+        return;
+      }
+      if (slots.length !== 2) return;
+      const {homeGoals, awayGoals} = state.bracketScores[match.id] || {};
+      const bothFilled = Number.isInteger(homeGoals) && Number.isInteger(awayGoals);
+      if (bothFilled && homeGoals !== awayGoals) {
+        const derived = homeGoals > awayGoals ? slots[0] : slots[1];
+        if (state.bracketWinners[match.id] !== derived) {
+          state.bracketWinners[match.id] = derived;
+          changed = true;
+        }
+      } else if (!bothFilled && winner) {
         delete state.bracketWinners[match.id];
         changed = true;
       }
@@ -632,9 +647,16 @@ function refreshBracket() {
     const current = state.bracketWinners[match.id] || '';
     const options = slots.filter(Boolean);
     const matchLocked = isBracketMatchLocked(match.id);
-    select.innerHTML = `<option value="">Ganador</option>${options.map(teamId => `<option value="${teamId}">${getTeamFlag(teamId)} ${escapeHtml(getTeamName(teamId))}</option>`).join('')}`;
+    select.innerHTML = `<option value="">Elige ganador</option>${options.map(teamId => `<option value="${teamId}">${getTeamFlag(teamId)} ${escapeHtml(getTeamName(teamId))}</option>`).join('')}`;
     select.value = options.includes(current) ? current : '';
     select.disabled = matchLocked || options.length < 2;
+
+    const bracketScore = state.bracketScores[match.id] || {homeGoals: null, awayGoals: null};
+    const isDraw = Number.isInteger(bracketScore.homeGoals)
+      && Number.isInteger(bracketScore.awayGoals)
+      && bracketScore.homeGoals === bracketScore.awayGoals;
+    const winnerBlock = document.getElementById(`winner-block-${match.id}`);
+    if (winnerBlock) winnerBlock.style.display = (isDraw && options.length === 2) ? '' : 'none';
     const card = document.getElementById(`match-${match.id}`);
     card.classList.toggle('invalid', match.id === 'M104' && current && !options.includes(current));
     card.classList.toggle('match-locked', matchLocked);
