@@ -129,7 +129,7 @@ body.locked .lock-banner {
   grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
   gap: var(--space-6);
   align-items: flex-end;
-  padding-top: 100px;
+  padding-top: 40px;
 }
 
 .hero-copy {
