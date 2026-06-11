@@ -22,6 +22,8 @@ const {
   getTeamName,
 } = require('../public/fixtures.js');
 
+const APP_VERSION = require('../package.json').version;
+
 const ACCESS_TOKEN_TTL_MS = 1000 * 60 * 60 * 24 * 60; // 60 dias
 const MAX_GOALS_PER_MATCH = 50;
 const MAX_PLAYER_GOALS = 100;
@@ -429,6 +431,7 @@ app.post('/api/admin/scrape', async (req, res) => {
 
 function publicMeta() {
   return {
+    version: APP_VERSION,
     deadline: metaState.deadline,
     locked: isLocked(),
     roundLocks: {...ROUND_LOCK_DATES},

@@ -1,6 +1,6 @@
 {
   "name": "porra-mundial-2026",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Porra del Mundial 2026 con backend Express y scraping de 365scores",
   "main": "app.js",
   "type": "commonjs",

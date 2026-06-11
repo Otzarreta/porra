@@ -284,6 +284,8 @@ function renderMeta() {
   document.getElementById('home-lock-state').textContent = state.meta?.locked ? 'cerrado' : 'abierto';
   document.getElementById('home-player-count').textContent = state.meta?.count ?? 0;
   document.body.classList.toggle('locked', Boolean(state.meta?.locked));
+  const versionEl = document.getElementById('app-version');
+  if (versionEl) versionEl.textContent = state.meta?.version ? `v${state.meta.version}` : '';
 }
 
 function setAccessMessage(text, type) {
