@@ -859,8 +859,13 @@ function scheduleScrape() {
   const now = Date.now();
   const start = Date.parse('2026-06-11T00:00:00Z');
   const end = Date.parse('2026-07-20T00:00:00Z');
-  if (now < start || now > end) {
+  if (now > end) {
     console.log('[scrape] fuera de ventana del torneo, skipping cron');
+    return;
+  }
+  if (now < start) {
+    console.log(`[scrape] antes del torneo, cron programado para ${new Date(start).toISOString()}`);
+    setTimeout(scheduleScrape, start - now);
     return;
   }
   runScrape();

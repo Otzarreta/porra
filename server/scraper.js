@@ -10,6 +10,7 @@ const GAME_URL = 'https://webws.365scores.com/web/game/';
 const GAME_DETAIL_CONCURRENCY = 5;
 const GOAL_EVENT_TYPE_ID = 1;
 const OWN_GOAL_SUBTYPE_ID = 2;
+const PENALTY_SHOOTOUT_STAGE_ID = 11;
 const TOURNAMENT_START = '2026-06-11';
 const TOURNAMENT_END = '2026-07-19';
 const GROUP_LETTERS = Object.keys(GROUPS);
@@ -250,6 +251,7 @@ function aggregatePlayerGoals(eventsList) {
     for (const event of events || []) {
       if (event?.eventType?.id !== GOAL_EVENT_TYPE_ID) continue;
       if (event.eventType.subTypeId === OWN_GOAL_SUBTYPE_ID) continue;
+      if (event.stageId === PENALTY_SHOOTOUT_STAGE_ID) continue;
       if (event.playerId == null) continue;
       const id = `365-${event.playerId}`;
       playerGoals[id] = (playerGoals[id] || 0) + 1;
@@ -282,9 +284,10 @@ function normalize365ScoresGames(games, now = new Date()) {
     r16: new Set(),
     qf: new Set(),
     sf: new Set(),
+    third: new Set(),
     finalists: new Set(),
   };
-  const knockoutMatches = {r32: [], r16: [], qf: [], sf: [], final: []};
+  const knockoutMatches = {r32: [], r16: [], qf: [], sf: [], third: [], final: []};
   const teamGoals = {};
   let champion = null;
   let finishedGames = 0;
@@ -364,6 +367,7 @@ function normalize365ScoresGames(games, now = new Date()) {
       r16: Array.from(bracketSets.r16),
       qf: Array.from(bracketSets.qf),
       sf: Array.from(bracketSets.sf),
+      third: Array.from(bracketSets.third),
       finalists: Array.from(bracketSets.finalists),
       champion,
     },
@@ -440,6 +444,7 @@ function knockoutBucket(game = {}) {
   if (/round of 16|last 16|octavos|1\/8/.test(text)) return 'r16';
   if (/quarter|cuartos|1\/4/.test(text)) return 'qf';
   if (/semi|semifinal/.test(text)) return 'sf';
+  if (/third place|3rd place|tercer puesto/.test(text)) return 'third';
   if (/\bfinal\b/.test(text)) return 'final';
   return null;
 }
@@ -457,15 +462,17 @@ function isFinishedGame(game = {}) {
   const awayScore = scoreOf(game.awayCompetitor);
   if (homeScore < 0 || awayScore < 0) return false;
 
-  const statusGroup = Number(game.statusGroup);
-  if (statusGroup === 4) return true;
-
   const statusText = normalizeName([
     game.statusText,
     game.shortStatusText,
     game.gameTimeDisplay,
     game.statusName,
   ].filter(Boolean).join(' '));
+  // 365scores marca los suspendidos con el mismo statusGroup que los terminados.
+  if (/suspend|postpon|abandon|cancel/.test(statusText)) return false;
+
+  const statusGroup = Number(game.statusGroup);
+  if (statusGroup === 4) return true;
   return /\b(ft|aet|ended|final|full time|after penalties)\b/.test(statusText);
 }
 
