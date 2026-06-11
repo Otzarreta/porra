@@ -188,6 +188,7 @@ function bracketMatchLockTime(matchId) {
 }
 
 function isBracketMatchLocked(matchId, now = Date.now()) {
+  if (now > Date.parse(metaState.deadline)) return true;
   const lockMs = bracketMatchLockTime(matchId);
   return Number.isFinite(lockMs) && now > lockMs;
 }

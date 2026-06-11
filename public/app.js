@@ -83,6 +83,7 @@ function bracketMatchLockMs(matchId) {
 }
 
 function isBracketMatchLocked(matchId) {
+  if (state.meta?.locked) return true;
   const ms = bracketMatchLockMs(matchId);
   return Number.isFinite(ms) && Date.now() > ms;
 }
