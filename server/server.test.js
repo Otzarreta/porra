@@ -76,6 +76,46 @@ test('sanitizeResults derives 1x2 from goals when result missing', () => {
   assert.equal(out.groupMatches.A[0].result, '2');
 });
 
+test('sanitizeResults conserva el directorio de goleadores saneado', () => {
+  const out = sanitizeResults({
+    scorers: {
+      '365-251296': {name: 'Julian Quinones', teamId: 'mexico'},
+      '365-9999': {name: 'Equipo Falso', teamId: 'made-up'},
+      '$$$': {name: 'X', teamId: 'spain'},
+      '365-1': 'not-an-object',
+    },
+  });
+
+  assert.deepEqual(out.scorers, {
+    '365-251296': {name: 'Julian Quinones', teamId: 'mexico'},
+    '365-9999': {name: 'Equipo Falso', teamId: ''},
+  });
+});
+
+test('sanitizeResults preserva flags en vivo y calcula liveCount', () => {
+  const out = sanitizeResults({
+    groupMatches: {
+      A: [
+        {idx: 0, goalsHome: 1, goalsAway: 0, live: true, minute: "42'"},
+        {idx: 1, goalsHome: 2, goalsAway: 2},
+      ],
+    },
+    liveKnockout: [
+      {round: 'r16', homeId: 'spain', awayId: 'france', goalsHome: 2, goalsAway: 1, minute: "67'"},
+      {round: 'bad-round', homeId: 'spain', awayId: 'france', goalsHome: 1, goalsAway: 0},
+      {round: 'qf', homeId: 'made-up', awayId: 'france', goalsHome: 1, goalsAway: 0},
+    ],
+  });
+
+  assert.equal(out.groupMatches.A[0].live, true);
+  assert.equal(out.groupMatches.A[0].minute, "42'");
+  assert.equal(out.groupMatches.A[1].live, undefined);
+  assert.deepEqual(out.liveKnockout, [
+    {round: 'r16', homeId: 'spain', awayId: 'france', goalsHome: 2, goalsAway: 1, minute: "67'"},
+  ]);
+  assert.equal(out.liveCount, 2);
+});
+
 test('access tokens expire after TTL', () => {
   const now = 1_700_000_000_000;
   const token = signAccessToken({porraId: 'abc', email: 'foo@bar.com', now});

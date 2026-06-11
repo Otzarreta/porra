@@ -4,6 +4,11 @@
 const {GROUPS, TEAMS, GROUP_FIXTURES} = require('../public/fixtures.js');
 
 const SCRAPE_INTERVAL_MS = 30 * 60 * 1000;
+const LIVE_SCRAPE_INTERVAL_MS = 60 * 1000;
+// Margen alrededor del kickoff en el que tratamos un partido como "puede estar en juego"
+// aunque el status del feed aún no lo refleje (retrasos, prórroga, penales).
+const LIVE_WINDOW_BEFORE_MS = 10 * 60 * 1000;
+const LIVE_WINDOW_AFTER_MS = 4 * 60 * 60 * 1000;
 const COMPETITION_ID = 5930;
 const SCORES_URL = 'https://webws.365scores.com/web/games/allscores/';
 const GAME_URL = 'https://webws.365scores.com/web/game/';
@@ -165,11 +170,106 @@ async function scrape365Scores(options = {}) {
   const normalized = normalize365ScoresGames(allGames);
   normalized.sourceMeta.errors = errors;
   try {
-    normalized.playerGoals = await collectPlayerGoals(allGames, fetchImpl);
+    const {playerGoals, scorers} = await collectPlayerGoals(allGames, fetchImpl);
+    normalized.playerGoals = playerGoals;
+    normalized.scorers = scorers;
   } catch (err) {
     errors.push({stage: 'playerGoals', error: err.message});
   }
   return normalized;
+}
+
+const MADRID_DAY_FORMATTER = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Europe/Madrid',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
+
+// Fechas a sondear en un tick en vivo: hoy y ayer en hora de Madrid (los partidos
+// de la costa oeste americana caen de madrugada, a caballo entre ambos días).
+function tickDates(now = new Date()) {
+  const days = new Set([
+    MADRID_DAY_FORMATTER.format(new Date(now.getTime() - 24 * 60 * 60 * 1000)),
+    MADRID_DAY_FORMATTER.format(now),
+  ]);
+  return Array.from(days)
+    .filter(day => day >= TOURNAMENT_START && day <= TOURNAMENT_END)
+    .sort()
+    .map(parseIsoDate);
+}
+
+/*
+  Tracker incremental: mantiene en memoria todos los partidos vistos (clave gameId)
+  y una caché de eventos por partido. Un refresh "full" barre todo el torneo
+  (igual que el scrape clásico); un refresh normal solo consulta hoy/ayer y
+  actualiza la caché, lo que permite ticks de 60s baratos durante los partidos.
+*/
+function createResultsTracker({fetchImpl = globalThis.fetch} = {}) {
+  if (typeof fetchImpl !== 'function') {
+    throw new Error('Node 18+ fetch API is required');
+  }
+  const games = new Map();
+  const eventsCache = new Map();
+
+  async function refresh({full = false, now = new Date()} = {}) {
+    const dates = full ? datesBetween(TOURNAMENT_START, TOURNAMENT_END) : tickDates(now);
+    const errors = [];
+    const fetched = [];
+    let okDates = 0;
+    for (const date of dates) {
+      try {
+        fetched.push(...await fetchGamesForDate(date, fetchImpl));
+        okDates++;
+      } catch (err) {
+        errors.push({date: toIsoDate(date), error: err.message});
+      }
+    }
+    if (dates.length && !okDates) {
+      throw new Error(`365Scores scrape failed for all dates: ${errors[0].error}`);
+    }
+    if (full && !errors.length) games.clear();
+    fetched.forEach(game => {
+      const id = game.id ?? game.gameId;
+      if (id != null) games.set(id, game);
+    });
+
+    const all = Array.from(games.values());
+    const normalized = normalize365ScoresGames(all, now);
+    normalized.sourceMeta.errors = errors;
+    normalized.sourceMeta.fullSweep = full;
+    try {
+      const {playerGoals, scorers} = await collectPlayerGoals(all, fetchImpl, eventsCache);
+      normalized.playerGoals = playerGoals;
+      normalized.scorers = scorers;
+    } catch (err) {
+      errors.push({stage: 'playerGoals', error: err.message});
+    }
+    return normalized;
+  }
+
+  function liveWindow(nowMs = Date.now()) {
+    for (const game of games.values()) {
+      if (isLiveGame(game, nowMs)) return true;
+      if (isFinishedGame(game) || isInterruptedGame(game)) continue;
+      const start = Date.parse(game.startTime);
+      if (!Number.isFinite(start)) continue;
+      if (nowMs >= start - LIVE_WINDOW_BEFORE_MS && nowMs <= start + LIVE_WINDOW_AFTER_MS) return true;
+    }
+    return false;
+  }
+
+  function nextKickoff(nowMs = Date.now()) {
+    let next = null;
+    for (const game of games.values()) {
+      const start = Date.parse(game.startTime);
+      if (!Number.isFinite(start) || start <= nowMs) continue;
+      if (next === null || start < next) next = start;
+    }
+    return next;
+  }
+
+  return {refresh, liveWindow, nextKickoff};
 }
 
 async function fetchGamesForDate(date, fetchImpl) {
@@ -202,7 +302,7 @@ async function fetchGamesForDate(date, fetchImpl) {
   return (payload.games || []).filter(game => Number(game.competitionId) === COMPETITION_ID);
 }
 
-async function fetchGameEvents(gameId, fetchImpl) {
+async function fetchGameDetail(gameId, fetchImpl) {
   const url = new URL(GAME_URL);
   const params = {
     appTypeId: '5',
@@ -225,24 +325,67 @@ async function fetchGameEvents(gameId, fetchImpl) {
   }
 
   const payload = await res.json();
-  return payload.game?.events || [];
+  return payload.game || null;
 }
 
-async function collectPlayerGoals(games, fetchImpl) {
-  const finished = (games || []).filter(game =>
-    Number(game.competitionId) === COMPETITION_ID && isFinishedGame(game));
+// Nombre y selección de cada goleador, sacados del propio partido (members +
+// competitorId): no depende de que la plantilla sincronizada esté completa.
+function extractGameScorers(detail) {
+  if (!detail || typeof detail !== 'object') return {};
+  const competitorTeams = {};
+  [detail.homeCompetitor, detail.awayCompetitor].forEach(competitor => {
+    const teamId = teamFromCompetitor(competitor || {});
+    const sourceId = competitor?.id;
+    if (teamId && sourceId != null) competitorTeams[sourceId] = teamId;
+  });
+  const members = new Map((detail.members || []).map(member => [member.id, member]));
 
-  const eventsList = await mapWithConcurrency(finished, GAME_DETAIL_CONCURRENCY, async game => {
+  const scorers = {};
+  (detail.events || []).forEach(event => {
+    if (event?.eventType?.id !== GOAL_EVENT_TYPE_ID) return;
+    if (event.eventType.subTypeId === OWN_GOAL_SUBTYPE_ID) return;
+    if (event.stageId === PENALTY_SHOOTOUT_STAGE_ID) return;
+    if (event.playerId == null) return;
+    const member = members.get(event.playerId);
+    const name = String(member?.name || '').trim();
+    const teamId = competitorTeams[member?.competitorId ?? event.competitorId] || '';
+    scorers[`365-${event.playerId}`] = {name, teamId};
+  });
+  return scorers;
+}
+
+async function collectPlayerGoals(games, fetchImpl, eventsCache = null) {
+  const nowMs = Date.now();
+  const relevant = (games || []).filter(game =>
+    Number(game.competitionId) === COMPETITION_ID
+    && (isFinishedGame(game) || isLiveGame(game, nowMs)));
+
+  const perGame = await mapWithConcurrency(relevant, GAME_DETAIL_CONCURRENCY, async game => {
     const gameId = game.id ?? game.gameId;
-    if (gameId == null) return [];
+    if (gameId == null) return null;
+    const cached = eventsCache?.get(gameId);
+    if (cached?.final) return cached;
     try {
-      return await fetchGameEvents(gameId, fetchImpl);
+      const detail = await fetchGameDetail(gameId, fetchImpl);
+      const entry = {
+        final: isFinishedGame(game),
+        events: detail?.events || [],
+        scorers: extractGameScorers(detail),
+      };
+      eventsCache?.set(gameId, entry);
+      return entry;
     } catch {
-      return [];
+      return cached || null;
     }
   });
 
-  return aggregatePlayerGoals(eventsList);
+  const valid = perGame.filter(Boolean);
+  const scorers = {};
+  valid.forEach(entry => Object.assign(scorers, entry.scorers || {}));
+  return {
+    playerGoals: aggregatePlayerGoals(valid.map(entry => entry.events)),
+    scorers,
+  };
 }
 
 function aggregatePlayerGoals(eventsList) {
@@ -288,15 +431,21 @@ function normalize365ScoresGames(games, now = new Date()) {
     finalists: new Set(),
   };
   const knockoutMatches = {r32: [], r16: [], qf: [], sf: [], third: [], final: []};
+  const liveKnockout = [];
   const teamGoals = {};
+  const nowMs = now.getTime();
   let champion = null;
   let finishedGames = 0;
+  let liveGames = 0;
   let groupGames = 0;
   let knockoutGames = 0;
   let skippedUnknownTeams = 0;
 
   for (const game of games || []) {
-    if (Number(game.competitionId) !== COMPETITION_ID || !isFinishedGame(game)) continue;
+    if (Number(game.competitionId) !== COMPETITION_ID) continue;
+    const finished = isFinishedGame(game);
+    const live = !finished && isLiveGame(game, nowMs);
+    if (!finished && !live) continue;
 
     const home = teamFromCompetitor(game.homeCompetitor);
     const away = teamFromCompetitor(game.awayCompetitor);
@@ -307,7 +456,8 @@ function normalize365ScoresGames(games, now = new Date()) {
       continue;
     }
 
-    finishedGames++;
+    if (finished) finishedGames++;
+    else liveGames++;
     addTeamGoals(teamGoals, home, homeScore, awayScore);
     addTeamGoals(teamGoals, away, awayScore, homeScore);
 
@@ -316,7 +466,7 @@ function normalize365ScoresGames(games, now = new Date()) {
     if (fixture) {
       const fixtureHomeScore = fixture.inverted ? awayScore : homeScore;
       const fixtureAwayScore = fixture.inverted ? homeScore : awayScore;
-      groupMaps[group].set(fixture.idx, {
+      const entry = {
         idx: fixture.idx,
         home: fixture.homeId,
         away: fixture.awayId,
@@ -324,13 +474,34 @@ function normalize365ScoresGames(games, now = new Date()) {
         goalsAway: fixtureAwayScore,
         result: result1x2(fixtureHomeScore, fixtureAwayScore),
         sourceGameId: game.id || game.gameId || null,
-      });
+      };
+      if (live) {
+        entry.live = true;
+        const minute = gameMinute(game);
+        if (minute) entry.minute = minute;
+      }
+      groupMaps[group].set(fixture.idx, entry);
       groupGames++;
       continue;
     }
 
     const bucket = knockoutBucket(game);
     if (!bucket) continue;
+
+    if (live) {
+      // Mientras se juega no hay ganador: solo se expone para la vista en vivo,
+      // sin alimentar bracketAdvanced ni knockoutMatches (eso puntuaría de más).
+      liveKnockout.push({
+        round: bucket,
+        homeId: home,
+        awayId: away,
+        goalsHome: homeScore,
+        goalsAway: awayScore,
+        minute: gameMinute(game),
+        sourceGameId: game.id || game.gameId || null,
+      });
+      continue;
+    }
 
     const winner = winnerFromGame(game, home, away, homeScore, awayScore);
     if (!winner) continue;
@@ -372,14 +543,18 @@ function normalize365ScoresGames(games, now = new Date()) {
       champion,
     },
     knockoutMatches,
+    liveKnockout,
+    liveCount: liveGames,
     teamGoals,
     playerGoals: {},
+    scorers: {},
     lastUpdated: now.toISOString(),
     source: '365scores',
     sourceMeta: {
       competitionId: COMPETITION_ID,
       games: Array.isArray(games) ? games.length : 0,
       finishedGames,
+      liveGames,
       groupGames,
       knockoutGames,
       skippedUnknownTeams,
@@ -462,18 +637,41 @@ function isFinishedGame(game = {}) {
   const awayScore = scoreOf(game.awayCompetitor);
   if (homeScore < 0 || awayScore < 0) return false;
 
-  const statusText = normalizeName([
+  // 365scores marca los suspendidos con el mismo statusGroup que los terminados.
+  if (isInterruptedGame(game)) return false;
+
+  const statusGroup = Number(game.statusGroup);
+  if (statusGroup === 4) return true;
+  const statusText = gameStatusText(game);
+  return /\b(ft|aet|ended|final|full time|after penalties)\b/.test(statusText);
+}
+
+function isInterruptedGame(game = {}) {
+  return /suspend|postpon|abandon|cancel/.test(gameStatusText(game));
+}
+
+function gameStatusText(game = {}) {
+  return normalizeName([
     game.statusText,
     game.shortStatusText,
     game.gameTimeDisplay,
     game.statusName,
   ].filter(Boolean).join(' '));
-  // 365scores marca los suspendidos con el mismo statusGroup que los terminados.
-  if (/suspend|postpon|abandon|cancel/.test(statusText)) return false;
+}
 
-  const statusGroup = Number(game.statusGroup);
-  if (statusGroup === 4) return true;
-  return /\b(ft|aet|ended|final|full time|after penalties)\b/.test(statusText);
+function isLiveGame(game = {}, nowMs = Date.now()) {
+  if (isFinishedGame(game) || isInterruptedGame(game)) return false;
+  if (Number(game.statusGroup) === 3) return true;
+  const start = Date.parse(game.startTime);
+  return Number.isFinite(start) && start <= nowMs
+    && scoreOf(game.homeCompetitor) >= 0 && scoreOf(game.awayCompetitor) >= 0;
+}
+
+function gameMinute(game = {}) {
+  const display = String(game.gameTimeDisplay || '').trim();
+  if (display) return display.slice(0, 10);
+  const minutes = Number(game.gameTime);
+  return Number.isFinite(minutes) && minutes > 0 ? `${Math.floor(minutes)}'` : '';
 }
 
 function scoreOf(competitor = {}) {
@@ -541,13 +739,19 @@ function normalizeName(value) {
 
 module.exports = {
   SCRAPE_INTERVAL_MS,
+  LIVE_SCRAPE_INTERVAL_MS,
   COMPETITION_ID,
   scrape365Scores,
+  createResultsTracker,
+  tickDates,
   normalize365ScoresGames,
   fetchGamesForDate,
-  fetchGameEvents,
+  fetchGameDetail,
+  extractGameScorers,
   collectPlayerGoals,
   aggregatePlayerGoals,
+  isFinishedGame,
+  isLiveGame,
   teamFromCompetitor,
   formatDateParam,
   result1x2,

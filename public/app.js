@@ -66,6 +66,8 @@ function realGroupShape(realResults) {
       shape[group][idx] = {
         homeGoals: Number.isInteger(homeGoals) ? homeGoals : null,
         awayGoals: Number.isInteger(awayGoals) ? awayGoals : null,
+        live: match.live === true,
+        minute: typeof match.minute === 'string' ? match.minute : '',
       };
     });
   });
@@ -101,7 +103,42 @@ function init() {
   loadPublicData().then(() => restoreAccess()).catch(err => {
     console.warn('init failed', err);
     setAccessMessage('No se pudo conectar con el servidor.', 'error');
+  }).finally(() => scheduleLiveRefresh());
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    refreshRanking().catch(() => {});
+    scheduleLiveRefresh();
   });
+}
+
+let liveRefreshTimer = null;
+
+function nextKickoffMs(now = Date.now()) {
+  let next = null;
+  Object.values(state.kickoffs || {}).forEach(entry => {
+    const t = Date.parse(entry?.kickoff);
+    if (Number.isFinite(t) && t > now && (next === null || t < next)) next = t;
+  });
+  return next;
+}
+
+// Cada 60s con partidos en juego; si no, lo justo para despertar tras el
+// próximo kickoff (máximo 5 min).
+function liveRefreshDelayMs() {
+  if (Number(state.realResults?.liveCount) > 0) return 60_000;
+  const next = nextKickoffMs();
+  if (next === null) return 300_000;
+  return Math.max(60_000, Math.min(next - Date.now() + 90_000, 300_000));
+}
+
+function scheduleLiveRefresh() {
+  clearTimeout(liveRefreshTimer);
+  liveRefreshTimer = setTimeout(async () => {
+    if (document.visibilityState === 'visible') {
+      try { await refreshRanking(); } catch { /* reintenta en el próximo ciclo */ }
+    }
+    scheduleLiveRefresh();
+  }, liveRefreshDelayMs());
 }
 
 async function loadPublicData() {
@@ -390,15 +427,19 @@ function buildHomeMatches() {
           const matchId = `${group}${index + 1}`;
           const kickoff = kickoffMeta(matchId);
           const realScore = realShape?.[group]?.[index] || {};
+          const isLive = realScore.live === true;
           const homeGoals = Number.isFinite(realScore.homeGoals) ? realScore.homeGoals : null;
           const awayGoals = Number.isFinite(realScore.awayGoals) ? realScore.awayGoals : null;
           const homeSlot = homeGoals == null ? '<span class="home-match-score placeholder">–</span>' : `<span class="home-match-score">${homeGoals}</span>`;
           const awaySlot = awayGoals == null ? '<span class="home-match-score placeholder">–</span>' : `<span class="home-match-score">${awayGoals}</span>`;
+          const headRight = isLive
+            ? `<span class="home-match-live">En vivo${realScore.minute ? ` · ${escapeHtml(realScore.minute)}` : ''}</span>`
+            : (kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : '<span class="home-match-kickoff placeholder">Por confirmar</span>');
           return `
-            <button class="home-match-card" onclick="openMatchPredictions('${matchId}')" type="button">
+            <button class="home-match-card${isLive ? ' live' : ''}" onclick="openMatchPredictions('${matchId}')" type="button">
               <span class="home-match-head">
                 <span class="home-match-id">${matchId}</span>
-                ${kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : '<span class="home-match-kickoff placeholder">Por confirmar</span>'}
+                ${headRight}
               </span>
               <span class="home-match-body">
                 <span class="home-match-team home">${getTeamFlagImg(fixture.homeId, {className: 'flag flag-sm'})}<strong>${escapeHtml(home.name)}</strong></span>
@@ -415,6 +456,11 @@ function buildHomeMatches() {
     return;
   }
 
+  if (state.homeMatchView === 'scorers') {
+    container.innerHTML = renderScorersBoard();
+    return;
+  }
+
   const rounds = [
     ['r32', '1/16'],
     ['r16', 'Octavos'],
@@ -424,26 +470,31 @@ function buildHomeMatches() {
     ['final', 'Final'],
   ];
   const realResolved = resolveBracketMatches(realGroupShape(state.realResults), {});
+  const koScores = knockoutScoreIndex(state.realResults);
   container.innerHTML = rounds.map(([round, label]) => `
     <div class="home-match-group">
       <h3>${label}</h3>
       ${BRACKET_BY_ROUND[round].map(match => {
         const kickoff = kickoffMeta(match.id);
         const realSlots = realResolved.matches[match.id]?.slots || [];
+        const real = knockoutScoreFor(koScores, round, realSlots);
         const sideLabel = (index) => {
           const teamId = realSlots[index];
           if (teamId) return `${getTeamFlagImg(teamId, {className: 'flag flag-sm'})} ${escapeHtml(getTeamName(teamId))}`;
           return escapeHtml(sourceLabel(match.sources[index]));
         };
+        const headRight = real?.live
+          ? `<span class="home-match-live">En vivo${real.minute ? ` · ${escapeHtml(real.minute)}` : ''}</span>`
+          : (kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : '');
         return `
-        <button class="home-match-card bracket" onclick="openMatchPredictions('${match.id}')" type="button">
+        <button class="home-match-card bracket${real?.live ? ' live' : ''}" onclick="openMatchPredictions('${match.id}')" type="button">
           <span class="home-match-head">
             <span class="home-match-id">${match.id}</span>
-            ${kickoff ? `<time class="home-match-kickoff" datetime="${kickoff.iso}">${kickoff.day} · ${kickoff.time}</time>` : ''}
+            ${headRight}
           </span>
           <span class="home-match-body bracket-body">
             <strong>${sideLabel(0)}</strong>
-            <em>vs</em>
+            ${real ? `<span class="home-match-score">${real.goalsHome} - ${real.goalsAway}</span>` : '<em>vs</em>'}
             <strong>${sideLabel(1)}</strong>
           </span>
         </button>
@@ -451,6 +502,97 @@ function buildHomeMatches() {
       }).join('')}
     </div>
   `).join('');
+}
+
+function knockoutScoreIndex(realResults) {
+  const index = {};
+  const add = (round, entry, live) => {
+    if (!entry || !entry.homeId || !entry.awayId) return;
+    index[`${round}|${entry.homeId}|${entry.awayId}`] = {
+      goalsHome: entry.goalsHome,
+      goalsAway: entry.goalsAway,
+      live,
+      minute: typeof entry.minute === 'string' ? entry.minute : '',
+    };
+  };
+  const finished = realResults?.knockoutMatches || {};
+  Object.entries(finished).forEach(([round, list]) => {
+    (Array.isArray(list) ? list : []).forEach(entry => add(round, entry, false));
+  });
+  (Array.isArray(realResults?.liveKnockout) ? realResults.liveKnockout : [])
+    .forEach(entry => add(entry.round, entry, true));
+  return index;
+}
+
+// Los slots resueltos pueden venir en el orden contrario al feed: probamos ambos.
+function knockoutScoreFor(index, round, slots) {
+  const [a, b] = slots || [];
+  if (!a || !b) return null;
+  const direct = index[`${round}|${a}|${b}`];
+  if (direct) return direct;
+  const inverted = index[`${round}|${b}|${a}`];
+  if (!inverted) return null;
+  return {...inverted, goalsHome: inverted.goalsAway, goalsAway: inverted.goalsHome};
+}
+
+function renderScorersBoard() {
+  const playerGoals = state.realResults?.playerGoals || {};
+  const scorerInfo = state.realResults?.scorers || {};
+  const playersById = new Map(state.players.map(player => [player.id, player]));
+
+  const rows = Object.entries(playerGoals)
+    .map(([playerId, goals]) => {
+      const info = scorerInfo[playerId] || {};
+      const player = playersById.get(playerId);
+      return {
+        playerId,
+        goals: Number(goals) || 0,
+        name: info.name || player?.name || 'Sin identificar',
+        teamId: info.teamId || player?.teamId || '',
+      };
+    })
+    .filter(row => row.goals > 0)
+    .sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
+
+  if (!rows.length) {
+    return '<div class="empty-state">Aún no hay goles: en cuanto caiga el primero, el goleador aparecerá aquí.</div>';
+  }
+
+  // Empatados a goles comparten posición, como en la clasificación del pichichi.
+  let lastGoals = null;
+  let lastRank = 0;
+  rows.forEach((row, index) => {
+    if (row.goals !== lastGoals) {
+      lastRank = index + 1;
+      lastGoals = row.goals;
+    }
+    row.rank = lastRank;
+  });
+
+  const myPick = state.topScorerPlayerId || '';
+  return `
+    <div class="scorers-board">
+      <div class="scorer-row head">
+        <span></span>
+        <span>Jugador</span>
+        <span>Selección</span>
+        <span class="scorer-goals">Goles</span>
+      </div>
+      ${rows.map(row => {
+        const isMine = myPick && row.playerId === myPick;
+        return `
+        <div class="scorer-row${isMine ? ' me' : ''}">
+          <span class="scorer-rank">${row.rank}</span>
+          <span class="scorer-player">${escapeHtml(row.name)}${isMine ? ' <small>(tu elección)</small>' : ''}</span>
+          <span class="scorer-team">${row.teamId
+            ? `${getTeamFlagImg(row.teamId, {className: 'flag flag-xs'})} <span class="scorer-team-name">${escapeHtml(getTeamName(row.teamId))}</span>`
+            : '—'}</span>
+          <span class="scorer-goals">${row.goals}</span>
+        </div>
+      `;
+      }).join('')}
+    </div>
+  `;
 }
 
 function showHomeMatches(view, btn) {
@@ -490,7 +632,11 @@ function renderMatchPredictionModal(data) {
       <em>vs</em>
       <span class="modal-title-team">${getTeamFlagImg(data.awayId, {className: 'flag flag-md'})}<span>${escapeHtml(getTeamName(data.awayId))}</span></span>
     `;
-    subtitle.textContent = `${data.predictions.length} pronósticos registrados`;
+    const real = realGroupShape(state.realResults)?.[data.group]?.[data.idx];
+    const realLine = real && Number.isInteger(real.homeGoals) && Number.isInteger(real.awayGoals)
+      ? ` · ${real.live ? `En vivo${real.minute ? ` ${real.minute}` : ''}` : 'Final'}: ${real.homeGoals} - ${real.awayGoals}`
+      : '';
+    subtitle.textContent = `${data.predictions.length} pronósticos registrados${realLine}`;
     const myPlayer = (state.player || '').trim().toLowerCase();
     body.innerHTML = data.predictions.map(item => {
       const isMe = myPlayer && String(item.player || '').trim().toLowerCase() === myPlayer;
@@ -969,9 +1115,11 @@ async function refreshRanking() {
     updateScorePanel();
     renderRanking('ranking-container', ranking || []);
     renderRanking('ranking-container-game', ranking || []);
+    const live = Number(state.realResults?.liveCount) > 0;
     const updated = meta?.lastScrape?.at ? new Date(meta.lastScrape.at).toLocaleString('es-ES') : 'sin resultados reales';
-    setText('ranking-info', `Actualización: ${updated}`);
-    setText('ranking-info-game', `Actualización: ${updated}`);
+    const info = `Actualización: ${updated}${live ? ' · EN VIVO' : ''}`;
+    setText('ranking-info', info);
+    setText('ranking-info-game', info);
   } catch (err) {
     console.error('ranking failed', err);
     setText('ranking-info', 'No se pudo cargar el ranking.');

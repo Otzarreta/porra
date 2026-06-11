@@ -684,6 +684,130 @@ select:focus {
   font-weight: 500;
 }
 
+.home-match-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-red);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.home-match-live::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-match-live::before { animation: none; }
+}
+
+.home-match-card.live {
+  border-color: color-mix(in srgb, var(--color-red), transparent 55%);
+}
+
+.home-match-card.live .home-match-score {
+  background: color-mix(in srgb, var(--color-red), var(--color-fill) 85%);
+}
+
+.scorers-board {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.scorer-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1.2fr) minmax(0, 1fr) 56px;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 1px solid var(--color-separator);
+  border-radius: var(--radius-md);
+  background: var(--color-window-strong);
+}
+
+.scorer-row.head {
+  min-height: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-tertiary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.scorer-row.me {
+  border-color: color-mix(in srgb, var(--color-blue), transparent 45%);
+  background: color-mix(in srgb, var(--color-blue), var(--color-window-strong) 90%);
+}
+
+.scorer-rank {
+  display: grid;
+  place-items: center;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-fill), transparent 30%);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.scorer-player {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.scorer-player small {
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.scorer-team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--color-secondary);
+}
+
+.scorer-team-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scorer-goals {
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .scorer-row {
+    grid-template-columns: 28px minmax(0, 1.3fr) minmax(0, 1fr) 44px;
+    font-size: 0.85rem;
+  }
+}
+
 .game-top {
   position: relative;
   top: 12px;

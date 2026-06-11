@@ -7,7 +7,7 @@ const fs = require('fs').promises;
 const crypto = require('crypto');
 
 const {computeScore} = require('./scoring.js');
-const {scrape365Scores, SCRAPE_INTERVAL_MS} = require('./scraper.js');
+const {createResultsTracker, SCRAPE_INTERVAL_MS, LIVE_SCRAPE_INTERVAL_MS} = require('./scraper.js');
 const {scrape365ScoresPlayers, mergePlayers} = require('./playerScraper.js');
 const {
   GROUP_ORDER,
@@ -423,7 +423,7 @@ app.post('/api/admin/results', async (req, res) => {
 app.post('/api/admin/scrape', async (req, res) => {
   if (!requireAdmin(req, res)) return;
   try {
-    await runScrape({throwOnError: true});
+    await runScrape({throwOnError: true, full: true});
     res.json({ok: true, lastScrape: metaState.lastScrape});
   } catch (err) {
     res.status(500).json({error: 'scrape_failed', message: err.message});
@@ -549,12 +549,16 @@ function sanitizeResults(input) {
     groupMatches: sanitizeGroupMatches(input.groupMatches),
     bracketAdvanced: sanitizeBracketAdvanced(input.bracketAdvanced),
     knockoutMatches: sanitizeKnockoutMatches(input.knockoutMatches),
+    liveKnockout: sanitizeLiveKnockout(input.liveKnockout),
     teamGoals: sanitizeTeamGoals(input.teamGoals),
     playerGoals: sanitizePlayerGoals(input.playerGoals),
+    scorers: sanitizeScorers(input.scorers),
     topScorerPlayerId: sanitizePlayerId(input.topScorerPlayerId),
     lastUpdated: typeof input.lastUpdated === 'string' ? input.lastUpdated.slice(0, 40) : new Date().toISOString(),
     source: typeof input.source === 'string' ? input.source.slice(0, 40) : 'manual',
   };
+  out.liveCount = out.liveKnockout.length + Object.values(out.groupMatches)
+    .reduce((acc, matches) => acc + matches.filter(match => match.live).length, 0);
   if (input.sourceMeta && typeof input.sourceMeta === 'object' && !Array.isArray(input.sourceMeta)) {
     out.sourceMeta = sanitizeSourceMeta(input.sourceMeta);
   }
@@ -589,6 +593,11 @@ function sanitizeGroupMatches(input) {
       };
       if (typeof item.sourceGameId === 'string' || typeof item.sourceGameId === 'number') {
         match.sourceGameId = String(item.sourceGameId).slice(0, 80);
+      }
+      if (item.live === true) {
+        match.live = true;
+        const minute = sanitizeMinute(item.minute);
+        if (minute) match.minute = minute;
       }
       matches.push(match);
     });
@@ -626,6 +635,44 @@ function sanitizeKnockoutMatches(input) {
     });
   });
   return out;
+}
+
+function sanitizeScorers(input) {
+  const out = {};
+  if (!input || typeof input !== 'object') return out;
+  for (const [rawId, value] of Object.entries(input)) {
+    const id = sanitizePlayerId(rawId);
+    if (!id || !value || typeof value !== 'object') continue;
+    const name = sanitizeStr(value.name, 80).trim();
+    const teamId = TEAM_IDS.includes(value.teamId) ? value.teamId : '';
+    out[id] = {name, teamId};
+    if (Object.keys(out).length >= 400) break;
+  }
+  return out;
+}
+
+function sanitizeMinute(value) {
+  if (typeof value !== 'string' && typeof value !== 'number') return '';
+  return String(value).trim().slice(0, 10);
+}
+
+function sanitizeLiveKnockout(input) {
+  if (!Array.isArray(input)) return [];
+  const out = [];
+  input.forEach(item => {
+    if (!item || typeof item !== 'object') return;
+    const validRound = ['r32', 'r16', 'qf', 'sf', 'third', 'final'].includes(item.round);
+    const homeId = TEAM_IDS.includes(item.homeId) ? item.homeId : null;
+    const awayId = TEAM_IDS.includes(item.awayId) ? item.awayId : null;
+    const goalsHome = sanitizeGoalCount(item.goalsHome);
+    const goalsAway = sanitizeGoalCount(item.goalsAway);
+    if (!validRound || !homeId || !awayId || homeId === awayId || goalsHome == null || goalsAway == null) return;
+    const entry = {round: item.round, homeId, awayId, goalsHome, goalsAway};
+    const minute = sanitizeMinute(item.minute);
+    if (minute) entry.minute = minute;
+    out.push(entry);
+  });
+  return out.slice(0, 16);
 }
 
 function sanitizeTeamGoals(input) {
@@ -843,20 +890,44 @@ function requireAdmin(req, res) {
   return true;
 }
 
-async function runScrape({throwOnError = false} = {}) {
+const resultsTracker = createResultsTracker();
+let lastFullScrapeAt = 0;
+let lastResultsJson = null;
+
+async function runScrape({throwOnError = false, full = false} = {}) {
+  const fullSweep = full || (Date.now() - lastFullScrapeAt >= SCRAPE_INTERVAL_MS);
+  const wasOk = metaState.lastScrape?.ok;
   try {
-    const fresh = await scrape365Scores();
+    const fresh = await resultsTracker.refresh({full: fullSweep});
+    if (fullSweep) lastFullScrapeAt = Date.now();
     results = sanitizeResults(fresh);
-    await writeJsonSerialized(RESULTS_FILE, results);
     metaState.lastScrape = {ok: true, at: new Date().toISOString()};
-    await writeJsonSerialized(META_FILE, metaState);
-    console.log('[scrape] ok', new Date().toISOString());
+    const json = JSON.stringify(results);
+    // Con ticks de 60s solo persistimos (y logueamos) cuando algo cambia.
+    if (json !== lastResultsJson) {
+      lastResultsJson = json;
+      await writeJsonSerialized(RESULTS_FILE, results);
+      await writeJsonSerialized(META_FILE, metaState);
+      console.log(`[scrape] ok ${metaState.lastScrape.at} (${fullSweep ? 'full' : 'tick'}, live=${results?.liveCount || 0})`);
+    } else if (wasOk !== true) {
+      await writeJsonSerialized(META_FILE, metaState);
+    }
   } catch (err) {
     console.error('[scrape] failed:', err.message);
     metaState.lastScrape = {ok: false, at: new Date().toISOString(), error: err.message};
-    await writeJsonSerialized(META_FILE, metaState);
+    if (wasOk !== false) await writeJsonSerialized(META_FILE, metaState);
     if (throwOnError) throw err;
   }
+}
+
+function nextScrapeDelayMs(now = Date.now()) {
+  if (resultsTracker.liveWindow(now)) return LIVE_SCRAPE_INTERVAL_MS;
+  let delay = SCRAPE_INTERVAL_MS;
+  const kickoff = resultsTracker.nextKickoff(now);
+  if (kickoff !== null) {
+    delay = Math.min(delay, Math.max(kickoff - now, 0) + LIVE_SCRAPE_INTERVAL_MS / 2);
+  }
+  return Math.max(LIVE_SCRAPE_INTERVAL_MS, Math.min(delay, SCRAPE_INTERVAL_MS));
 }
 
 function scheduleScrape() {
@@ -872,8 +943,15 @@ function scheduleScrape() {
     setTimeout(scheduleScrape, start - now);
     return;
   }
-  runScrape();
-  setInterval(runScrape, SCRAPE_INTERVAL_MS);
+  const loop = async () => {
+    await runScrape();
+    if (Date.now() > end) {
+      console.log('[scrape] torneo terminado, cron detenido');
+      return;
+    }
+    setTimeout(loop, nextScrapeDelayMs());
+  };
+  loop();
 }
 
 async function runPlayerSync({teams = null, deactivateMissing = true, syncOptions = {}, throwOnError = false} = {}) {
