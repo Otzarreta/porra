@@ -18,6 +18,15 @@
         <div class="eyebrow">FIFA World Cup 2026</div>
         <h1>Porra Mundial</h1>
         <p class="hero-sub">Realiza tus pronósticos de todos los partidos de la fase de grupos y luego completa las llaves hasta llegar a tu predicción de campeón.</p>
+        <form class="access-card" onsubmit="loginUser();return false;">
+        <div class="card-kicker">Acceso de jugador</div>
+        <label for="player-email">Correo electrónico</label>
+        <input id="player-email" name="player-email" type="email" autocomplete="email" placeholder="tu@email.com">
+        <label for="player-alias">Alias</label>
+        <input id="player-alias" name="player-alias" type="text" autocomplete="nickname" maxlength="80" placeholder="Tu nombre en el ranking">
+        <button class="btn btn-primary" type="submit">Hacer mi porra</button>
+        <div class="form-message" id="access-message"></div>
+      </form>
         <div class="hero-stats">
           <div><span id="home-player-count">0</span><small>jugadores</small></div>
           <div><span id="home-deadline">-</span><small>cierre de inscripción</small></div>
@@ -38,15 +47,6 @@
         <div class="ranking-meta" id="ranking-info">Cargando ranking...</div>
         <div id="ranking-container" class="ranking-list compact"></div>
       </section>
-      <form class="access-card" onsubmit="loginUser();return false;">
-        <div class="card-kicker">Acceso de jugador</div>
-        <label for="player-email">Correo electrónico</label>
-        <input id="player-email" name="player-email" type="email" autocomplete="email" placeholder="tu@email.com">
-        <label for="player-alias">Alias</label>
-        <input id="player-alias" name="player-alias" type="text" autocomplete="nickname" maxlength="80" placeholder="Tu nombre en el ranking">
-        <button class="btn btn-primary" type="submit">Hacer mi porra</button>
-        <div class="form-message" id="access-message"></div>
-      </form>
     </div>
 
     <section class="panel matches-panel">
