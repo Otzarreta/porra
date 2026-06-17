@@ -6,6 +6,7 @@ const {
   GROUP_ORDER,
   BRACKET_BY_ROUND,
   resultFromPrediction,
+  normalizeName,
 } = require('../public/fixtures.js');
 
 const POINTS = {
@@ -22,19 +23,62 @@ function emptyBreakdown() {
   return {grupos: 0, r32: 0, r16: 0, qf: 0, sf: 0, third: 0, final: 0, especiales: 0, total: 0};
 }
 
-function computeScore(porra = {}, results = null) {
-  const bd = emptyBreakdown();
-  if (!results) return bd;
+// 365scores usa identificadores de jugador distintos en la lista de plantillas
+// (de donde el usuario elige su goleador) y en los eventos de gol de los
+// partidos. Para que los goles del jugador elegido cuenten, remapeamos las
+// claves de scorers/playerGoals al id de plantilla casando por nombre+selección.
+// Idempotente: si un id ya es de plantilla, se mapea a sí mismo.
+function reconcileScorerIds(results, players = []) {
+  if (!results || !results.scorers) return results;
+  const squadByNameTeam = new Map();
+  (players || []).forEach(p => {
+    if (!p || !p.id || !p.name) return;
+    squadByNameTeam.set(`${normalizeName(p.name)}|${p.teamId || ''}`, p.id);
+  });
 
-  scoreGroups(bd, porra, results);
-  scoreBracket(bd, porra, results);
-  scoreSpecials(bd, porra, results);
+  const remapId = id => {
+    const info = results.scorers[id];
+    if (!info || !info.name) return id;
+    return squadByNameTeam.get(`${normalizeName(info.name)}|${info.teamId || ''}`) || id;
+  };
 
-  bd.total = bd.grupos + bd.r32 + bd.r16 + bd.qf + bd.sf + bd.third + bd.final + bd.especiales;
-  return bd;
+  const scorers = {};
+  Object.keys(results.scorers).forEach(id => { scorers[remapId(id)] = results.scorers[id]; });
+
+  const playerGoals = {};
+  Object.entries(results.playerGoals || {}).forEach(([id, goals]) => {
+    const target = remapId(id);
+    playerGoals[target] = (playerGoals[target] || 0) + (Number(goals) || 0);
+  });
+
+  return {...results, scorers, playerGoals};
 }
 
-function scoreGroups(bd, porra, results) {
+function emptyEvents() {
+  return {grupos: [], bracket: [], especiales: []};
+}
+
+// Fuente única: calcula el breakdown y, opcionalmente, el detalle de cada punto.
+// computeScore es un envoltorio sobre esto, así el total agregado nunca diverge
+// de la suma de eventos que se muestra en la auditoría y en el popup.
+function computeScoreDetailed(porra = {}, results = null) {
+  const bd = emptyBreakdown();
+  const events = emptyEvents();
+  if (!results) return {breakdown: bd, events};
+
+  scoreGroups(bd, porra, results, events.grupos);
+  scoreBracket(bd, porra, results, events.bracket);
+  scoreSpecials(bd, porra, results, events.especiales);
+
+  bd.total = bd.grupos + bd.r32 + bd.r16 + bd.qf + bd.sf + bd.third + bd.final + bd.especiales;
+  return {breakdown: bd, events};
+}
+
+function computeScore(porra = {}, results = null) {
+  return computeScoreDetailed(porra, results).breakdown;
+}
+
+function scoreGroups(bd, porra, results, out = null) {
   const groupMatches = results.groupMatches || {};
   GROUP_ORDER.forEach(group => {
     const realMatches = Array.isArray(groupMatches[group]) ? groupMatches[group] : [];
@@ -52,12 +96,24 @@ function scoreGroups(bd, porra, results) {
       const exact = Number.isInteger(realHome) && Number.isInteger(realAway)
         && Number.isInteger(predHome) && Number.isInteger(predAway)
         && realHome === predHome && realAway === predAway;
-      bd.grupos += exact ? POINTS.grupos.exact : POINTS.grupos.winner;
+      const points = exact ? POINTS.grupos.exact : POINTS.grupos.winner;
+      bd.grupos += points;
+      if (out) {
+        out.push({
+          phase: 'grupos', group, idx,
+          homeId: match.home, awayId: match.away,
+          realHome: Number.isInteger(realHome) ? realHome : null,
+          realAway: Number.isInteger(realAway) ? realAway : null,
+          predHome: Number.isInteger(predHome) ? predHome : null,
+          predAway: Number.isInteger(predAway) ? predAway : null,
+          hit: exact ? 'exact' : 'winner', points,
+        });
+      }
     });
   });
 }
 
-function scoreBracket(bd, porra, results) {
+function scoreBracket(bd, porra, results, out = null) {
   const advanced = results.bracketAdvanced || {};
   const knockoutMatches = results.knockoutMatches || {};
 
@@ -71,7 +127,17 @@ function scoreBracket(bd, porra, results) {
       if (!predictedWinner || !winnersSet.has(predictedWinner)) return;
 
       const exact = matchExactScore(porra.bracketScores?.[match.id], predictedWinner, realGames);
-      bd[round] += exact ? POINTS[round].exact : POINTS[round].winner;
+      const points = exact ? POINTS[round].exact : POINTS[round].winner;
+      bd[round] += points;
+      if (out) {
+        const predScore = porra.bracketScores?.[match.id];
+        out.push({
+          phase: round, matchId: match.id, winnerId: predictedWinner, exact,
+          predHome: Number.isInteger(Number(predScore?.homeGoals)) ? Number(predScore.homeGoals) : null,
+          predAway: Number.isInteger(Number(predScore?.awayGoals)) ? Number(predScore.awayGoals) : null,
+          points,
+        });
+      }
     });
   });
 }
@@ -96,27 +162,39 @@ function matchExactScore(predScore, predictedWinner, realGames) {
   });
 }
 
-function scoreSpecials(bd, porra, results) {
+function scoreSpecials(bd, porra, results, out = null) {
   const teamGoals = results.teamGoals || {};
   const playerGoals = results.playerGoals || {};
 
   // Un punto por cada gol que marque la selección elegida como más goleadora,
   // sea o no la máxima goleadora del torneo.
   if (porra.topScorerTeam) {
-    bd.especiales += Number(teamGoals[porra.topScorerTeam]?.for) || 0;
+    const goals = Number(teamGoals[porra.topScorerTeam]?.for) || 0;
+    bd.especiales += goals;
+    if (out && goals > 0) {
+      out.push({kind: 'topScorerTeam', targetId: porra.topScorerTeam, goals, points: goals});
+    }
   }
 
   // Un punto por cada gol que reciba la selección elegida como más goleada,
   // sea o no la más goleada del torneo.
   if (porra.worstDefenseTeam) {
-    bd.especiales += Number(teamGoals[porra.worstDefenseTeam]?.against) || 0;
+    const goals = Number(teamGoals[porra.worstDefenseTeam]?.against) || 0;
+    bd.especiales += goals;
+    if (out && goals > 0) {
+      out.push({kind: 'worstDefenseTeam', targetId: porra.worstDefenseTeam, goals, points: goals});
+    }
   }
 
   // Un punto por cada gol que marque el jugador elegido como máximo goleador,
   // sea o no el máximo goleador del torneo.
   if (porra.topScorerPlayerId) {
-    bd.especiales += Number(playerGoals[porra.topScorerPlayerId]) || 0;
+    const goals = Number(playerGoals[porra.topScorerPlayerId]) || 0;
+    bd.especiales += goals;
+    if (out && goals > 0) {
+      out.push({kind: 'topScorerPlayer', targetId: porra.topScorerPlayerId, goals, points: goals});
+    }
   }
 }
 
-module.exports = {computeScore, POINTS, emptyBreakdown};
+module.exports = {computeScore, computeScoreDetailed, reconcileScorerIds, POINTS, emptyBreakdown};

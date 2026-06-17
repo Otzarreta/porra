@@ -1135,12 +1135,129 @@ function renderRanking(containerId, ranking) {
     return;
   }
   container.innerHTML = ranking.map((row, index) => `
-    <div class="rank-row ${row.id === state.porraId ? 'me' : ''}">
+    <div class="rank-row ${row.id === state.porraId ? 'me' : ''}" role="button" tabindex="0"
+         onclick="openScoreDetail('${row.id}')"
+         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openScoreDetail('${row.id}');}"
+         title="Ver desglose de puntos">
       <span class="rank-pos">${index + 1}</span>
       <span class="rank-player">${escapeHtml(row.player || '-')}</span>
       <span class="rank-total">${row.total}</span>
     </div>
   `).join('');
+}
+
+async function openScoreDetail(id) {
+  const modal = document.getElementById('score-modal');
+  const title = document.getElementById('score-modal-title');
+  const subtitle = document.getElementById('score-modal-subtitle');
+  const body = document.getElementById('score-modal-body');
+  modal.classList.remove('closing');
+  modal.classList.add('active');
+  title.textContent = 'Cargando…';
+  subtitle.textContent = '';
+  body.innerHTML = '';
+  try {
+    const data = await API.getScoreDetail(id);
+    renderScoreDetail(data);
+  } catch (err) {
+    console.error('score detail failed', err);
+    title.textContent = 'Desglose de puntos';
+    subtitle.textContent = 'No se pudo cargar el desglose.';
+  }
+}
+
+function renderScoreDetail(data) {
+  const title = document.getElementById('score-modal-title');
+  const subtitle = document.getElementById('score-modal-subtitle');
+  const body = document.getElementById('score-modal-body');
+  const events = data.events || {grupos: [], bracket: [], especiales: []};
+  title.textContent = data.player || '-';
+  subtitle.innerHTML = `Total: <strong>${data.total}</strong> puntos`;
+
+  const pointsBadge = (n, exact) => `<span class="score-badge${exact ? ' exact' : ''}">+${n}</span>`;
+
+  const sections = [];
+
+  // --- Grupos ---
+  if (events.grupos.length) {
+    const subtotal = events.grupos.reduce((s, e) => s + e.points, 0);
+    const rows = events.grupos.map(e => {
+      const real = `${e.realHome}-${e.realAway}`;
+      const pred = Number.isInteger(e.predHome) && Number.isInteger(e.predAway) ? `${e.predHome}-${e.predAway}` : '–';
+      const tag = e.hit === 'exact' ? 'Exacto' : 'Resultado';
+      return `
+        <div class="score-row">
+          <span class="score-row-match">
+            ${getTeamFlagImg(e.homeId, {className: 'flag flag-xs'})} ${escapeHtml(getTeamName(e.homeId))}
+            <b>${real}</b>
+            ${escapeHtml(getTeamName(e.awayId))} ${getTeamFlagImg(e.awayId, {className: 'flag flag-xs'})}
+          </span>
+          <span class="score-row-note">${e.group}${e.idx + 1} · ${tag} · Pronóstico: ${pred}</span>
+          ${pointsBadge(e.points, e.hit === 'exact')}
+        </div>`;
+    }).join('');
+    sections.push(scoreSection('Grupos', subtotal, rows));
+  }
+
+  // --- Eliminatorias ---
+  if (events.bracket.length) {
+    const subtotal = events.bracket.reduce((s, e) => s + e.points, 0);
+    const rows = events.bracket.map(e => `
+      <div class="score-row">
+        <span class="score-row-match">
+          ${getTeamFlagImg(e.winnerId, {className: 'flag flag-xs'})} ${escapeHtml(getTeamName(e.winnerId))}
+        </span>
+        <span class="score-row-note">${escapeHtml(roundLabel(e.phase))} · ${e.matchId} · ${e.exact ? 'marcador exacto' : 'ganador'}</span>
+        ${pointsBadge(e.points, e.exact)}
+      </div>`).join('');
+    sections.push(scoreSection('Eliminatorias', subtotal, rows));
+  }
+
+  // --- Especiales ---
+  if (events.especiales.length) {
+    const subtotal = events.especiales.reduce((s, e) => s + e.points, 0);
+    const rows = events.especiales.map(e => {
+      let label;
+      let icon = '';
+      if (e.kind === 'topScorerTeam') {
+        icon = getTeamFlagImg(e.targetId, {className: 'flag flag-xs'});
+        label = `Equipo más goleador · ${escapeHtml(getTeamName(e.targetId))} · ${e.goals} gol${e.goals === 1 ? '' : 'es'} a favor`;
+      } else if (e.kind === 'worstDefenseTeam') {
+        icon = getTeamFlagImg(e.targetId, {className: 'flag flag-xs'});
+        label = `Equipo más goleado · ${escapeHtml(getTeamName(e.targetId))} · ${e.goals} gol${e.goals === 1 ? '' : 'es'} en contra`;
+      } else {
+        label = `Máximo goleador · ${escapeHtml(e.targetName || e.targetId)} · ${e.goals} gol${e.goals === 1 ? '' : 'es'}`;
+      }
+      return `
+        <div class="score-row">
+          <span class="score-row-match">${icon} ${label}</span>
+          ${pointsBadge(e.points, false)}
+        </div>`;
+    }).join('');
+    sections.push(scoreSection('Especiales', subtotal, rows));
+  }
+
+  body.innerHTML = sections.join('')
+    || '<div class="empty-state">Este participante aún no ha sumado puntos.</div>';
+}
+
+function scoreSection(name, subtotal, rowsHtml) {
+  return `
+    <div class="score-section">
+      <div class="score-section-head">
+        <span>${name}</span>
+        <span class="score-section-subtotal">${subtotal} pts</span>
+      </div>
+      ${rowsHtml}
+    </div>`;
+}
+
+function closeScoreDetail(event) {
+  if (event && event.target !== document.getElementById('score-modal')) return;
+  const modal = document.getElementById('score-modal');
+  modal.classList.remove('active');
+  modal.classList.add('closing');
+  setTimeout(() => modal.classList.remove('closing'), 220);
 }
 
 function showStep(name, btn) {
@@ -1218,6 +1335,8 @@ window.renderPlayerOptions = renderPlayerOptions;
 window.showHomeMatches = showHomeMatches;
 window.openMatchPredictions = openMatchPredictions;
 window.closeMatchModal = closeMatchModal;
+window.openScoreDetail = openScoreDetail;
+window.closeScoreDetail = closeScoreDetail;
 window.forceSave = forceSave;
 window.exportPorra = exportPorra;
 window.refreshRanking = refreshRanking;

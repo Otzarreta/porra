@@ -22,6 +22,7 @@ const API = (() => {
     getResults: () => request('/results'),
     getRanking: () => request('/ranking', {cache: 'no-store'}),
     getMatchPredictions: (matchId) => request('/matches/' + encodeURIComponent(matchId) + '/predictions'),
+    getScoreDetail: (id) => request('/porras/' + encodeURIComponent(id) + '/score-detail', {cache: 'no-store'}),
     access: (email, player, restore) => request('/access', {
       method: 'POST',
       body: JSON.stringify({email, player, restore: !!restore}),

@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const crypto = require('crypto');
 
-const {computeScore} = require('./scoring.js');
+const {computeScore, computeScoreDetailed, reconcileScorerIds} = require('./scoring.js');
 const {createResultsTracker, SCRAPE_INTERVAL_MS, LIVE_SCRAPE_INTERVAL_MS} = require('./scraper.js');
 const {scrape365ScoresPlayers, mergePlayers} = require('./playerScraper.js');
 const {
@@ -135,7 +135,7 @@ async function reloadResultsFromDisk() {
     const txt = await fs.readFile(RESULTS_FILE, 'utf8');
     if (!txt.trim()) { results = null; return; }
     const parsed = JSON.parse(txt);
-    results = parsed === null ? null : sanitizeResults(parsed);
+    results = parsed === null ? null : reconcileScorerIds(sanitizeResults(parsed), players);
     console.log('[reload] results.json picked up external change');
   } catch (err) {
     console.warn('[reload] results.json failed:', err.message);
@@ -170,7 +170,7 @@ async function loadState() {
       console.log(`[boot] sembrados ${players.length} jugadores desde players-seed.json`);
     }
   }
-  results = await readJson(RESULTS_FILE, null, true);
+  results = reconcileScorerIds(await readJson(RESULTS_FILE, null, true), players);
   metaState = {...metaState, ...(await readJson(META_FILE, metaState, true))};
   const fixturesSeed = await readJson(FIXTURES_SEED_FILE, null, false);
   kickoffs = sanitizeKickoffs(fixturesSeed?.matches);
@@ -367,6 +367,31 @@ app.get('/api/ranking', (_req, res) => {
   res.json(list);
 });
 
+app.get('/api/porras/:id/score-detail', (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+  const porra = porras[req.params.id];
+  if (!porra) return res.status(404).json({error: 'not_found'});
+
+  const {breakdown, events} = computeScoreDetailed(porra, results);
+  // Resolver el nombre del jugador especial server-side (el cliente no siempre
+  // tiene cargada la lista completa de jugadores); los equipos los resuelve el
+  // front con getTeamName.
+  const scorers = (results && results.scorers) || {};
+  const especiales = events.especiales.map(ev => {
+    if (ev.kind !== 'topScorerPlayer') return ev;
+    const player = players.find(p => p && p.id === ev.targetId);
+    return {...ev, targetName: player?.name || scorers[ev.targetId]?.name || ev.targetId};
+  });
+
+  res.json({
+    id: porra.id,
+    player: porra.player || '-',
+    total: breakdown.total,
+    breakdown,
+    events: {...events, especiales},
+  });
+});
+
 app.post('/api/admin/players', async (req, res) => {
   if (!requireAdmin(req, res)) return;
   const incoming = Array.isArray(req.body) ? req.body : req.body?.players;
@@ -413,7 +438,7 @@ app.post('/api/admin/results', async (req, res) => {
   } catch (err) {
     return res.status(400).json({error: 'results_invalid', message: err.message});
   }
-  results = sanitized;
+  results = reconcileScorerIds(sanitized, players);
   await writeJsonSerialized(RESULTS_FILE, results);
   metaState.lastScrape = {ok: true, at: new Date().toISOString(), source: 'manual'};
   await writeJsonSerialized(META_FILE, metaState);
@@ -900,7 +925,7 @@ async function runScrape({throwOnError = false, full = false} = {}) {
   try {
     const fresh = await resultsTracker.refresh({full: fullSweep});
     if (fullSweep) lastFullScrapeAt = Date.now();
-    results = sanitizeResults(fresh);
+    results = reconcileScorerIds(sanitizeResults(fresh), players);
     metaState.lastScrape = {ok: true, at: new Date().toISOString()};
     const json = JSON.stringify(results);
     // Con ticks de 60s solo persistimos (y logueamos) cuando algo cambia.

@@ -1,0 +1,10008 @@
+{
+  "7dfc05c6-3bd5-4a63-8e0b-6e8338f3243b": {
+    "id": "7dfc05c6-3bd5-4a63-8e0b-6e8338f3243b",
+    "email": "jtello@otzarreta.com",
+    "player": "Juan Tello",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 5
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 6,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 7,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 5
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 7,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "topScorerTeam": "argentina",
+    "topScorerPlayerId": "365-39820",
+    "createdAt": "2026-05-26T17:58:17.497Z",
+    "updatedAt": "2026-06-11T19:03:39.796Z",
+    "bracketWinners": {
+      "M73": "mexico",
+      "M74": "germany",
+      "M75": "brazil",
+      "M78": "ecuador",
+      "M80": "england",
+      "M83": "colombia",
+      "M88": "egypt",
+      "M84": "spain",
+      "M79": "czech-republic",
+      "M81": "turkey",
+      "M77": "france",
+      "M76": "morocco",
+      "M85": "algeria",
+      "M87": "portugal",
+      "M86": "argentina",
+      "M82": "belgium",
+      "M89": "france",
+      "M90": "brazil",
+      "M91": "morocco",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "turkey",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "england",
+      "M100": "argentina",
+      "M101": "france",
+      "M102": "argentina",
+      "M104": "argentina",
+      "M103": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M80": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M83": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M86": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M85": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M92": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M93": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M94": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M97": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M100": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 4,
+        "awayGoals": 3
+      },
+      "M102": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M103": {
+        "homeGoals": 4,
+        "awayGoals": 0
+      }
+    },
+    "worstDefenseTeam": "curacao"
+  },
+  "7d813bcb-2508-4f4d-a662-1bab400f8685": {
+    "id": "7d813bcb-2508-4f4d-a662-1bab400f8685",
+    "email": "haymarm@gmail.com",
+    "player": "Haymar",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 3
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 7,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 2
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 8,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 6
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 7,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 5
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "czech-republic",
+      "M74": "germany",
+      "M76": "brazil",
+      "M77": "france",
+      "M75": "morocco",
+      "M78": "ivory-coast",
+      "M81": "usa",
+      "M84": "spain",
+      "M87": "portugal",
+      "M80": "england",
+      "M83": "ghana",
+      "M86": "argentina",
+      "M79": "mexico",
+      "M82": "belgium",
+      "M85": "switzerland",
+      "M88": "egypt",
+      "M89": "france",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "usa",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "england",
+      "M100": "argentina",
+      "M101": "france",
+      "M102": "argentina",
+      "M103": "england",
+      "M104": "france"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M86": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M88": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 4,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M94": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M95": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M97": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M100": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M104": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "england",
+    "topScorerPlayerId": "365-1669",
+    "createdAt": "2026-05-27T10:00:39.744Z",
+    "updatedAt": "2026-06-11T13:35:26.362Z",
+    "worstDefenseTeam": "curacao"
+  },
+  "320b57a8-ae60-4c65-b651-1cf83e0daf52": {
+    "id": "320b57a8-ae60-4c65-b651-1cf83e0daf52",
+    "email": "anna@otzarreta.com",
+    "player": "Anna",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "bosnia-herzegovina",
+      "M76": "brazil",
+      "M79": "czech-republic",
+      "M75": "netherlands",
+      "M77": "france",
+      "M80": "croatia",
+      "M81": "usa",
+      "M82": "belgium",
+      "M83": "england",
+      "M84": "spain",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "paraguay",
+      "M74": "germany",
+      "M78": "ecuador",
+      "M89": "france",
+      "M95": "argentina",
+      "M90": "netherlands",
+      "M93": "spain",
+      "M91": "brazil",
+      "M94": "belgium",
+      "M85": "switzerland",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M100": "portugal",
+      "M92": "croatia",
+      "M99": "brazil",
+      "M101": "spain",
+      "M102": "portugal",
+      "M103": "france",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M79": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M82": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M78": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M92": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M94": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M96": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M98": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "createdAt": "2026-05-27T12:53:59.126Z",
+    "updatedAt": "2026-06-10T08:43:12.729Z",
+    "worstDefenseTeam": "canada"
+  },
+  "656f0d0b-b1e3-4d6f-b50f-9fe35e3fa530": {
+    "id": "656f0d0b-b1e3-4d6f-b50f-9fe35e3fa530",
+    "email": "patxi@otzarreta.com",
+    "player": "Patxi",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "canada",
+      "M76": "brazil",
+      "M79": "scotland",
+      "M82": "belgium",
+      "M85": "switzerland",
+      "M88": "egypt",
+      "M74": "germany",
+      "M77": "france",
+      "M80": "croatia",
+      "M83": "portugal",
+      "M86": "argentina",
+      "M75": "morocco",
+      "M78": "ecuador",
+      "M81": "turkey",
+      "M84": "spain",
+      "M87": "colombia",
+      "M89": "france",
+      "M92": "croatia",
+      "M95": "argentina",
+      "M90": "morocco",
+      "M93": "spain",
+      "M96": "colombia",
+      "M91": "brazil",
+      "M94": "turkey",
+      "M97": "france",
+      "M100": "argentina",
+      "M98": "spain",
+      "M99": "brazil",
+      "M102": "argentina",
+      "M101": "spain",
+      "M103": "france",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M79": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M77": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M87": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M89": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M90": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M94": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M97": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "createdAt": "2026-05-27T13:21:25.603Z",
+    "updatedAt": "2026-06-17T19:06:58.062Z",
+    "worstDefenseTeam": "haiti"
+  },
+  "b1e90228-de47-4fd1-bcc1-b93765ad37cf": {
+    "id": "b1e90228-de47-4fd1-bcc1-b93765ad37cf",
+    "email": "i.gaztanazpi@gmail.com",
+    "player": "Iñigo",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "czech-republic",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "senegal",
+      "M79": "mexico",
+      "M80": "england",
+      "M82": "belgium",
+      "M83": "colombia",
+      "M84": "spain",
+      "M81": "usa",
+      "M85": "algeria",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "turkey",
+      "M89": "france",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "belgium",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M100": "argentina",
+      "M99": "brazil",
+      "M101": "spain",
+      "M102": "brazil",
+      "M103": "france",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M82": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M88": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M93": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M94": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M97": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M100": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M103": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "brazil",
+    "topScorerPlayerId": "365-48298",
+    "worstDefenseTeam": "haiti",
+    "createdAt": "2026-05-28T08:42:34.792Z",
+    "updatedAt": "2026-05-29T10:47:18.030Z"
+  },
+  "6923fd36-fe36-4ef9-819f-0ab748589759": {
+    "id": "6923fd36-fe36-4ef9-819f-0ab748589759",
+    "email": "rostes.juan@gmail.com",
+    "player": "Juan Rostes",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "czech-republic",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "norway",
+      "M80": "england",
+      "M81": "turkey",
+      "M82": "belgium",
+      "M83": "colombia",
+      "M84": "spain",
+      "M85": "bosnia-herzegovina",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "egypt",
+      "M79": "mexico",
+      "M89": "france",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "belgium",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "morocco",
+      "M98": "spain",
+      "M99": "england",
+      "M100": "argentina",
+      "M101": "spain",
+      "M102": "argentina",
+      "M103": "morocco",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M79": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M88": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M90": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M92": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M95": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M99": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 0,
+        "awayGoals": 0
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "germany",
+    "topScorerPlayerId": "365-39820",
+    "worstDefenseTeam": "curacao",
+    "createdAt": "2026-05-29T06:38:51.425Z",
+    "updatedAt": "2026-05-29T07:10:58.189Z"
+  },
+  "c35ee6a3-274b-4677-b6b2-390363fb205e": {
+    "id": "c35ee6a3-274b-4677-b6b2-390363fb205e",
+    "email": "galonso@otzarreta.com",
+    "player": "Gabri",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "czech-republic",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "senegal",
+      "M79": "mexico",
+      "M80": "england",
+      "M81": "usa",
+      "M82": "egypt",
+      "M85": "canada",
+      "M83": "croatia",
+      "M84": "uruguay",
+      "M86": "spain",
+      "M87": "portugal",
+      "M88": "belgium",
+      "M89": "france",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "mexico",
+      "M93": "croatia",
+      "M94": "usa",
+      "M95": "spain",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "usa",
+      "M99": "brazil",
+      "M100": "spain",
+      "M101": "france",
+      "M102": "spain",
+      "M103": "brazil",
+      "M104": "france"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M79": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M84": {
+        "homeGoals": 0,
+        "awayGoals": 0
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M88": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M93": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M95": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M102": {
+        "homeGoals": 0,
+        "awayGoals": 0
+      },
+      "M103": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M104": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      }
+    },
+    "topScorerTeam": "brazil",
+    "topScorerPlayerId": "365-39820",
+    "worstDefenseTeam": "haiti",
+    "createdAt": "2026-06-08T08:21:47.804Z",
+    "updatedAt": "2026-06-08T11:41:22.845Z"
+  },
+  "eb890ba8-aa86-4ebf-afef-e8a34eb687f4": {
+    "id": "eb890ba8-aa86-4ebf-afef-e8a34eb687f4",
+    "email": "eegana@otzarreta.com",
+    "player": "Eguz",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "bosnia-herzegovina",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "japan",
+      "M78": "senegal",
+      "M79": "mexico",
+      "M80": "england",
+      "M81": "austria",
+      "M82": "egypt",
+      "M83": "colombia",
+      "M84": "uruguay",
+      "M85": "switzerland",
+      "M86": "spain",
+      "M87": "portugal",
+      "M88": "belgium",
+      "M89": "germany",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "mexico",
+      "M93": "colombia",
+      "M94": "egypt",
+      "M95": "spain",
+      "M96": "portugal",
+      "M97": "morocco",
+      "M98": "colombia",
+      "M99": "brazil",
+      "M100": "spain",
+      "M101": "morocco",
+      "M102": "spain",
+      "M103": "brazil",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M77": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M78": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M85": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M88": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M93": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M95": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M100": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "worstDefenseTeam": "haiti",
+    "createdAt": "2026-06-08T11:43:43.301Z",
+    "updatedAt": "2026-06-08T12:12:21.538Z"
+  },
+  "ae886230-582f-4a81-be52-1bf53d8885cd": {
+    "id": "ae886230-582f-4a81-be52-1bf53d8885cd",
+    "email": "ander.morate@gmail.com",
+    "player": "Ander",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "mexico",
+      "M74": "germany",
+      "M75": "netherlands",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "ecuador",
+      "M79": "czech-republic",
+      "M80": "england",
+      "M81": "ivory-coast",
+      "M82": "belgium",
+      "M83": "colombia",
+      "M84": "spain",
+      "M85": "canada",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "turkey",
+      "M89": "france",
+      "M90": "netherlands",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "belgium",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "brazil",
+      "M100": "portugal",
+      "M101": "spain",
+      "M102": "portugal",
+      "M103": "france",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M79": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 4,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M95": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "worstDefenseTeam": "curacao",
+    "createdAt": "2026-06-08T20:33:50.916Z",
+    "updatedAt": "2026-06-09T14:54:07.305Z"
+  },
+  "30357f44-a8b9-4edf-9958-b68a598182f1": {
+    "id": "30357f44-a8b9-4edf-9958-b68a598182f1",
+    "email": "aitzmanur@gmail.com",
+    "player": "Aizpea",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "mexico",
+      "M74": "germany",
+      "M75": "japan",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "senegal",
+      "M79": "south-africa",
+      "M80": "norway",
+      "M81": "paraguay",
+      "M82": "iran",
+      "M83": "colombia",
+      "M84": "spain",
+      "M85": "bosnia-herzegovina",
+      "M86": "uruguay",
+      "M87": "portugal",
+      "M88": "belgium",
+      "M89": "france",
+      "M90": "japan",
+      "M91": "brazil",
+      "M92": "norway",
+      "M93": "spain",
+      "M94": "paraguay",
+      "M95": "uruguay",
+      "M96": "portugal",
+      "M97": "japan",
+      "M98": "spain",
+      "M99": "norway",
+      "M100": "portugal",
+      "M101": "spain",
+      "M102": "norway",
+      "M103": "japan",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M79": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 0,
+        "awayGoals": 0
+      },
+      "M83": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 4,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M90": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M91": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M93": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M95": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M99": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M102": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M104": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "worstDefenseTeam": "curacao",
+    "createdAt": "2026-06-10T09:34:31.743Z",
+    "updatedAt": "2026-06-10T15:23:54.171Z"
+  },
+  "a8c07599-3319-4d70-8da5-77f8502acb84": {
+    "id": "a8c07599-3319-4d70-8da5-77f8502acb84",
+    "email": "joanvilgui@gmail.com",
+    "player": "Jon Ander",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "bosnia-herzegovina",
+      "M76": "brazil",
+      "M79": "mexico",
+      "M82": "belgium",
+      "M85": "switzerland",
+      "M88": "paraguay",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M84": "spain",
+      "M83": "colombia",
+      "M80": "england",
+      "M77": "france",
+      "M81": "turkey",
+      "M78": "ecuador",
+      "M75": "netherlands",
+      "M74": "germany",
+      "M89": "france",
+      "M90": "netherlands",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "turkey",
+      "M96": "portugal",
+      "M95": "argentina",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "england",
+      "M100": "portugal",
+      "M101": "spain",
+      "M102": "portugal",
+      "M103": "france",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M79": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M87": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M83": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M80": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M94": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M96": {
+        "homeGoals": 0,
+        "awayGoals": 3
+      },
+      "M95": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M97": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M99": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M102": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "france",
+    "topScorerPlayerId": "365-39820",
+    "worstDefenseTeam": "curacao",
+    "createdAt": "2026-06-10T09:51:11.575Z",
+    "updatedAt": "2026-06-17T04:33:21.132Z"
+  },
+  "7209594d-3b27-4924-88f8-7f3e585bddd8": {
+    "id": "7209594d-3b27-4924-88f8-7f3e585bddd8",
+    "email": "olatz@otzarreta.com",
+    "player": "Olatz",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "czech-republic",
+      "M74": "germany",
+      "M75": "netherlands",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "norway",
+      "M79": "morocco",
+      "M80": "england",
+      "M81": "turkey",
+      "M82": "belgium",
+      "M83": "colombia",
+      "M84": "spain",
+      "M85": "switzerland",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "usa",
+      "M89": "france",
+      "M90": "netherlands",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "belgium",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "england",
+      "M100": "argentina",
+      "M101": "spain",
+      "M102": "argentina",
+      "M103": "france",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M79": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M88": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M99": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M100": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39820",
+    "worstDefenseTeam": "curacao",
+    "createdAt": "2026-06-10T11:17:21.996Z",
+    "updatedAt": "2026-06-11T18:29:27.787Z"
+  },
+  "898c191e-c7c7-46db-9f68-c675861b0064": {
+    "id": "898c191e-c7c7-46db-9f68-c675861b0064",
+    "email": "naia@otzarreta.com",
+    "player": "Naia",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "south-korea",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "norway",
+      "M79": "czech-republic",
+      "M80": "england",
+      "M81": "turkey",
+      "M82": "belgium",
+      "M83": "croatia",
+      "M84": "spain",
+      "M85": "egypt",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "iran",
+      "M89": "france",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "belgium",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "brazil",
+      "M100": "portugal",
+      "M101": "spain",
+      "M102": "portugal",
+      "M103": "france",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M79": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M82": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M88": {
+        "homeGoals": 0,
+        "awayGoals": 0
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M91": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M95": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 0,
+        "awayGoals": 4
+      },
+      "M97": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M99": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M101": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "england",
+    "topScorerPlayerId": "365-39820",
+    "worstDefenseTeam": "curacao",
+    "createdAt": "2026-06-10T11:24:21.867Z",
+    "updatedAt": "2026-06-10T11:35:27.215Z"
+  },
+  "38b5f626-9322-4c25-baf5-174a351d83ce": {
+    "id": "38b5f626-9322-4c25-baf5-174a351d83ce",
+    "email": "ataibo@otzarreta.com",
+    "player": "Angy",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 6,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "czech-republic",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "ivory-coast",
+      "M79": "mexico",
+      "M80": "england",
+      "M81": "usa",
+      "M82": "belgium",
+      "M83": "colombia",
+      "M84": "spain",
+      "M85": "switzerland",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "australia",
+      "M89": "germany",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "belgium",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "germany",
+      "M98": "spain",
+      "M99": "england",
+      "M100": "argentina",
+      "M101": "spain",
+      "M102": "argentina",
+      "M103": "england",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M80": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 1,
+        "awayGoals": 0
+      },
+      "M82": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M88": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 3
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M93": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M94": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M95": {
+        "homeGoals": 4,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M99": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M100": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M102": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M104": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "worstDefenseTeam": "haiti",
+    "createdAt": "2026-06-10T13:57:34.277Z",
+    "updatedAt": "2026-06-11T19:20:20.568Z"
+  },
+  "124df1c4-e56c-40ba-9b84-d3ba9a218dbf": {
+    "id": "124df1c4-e56c-40ba-9b84-d3ba9a218dbf",
+    "email": "hmancisidor@otzarreta.com",
+    "player": "Juanita",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 7,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 5
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 6,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "canada",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "norway",
+      "M79": "mexico",
+      "M80": "england",
+      "M81": "turkey",
+      "M82": "belgium",
+      "M83": "croatia",
+      "M84": "spain",
+      "M85": "switzerland",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "usa",
+      "M89": "france",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "belgium",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "brazil",
+      "M100": "portugal",
+      "M101": "france",
+      "M102": "portugal",
+      "M103": "spain",
+      "M104": "portugal"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M79": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 4,
+        "awayGoals": 2
+      },
+      "M92": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M95": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M96": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M98": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M101": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M102": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M104": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "worstDefenseTeam": "cape-verde",
+    "createdAt": "2026-06-10T15:14:13.630Z",
+    "updatedAt": "2026-06-11T07:36:00.081Z"
+  },
+  "74d0ffe4-7950-40fa-8d33-2188e1259405": {
+    "id": "74d0ffe4-7950-40fa-8d33-2188e1259405",
+    "email": "iongur@hotmail.com",
+    "player": "Gurmen",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "south-korea",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "senegal",
+      "M79": "mexico",
+      "M80": "england",
+      "M81": "usa",
+      "M82": "belgium",
+      "M83": "colombia",
+      "M84": "spain",
+      "M85": "switzerland",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M88": "egypt",
+      "M89": "france",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "mexico",
+      "M93": "spain",
+      "M94": "belgium",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "brazil",
+      "M100": "argentina",
+      "M101": "spain",
+      "M102": "argentina",
+      "M103": "brazil",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M85": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M88": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M92": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M94": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M102": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M103": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "worstDefenseTeam": "haiti",
+    "createdAt": "2026-06-10T19:04:27.533Z",
+    "updatedAt": "2026-06-10T19:30:29.316Z"
+  },
+  "11d43c34-1f35-4f79-8ecd-e0769d46f574": {
+    "id": "11d43c34-1f35-4f79-8ecd-e0769d46f574",
+    "email": "pmayordomo@gmail.com",
+    "player": "Pamaca",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 6,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M76": "brazil",
+      "M79": "mexico",
+      "M74": "germany",
+      "M75": "japan",
+      "M77": "france",
+      "M78": "norway",
+      "M80": "croatia",
+      "M81": "turkey",
+      "M82": "egypt",
+      "M83": "england",
+      "M87": "portugal",
+      "M88": "usa",
+      "M89": "france",
+      "M92": "croatia",
+      "M91": "brazil",
+      "M94": "turkey"
+    },
+    "bracketScores": {
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 2
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M87": {
+        "homeGoals": 4,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M94": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      }
+    },
+    "topScorerTeam": "",
+    "topScorerPlayerId": "",
+    "worstDefenseTeam": "",
+    "createdAt": "2026-06-10T19:18:45.458Z",
+    "updatedAt": "2026-06-10T19:32:43.680Z"
+  },
+  "c3f31129-281d-448f-80cd-2606732cdfe6": {
+    "id": "c3f31129-281d-448f-80cd-2606732cdfe6",
+    "email": "oiergoik@gmail.com",
+    "player": "Goiko",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        },
+        {
+          "homeGoals": null,
+          "awayGoals": null
+        }
+      ]
+    },
+    "bracketWinners": {},
+    "bracketScores": {},
+    "topScorerTeam": "",
+    "topScorerPlayerId": "",
+    "worstDefenseTeam": "",
+    "createdAt": "2026-06-10T20:30:52.306Z",
+    "updatedAt": "2026-06-10T20:30:52.306Z"
+  },
+  "f3e834d4-faa8-4230-a4bf-623518829519": {
+    "id": "f3e834d4-faa8-4230-a4bf-623518829519",
+    "email": "jarruabarrena@otzarreta.com",
+    "player": "Jak el Barbaro",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 6,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "mexico",
+      "M74": "germany",
+      "M75": "brazil",
+      "M76": "morocco",
+      "M77": "france",
+      "M78": "ecuador",
+      "M79": "south-africa",
+      "M80": "england",
+      "M81": "paraguay",
+      "M82": "belgium",
+      "M83": "portugal",
+      "M84": "spain",
+      "M85": "switzerland",
+      "M86": "argentina",
+      "M87": "colombia",
+      "M88": "usa",
+      "M89": "france",
+      "M90": "brazil",
+      "M91": "morocco",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "paraguay",
+      "M95": "argentina",
+      "M96": "colombia",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "england",
+      "M100": "argentina",
+      "M101": "spain",
+      "M102": "england",
+      "M103": "france",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M74": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M77": {
+        "homeGoals": 4,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M85": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 0,
+        "awayGoals": 0
+      },
+      "M89": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M90": {
+        "homeGoals": 0,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M93": {
+        "homeGoals": 2,
+        "awayGoals": 4
+      },
+      "M94": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 0,
+        "awayGoals": 1
+      },
+      "M97": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M98": {
+        "homeGoals": 4,
+        "awayGoals": 0
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M100": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M102": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M103": {
+        "homeGoals": 4,
+        "awayGoals": 0
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39820",
+    "worstDefenseTeam": "mexico",
+    "createdAt": "2026-06-11T09:33:06.172Z",
+    "updatedAt": "2026-06-11T09:43:21.158Z"
+  },
+  "60fb3f6e-684c-4dc1-84a2-02f2601c6ca3": {
+    "id": "60fb3f6e-684c-4dc1-84a2-02f2601c6ca3",
+    "email": "claudia.ab75@gmail.com",
+    "player": "Claudia winner",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "canada",
+      "M76": "brazil",
+      "M79": "mexico",
+      "M82": "belgium",
+      "M85": "switzerland",
+      "M88": "turkey",
+      "M74": "germany",
+      "M77": "france",
+      "M80": "england",
+      "M83": "croatia",
+      "M86": "argentina",
+      "M75": "netherlands",
+      "M78": "norway",
+      "M81": "austria",
+      "M84": "spain",
+      "M87": "portugal",
+      "M89": "germany",
+      "M92": "england",
+      "M95": "argentina",
+      "M90": "netherlands",
+      "M93": "spain",
+      "M96": "portugal",
+      "M91": "brazil",
+      "M94": "belgium",
+      "M97": "netherlands",
+      "M100": "portugal",
+      "M98": "spain",
+      "M99": "brazil",
+      "M101": "spain",
+      "M102": "brazil",
+      "M103": "netherlands",
+      "M104": "spain"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M76": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M85": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M88": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M80": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M83": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M86": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M75": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M81": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 0
+      },
+      "M87": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M89": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M90": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M94": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M97": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M101": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M102": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M103": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-131182",
+    "worstDefenseTeam": "haiti",
+    "createdAt": "2026-06-11T13:05:46.483Z",
+    "updatedAt": "2026-06-13T07:56:15.314Z"
+  },
+  "90484274-1708-44b5-bd20-6e5c9649ab4a": {
+    "id": "90484274-1708-44b5-bd20-6e5c9649ab4a",
+    "email": "haymar.creative@gmail.com",
+    "player": "Nebera",
+    "groupPredictions": {
+      "A": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "B": [
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "C": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 5,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 4
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "D": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ],
+      "E": [
+        {
+          "homeGoals": 6,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 4
+        }
+      ],
+      "F": [
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ],
+      "G": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 5
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        }
+      ],
+      "H": [
+        {
+          "homeGoals": 6,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "I": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 4,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        }
+      ],
+      "J": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 5
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 2
+        }
+      ],
+      "K": [
+        {
+          "homeGoals": 5,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 2,
+          "awayGoals": 0
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 2
+        }
+      ],
+      "L": [
+        {
+          "homeGoals": 3,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 3,
+          "awayGoals": 1
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 2
+        },
+        {
+          "homeGoals": 0,
+          "awayGoals": 3
+        },
+        {
+          "homeGoals": 1,
+          "awayGoals": 1
+        }
+      ]
+    },
+    "bracketWinners": {
+      "M73": "bosnia-herzegovina",
+      "M74": "germany",
+      "M75": "morocco",
+      "M76": "brazil",
+      "M77": "france",
+      "M78": "norway",
+      "M79": "mexico",
+      "M80": "england",
+      "M81": "usa",
+      "M82": "senegal",
+      "M83": "croatia",
+      "M84": "spain",
+      "M85": "switzerland",
+      "M86": "argentina",
+      "M87": "portugal",
+      "M89": "france",
+      "M90": "morocco",
+      "M91": "brazil",
+      "M92": "england",
+      "M93": "spain",
+      "M94": "usa",
+      "M88": "egypt",
+      "M95": "argentina",
+      "M96": "portugal",
+      "M97": "france",
+      "M98": "spain",
+      "M99": "brazil",
+      "M100": "portugal",
+      "M101": "france",
+      "M102": "brazil",
+      "M103": "spain",
+      "M104": "france"
+    },
+    "bracketScores": {
+      "M73": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M74": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M75": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M76": {
+        "homeGoals": 4,
+        "awayGoals": 1
+      },
+      "M77": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M78": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M79": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M80": {
+        "homeGoals": 4,
+        "awayGoals": 1
+      },
+      "M81": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M82": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M83": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M84": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M85": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M86": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M87": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M89": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M90": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M91": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M92": {
+        "homeGoals": 2,
+        "awayGoals": 3
+      },
+      "M93": {
+        "homeGoals": 1,
+        "awayGoals": 2
+      },
+      "M94": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M88": {
+        "homeGoals": 1,
+        "awayGoals": 1
+      },
+      "M95": {
+        "homeGoals": 2,
+        "awayGoals": 0
+      },
+      "M96": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M97": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M98": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      },
+      "M99": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M100": {
+        "homeGoals": 1,
+        "awayGoals": 3
+      },
+      "M101": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M102": {
+        "homeGoals": 3,
+        "awayGoals": 1
+      },
+      "M103": {
+        "homeGoals": 3,
+        "awayGoals": 2
+      },
+      "M104": {
+        "homeGoals": 2,
+        "awayGoals": 1
+      }
+    },
+    "topScorerTeam": "spain",
+    "topScorerPlayerId": "365-39775",
+    "worstDefenseTeam": "curacao",
+    "createdAt": "2026-06-11T13:22:35.297Z",
+    "updatedAt": "2026-06-11T13:36:27.873Z"
+  }
+}

@@ -206,6 +206,16 @@
   </div>
 </div>
 
+<div class="match-modal-backdrop" id="score-modal" onclick="closeScoreDetail(event)">
+  <div class="match-modal">
+    <button class="modal-close" onclick="closeScoreDetail()" type="button">×</button>
+    <div class="panel-kicker" id="score-modal-kicker">Desglose de puntos</div>
+    <h2 id="score-modal-title">Jugador</h2>
+    <p id="score-modal-subtitle"></p>
+    <div id="score-modal-body" class="score-detail-list"></div>
+  </div>
+</div>
+
 <script src="fixtures.js" defer></script>
 <script src="api.js" defer></script>
 <script src="app.js" defer></script>
