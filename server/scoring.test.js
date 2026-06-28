@@ -59,6 +59,61 @@ test('R32 winner=2, exact=3 (replaces winner)', () => {
   assert.equal(exact.r32, 3);
 });
 
+// La regla de cuadros (16avos en adelante) puntúa por PAÍS GANADOR acertado, no por el
+// enfrentamiento pronosticado: da igual contra quién juegue ni en qué slot/llave caiga
+// realmente, mientras el equipo que pusiste como ganador realmente gane esa ronda.
+test('16avos: puntúa por país ganador aunque el rival real sea distinto al pronosticado', () => {
+  // En el bracket del usuario, Argentina ganaba a Uruguay 3-1 en la llave M86.
+  const porra = {bracketWinners: {M86: 'argentina'}, bracketScores: {M86: {homeGoals: 3, awayGoals: 1}}};
+
+  // Realidad: Argentina gana su partido de 16avos contra CABO VERDE (otro rival) 3-1.
+  const exacto = computeScore(porra, {
+    bracketAdvanced: {r32: ['argentina']},
+    knockoutMatches: {r32: [{homeId: 'argentina', awayId: 'cabo-verde', goalsHome: 3, goalsAway: 1, winner: 'argentina'}]},
+  });
+  assert.equal(exacto.r32, 3); // marcador exacto (3-1) aunque el rival sea otro
+
+  // Mismo pronóstico, pero Argentina gana 2-0: acierta ganador, no el marcador.
+  const soloGanador = computeScore(porra, {
+    bracketAdvanced: {r32: ['argentina']},
+    knockoutMatches: {r32: [{homeId: 'argentina', awayId: 'cabo-verde', goalsHome: 2, goalsAway: 0, winner: 'argentina'}]},
+  });
+  assert.equal(soloGanador.r32, 2); // solo puntos de ganador
+});
+
+test('16avos: el marcador exacto no depende de quién sea local/visitante', () => {
+  // Usuario pone Argentina ganando 3-1.
+  const porra = {bracketWinners: {M86: 'argentina'}, bracketScores: {M86: {homeGoals: 3, awayGoals: 1}}};
+  // Realidad: Argentina figura como visitante y marca 3 (goalsHome 1 - goalsAway 3).
+  const score = computeScore(porra, {
+    bracketAdvanced: {r32: ['argentina']},
+    knockoutMatches: {r32: [{homeId: 'cabo-verde', awayId: 'argentina', goalsHome: 1, goalsAway: 3, winner: 'argentina'}]},
+  });
+  assert.equal(score.r32, 3); // par ordenado [1,3] => sigue siendo marcador exacto
+});
+
+test('16avos: un país que no clasificó a cuadros no suma nada', () => {
+  // Usuario apostó a Uruguay, que no aparece entre los que avanzaron en 16avos.
+  const porra = {bracketWinners: {M86: 'uruguay'}, bracketScores: {M86: {homeGoals: 2, awayGoals: 0}}};
+  const score = computeScore(porra, {
+    bracketAdvanced: {r32: ['argentina']},
+    knockoutMatches: {r32: [{homeId: 'argentina', awayId: 'cabo-verde', goalsHome: 3, goalsAway: 1, winner: 'argentina'}]},
+  });
+  assert.equal(score.r32, 0);
+});
+
+test('16avos: el slot pronosticado es irrelevante; mismo país ganador suma igual en cualquier llave', () => {
+  // Dos usuarios aciertan que Argentina gana, pero la colocaron en slots distintos.
+  const real = {
+    bracketAdvanced: {r32: ['argentina']},
+    knockoutMatches: {r32: [{homeId: 'argentina', awayId: 'cabo-verde', goalsHome: 2, goalsAway: 0, winner: 'argentina'}]},
+  };
+  const enM73 = computeScore({bracketWinners: {M73: 'argentina'}}, real);
+  const enM86 = computeScore({bracketWinners: {M86: 'argentina'}}, real);
+  assert.equal(enM73.r32, 2);
+  assert.equal(enM86.r32, 2); // cayó en un slot distinto al pronosticado pero ganó igual
+});
+
 test('Final: winner=10, exact=15', () => {
   const porra = {
     bracketWinners: {M104: 'brazil'},

@@ -18,6 +18,42 @@
         "goalsAway": 1,
         "result": "1",
         "sourceGameId": "4697696"
+      },
+      {
+        "idx": 2,
+        "home": "mexico",
+        "away": "south-korea",
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627854"
+      },
+      {
+        "idx": 3,
+        "home": "czech-republic",
+        "away": "south-africa",
+        "goalsHome": 1,
+        "goalsAway": 1,
+        "result": "x",
+        "sourceGameId": "4697697"
+      },
+      {
+        "idx": 4,
+        "home": "czech-republic",
+        "away": "mexico",
+        "goalsHome": 0,
+        "goalsAway": 3,
+        "result": "2",
+        "sourceGameId": "4697698"
+      },
+      {
+        "idx": 5,
+        "home": "south-africa",
+        "away": "south-korea",
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627867"
       }
     ],
     "B": [
@@ -38,6 +74,42 @@
         "goalsAway": 1,
         "result": "x",
         "sourceGameId": "4627868"
+      },
+      {
+        "idx": 2,
+        "home": "canada",
+        "away": "qatar",
+        "goalsHome": 6,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627937"
+      },
+      {
+        "idx": 3,
+        "home": "switzerland",
+        "away": "bosnia-herzegovina",
+        "goalsHome": 4,
+        "goalsAway": 1,
+        "result": "1",
+        "sourceGameId": "4697700"
+      },
+      {
+        "idx": 4,
+        "home": "switzerland",
+        "away": "canada",
+        "goalsHome": 2,
+        "goalsAway": 1,
+        "result": "1",
+        "sourceGameId": "4627855"
+      },
+      {
+        "idx": 5,
+        "home": "bosnia-herzegovina",
+        "away": "qatar",
+        "goalsHome": 3,
+        "goalsAway": 1,
+        "result": "1",
+        "sourceGameId": "4697701"
       }
     ],
     "C": [
@@ -58,6 +130,42 @@
         "goalsAway": 1,
         "result": "2",
         "sourceGameId": "4627891"
+      },
+      {
+        "idx": 2,
+        "home": "brazil",
+        "away": "haiti",
+        "goalsHome": 3,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627883"
+      },
+      {
+        "idx": 3,
+        "home": "scotland",
+        "away": "morocco",
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "result": "2",
+        "sourceGameId": "4627882"
+      },
+      {
+        "idx": 4,
+        "home": "scotland",
+        "away": "brazil",
+        "goalsHome": 0,
+        "goalsAway": 3,
+        "result": "2",
+        "sourceGameId": "4627881"
+      },
+      {
+        "idx": 5,
+        "home": "morocco",
+        "away": "haiti",
+        "goalsHome": 4,
+        "goalsAway": 2,
+        "result": "1",
+        "sourceGameId": "4627938"
       }
     ],
     "D": [
@@ -78,6 +186,42 @@
         "goalsAway": 0,
         "result": "1",
         "sourceGameId": "4697702"
+      },
+      {
+        "idx": 2,
+        "home": "usa",
+        "away": "australia",
+        "goalsHome": 2,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627857"
+      },
+      {
+        "idx": 3,
+        "home": "turkey",
+        "away": "paraguay",
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "result": "2",
+        "sourceGameId": "4697703"
+      },
+      {
+        "idx": 4,
+        "home": "turkey",
+        "away": "usa",
+        "goalsHome": 3,
+        "goalsAway": 2,
+        "result": "1",
+        "sourceGameId": "4697704"
+      },
+      {
+        "idx": 5,
+        "home": "paraguay",
+        "away": "australia",
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "result": "x",
+        "sourceGameId": "4627870"
       }
     ],
     "E": [
@@ -98,6 +242,42 @@
         "goalsAway": 0,
         "result": "1",
         "sourceGameId": "4627871"
+      },
+      {
+        "idx": 2,
+        "home": "germany",
+        "away": "ivory-coast",
+        "goalsHome": 2,
+        "goalsAway": 1,
+        "result": "1",
+        "sourceGameId": "4627872"
+      },
+      {
+        "idx": 3,
+        "home": "ecuador",
+        "away": "curacao",
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "result": "x",
+        "sourceGameId": "4627896"
+      },
+      {
+        "idx": 4,
+        "home": "ecuador",
+        "away": "germany",
+        "goalsHome": 2,
+        "goalsAway": 1,
+        "result": "1",
+        "sourceGameId": "4627858"
+      },
+      {
+        "idx": 5,
+        "home": "curacao",
+        "away": "ivory-coast",
+        "goalsHome": 0,
+        "goalsAway": 2,
+        "result": "2",
+        "sourceGameId": "4627897"
       }
     ],
     "F": [
@@ -118,6 +298,42 @@
         "goalsAway": 1,
         "result": "1",
         "sourceGameId": "4697705"
+      },
+      {
+        "idx": 2,
+        "home": "netherlands",
+        "away": "sweden",
+        "goalsHome": 5,
+        "goalsAway": 1,
+        "result": "1",
+        "sourceGameId": "4697706"
+      },
+      {
+        "idx": 3,
+        "home": "tunisia",
+        "away": "japan",
+        "goalsHome": 0,
+        "goalsAway": 4,
+        "result": "2",
+        "sourceGameId": "4627873"
+      },
+      {
+        "idx": 4,
+        "home": "tunisia",
+        "away": "netherlands",
+        "goalsHome": 1,
+        "goalsAway": 3,
+        "result": "2",
+        "sourceGameId": "4627874"
+      },
+      {
+        "idx": 5,
+        "home": "japan",
+        "away": "sweden",
+        "goalsHome": 1,
+        "goalsAway": 1,
+        "result": "x",
+        "sourceGameId": "4697707"
       }
     ],
     "G": [
@@ -138,6 +354,42 @@
         "goalsAway": 2,
         "result": "x",
         "sourceGameId": "4627902"
+      },
+      {
+        "idx": 2,
+        "home": "belgium",
+        "away": "iran",
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "result": "x",
+        "sourceGameId": "4627860"
+      },
+      {
+        "idx": 3,
+        "home": "new-zealand",
+        "away": "egypt",
+        "goalsHome": 1,
+        "goalsAway": 3,
+        "result": "2",
+        "sourceGameId": "4627901"
+      },
+      {
+        "idx": 4,
+        "home": "new-zealand",
+        "away": "belgium",
+        "goalsHome": 1,
+        "goalsAway": 5,
+        "result": "2",
+        "sourceGameId": "4627903"
+      },
+      {
+        "idx": 5,
+        "home": "egypt",
+        "away": "iran",
+        "goalsHome": 1,
+        "goalsAway": 1,
+        "result": "x",
+        "sourceGameId": "4627875"
       }
     ],
     "H": [
@@ -158,6 +410,42 @@
         "goalsAway": 1,
         "result": "x",
         "sourceGameId": "4627876"
+      },
+      {
+        "idx": 2,
+        "home": "spain",
+        "away": "saudi-arabia",
+        "goalsHome": 4,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627877"
+      },
+      {
+        "idx": 3,
+        "home": "uruguay",
+        "away": "cape-verde",
+        "goalsHome": 2,
+        "goalsAway": 2,
+        "result": "x",
+        "sourceGameId": "4627905"
+      },
+      {
+        "idx": 4,
+        "home": "uruguay",
+        "away": "spain",
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "result": "2",
+        "sourceGameId": "4627861"
+      },
+      {
+        "idx": 5,
+        "home": "cape-verde",
+        "away": "saudi-arabia",
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "result": "x",
+        "sourceGameId": "4627906"
       }
     ],
     "I": [
@@ -178,6 +466,42 @@
         "goalsAway": 4,
         "result": "2",
         "sourceGameId": "4697921"
+      },
+      {
+        "idx": 2,
+        "home": "france",
+        "away": "iraq",
+        "goalsHome": 3,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4697922"
+      },
+      {
+        "idx": 3,
+        "home": "norway",
+        "away": "senegal",
+        "goalsHome": 3,
+        "goalsAway": 2,
+        "result": "1",
+        "sourceGameId": "4627927"
+      },
+      {
+        "idx": 4,
+        "home": "norway",
+        "away": "france",
+        "goalsHome": 1,
+        "goalsAway": 4,
+        "result": "2",
+        "sourceGameId": "4627924"
+      },
+      {
+        "idx": 5,
+        "home": "senegal",
+        "away": "iraq",
+        "goalsHome": 5,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4697923"
       }
     ],
     "J": [
@@ -198,6 +522,42 @@
         "goalsAway": 1,
         "result": "1",
         "sourceGameId": "4627910"
+      },
+      {
+        "idx": 2,
+        "home": "argentina",
+        "away": "austria",
+        "goalsHome": 2,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627863"
+      },
+      {
+        "idx": 3,
+        "home": "jordan",
+        "away": "algeria",
+        "goalsHome": 1,
+        "goalsAway": 2,
+        "result": "2",
+        "sourceGameId": "4627911"
+      },
+      {
+        "idx": 4,
+        "home": "jordan",
+        "away": "argentina",
+        "goalsHome": 1,
+        "goalsAway": 3,
+        "result": "2",
+        "sourceGameId": "4627912"
+      },
+      {
+        "idx": 5,
+        "home": "algeria",
+        "away": "austria",
+        "goalsHome": 3,
+        "goalsAway": 3,
+        "result": "x",
+        "sourceGameId": "4627880"
       }
     ],
     "K": [
@@ -209,6 +569,51 @@
         "goalsAway": 1,
         "result": "x",
         "sourceGameId": "4697734"
+      },
+      {
+        "idx": 1,
+        "home": "uzbekistan",
+        "away": "colombia",
+        "goalsHome": 1,
+        "goalsAway": 3,
+        "result": "2",
+        "sourceGameId": "4627930"
+      },
+      {
+        "idx": 2,
+        "home": "portugal",
+        "away": "uzbekistan",
+        "goalsHome": 5,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627929"
+      },
+      {
+        "idx": 3,
+        "home": "colombia",
+        "away": "dr-congo",
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4697735"
+      },
+      {
+        "idx": 4,
+        "home": "colombia",
+        "away": "portugal",
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "result": "x",
+        "sourceGameId": "4627864"
+      },
+      {
+        "idx": 5,
+        "home": "dr-congo",
+        "away": "uzbekistan",
+        "goalsHome": 3,
+        "goalsAway": 1,
+        "result": "1",
+        "sourceGameId": "4697736"
       }
     ],
     "L": [
@@ -216,12 +621,55 @@
         "idx": 0,
         "home": "england",
         "away": "croatia",
-        "goalsHome": 3,
+        "goalsHome": 4,
         "goalsAway": 2,
         "result": "1",
-        "sourceGameId": "4627865",
-        "live": true,
-        "minute": "49'"
+        "sourceGameId": "4627865"
+      },
+      {
+        "idx": 1,
+        "home": "ghana",
+        "away": "panama",
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "result": "1",
+        "sourceGameId": "4627918"
+      },
+      {
+        "idx": 2,
+        "home": "england",
+        "away": "ghana",
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "result": "x",
+        "sourceGameId": "4627920"
+      },
+      {
+        "idx": 3,
+        "home": "panama",
+        "away": "croatia",
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "result": "2",
+        "sourceGameId": "4627935"
+      },
+      {
+        "idx": 4,
+        "home": "panama",
+        "away": "england",
+        "goalsHome": 0,
+        "goalsAway": 2,
+        "result": "2",
+        "sourceGameId": "4627933"
+      },
+      {
+        "idx": 5,
+        "home": "croatia",
+        "away": "ghana",
+        "goalsHome": 2,
+        "goalsAway": 1,
+        "result": "1",
+        "sourceGameId": "4627921"
       }
     ]
   },
@@ -245,196 +693,212 @@
   "liveKnockout": [],
   "teamGoals": {
     "mexico": {
-      "for": 2,
+      "for": 6,
       "against": 0
     },
     "south-africa": {
-      "for": 0,
-      "against": 2
+      "for": 2,
+      "against": 3
     },
     "south-korea": {
       "for": 2,
-      "against": 1
+      "against": 3
     },
     "czech-republic": {
-      "for": 1,
-      "against": 2
+      "for": 2,
+      "against": 6
     },
     "canada": {
-      "for": 1,
-      "against": 1
+      "for": 8,
+      "against": 3
     },
     "bosnia-herzegovina": {
-      "for": 1,
-      "against": 1
+      "for": 5,
+      "against": 6
     },
     "usa": {
-      "for": 4,
-      "against": 1
+      "for": 8,
+      "against": 4
     },
     "paraguay": {
-      "for": 1,
+      "for": 2,
       "against": 4
     },
     "qatar": {
-      "for": 1,
-      "against": 1
+      "for": 2,
+      "against": 10
     },
     "switzerland": {
-      "for": 1,
-      "against": 1
+      "for": 7,
+      "against": 3
     },
     "brazil": {
-      "for": 1,
-      "against": 1
-    },
-    "morocco": {
-      "for": 1,
-      "against": 1
-    },
-    "haiti": {
-      "for": 0,
-      "against": 1
-    },
-    "scotland": {
-      "for": 1,
-      "against": 0
-    },
-    "australia": {
-      "for": 2,
-      "against": 0
-    },
-    "turkey": {
-      "for": 0,
-      "against": 2
-    },
-    "germany": {
       "for": 7,
       "against": 1
     },
-    "curacao": {
-      "for": 1,
-      "against": 7
-    },
-    "netherlands": {
-      "for": 2,
-      "against": 2
-    },
-    "japan": {
-      "for": 2,
-      "against": 2
-    },
-    "ivory-coast": {
-      "for": 1,
-      "against": 0
-    },
-    "ecuador": {
-      "for": 0,
-      "against": 1
-    },
-    "sweden": {
-      "for": 5,
-      "against": 1
-    },
-    "tunisia": {
-      "for": 1,
-      "against": 5
-    },
-    "spain": {
-      "for": 0,
-      "against": 0
-    },
-    "cape-verde": {
-      "for": 0,
-      "against": 0
-    },
-    "belgium": {
-      "for": 1,
-      "against": 1
-    },
-    "egypt": {
-      "for": 1,
-      "against": 1
-    },
-    "saudi-arabia": {
-      "for": 1,
-      "against": 1
-    },
-    "uruguay": {
-      "for": 1,
-      "against": 1
-    },
-    "iran": {
-      "for": 2,
-      "against": 2
-    },
-    "new-zealand": {
-      "for": 2,
-      "against": 2
-    },
-    "france": {
-      "for": 3,
-      "against": 1
-    },
-    "senegal": {
-      "for": 1,
+    "morocco": {
+      "for": 6,
       "against": 3
     },
-    "iraq": {
+    "haiti": {
+      "for": 2,
+      "against": 8
+    },
+    "scotland": {
       "for": 1,
       "against": 4
     },
-    "norway": {
-      "for": 4,
-      "against": 1
+    "australia": {
+      "for": 2,
+      "against": 2
     },
-    "argentina": {
+    "turkey": {
       "for": 3,
+      "against": 5
+    },
+    "germany": {
+      "for": 10,
+      "against": 4
+    },
+    "curacao": {
+      "for": 1,
+      "against": 9
+    },
+    "netherlands": {
+      "for": 10,
+      "against": 4
+    },
+    "japan": {
+      "for": 7,
+      "against": 3
+    },
+    "ivory-coast": {
+      "for": 4,
+      "against": 2
+    },
+    "ecuador": {
+      "for": 2,
+      "against": 2
+    },
+    "sweden": {
+      "for": 7,
+      "against": 7
+    },
+    "tunisia": {
+      "for": 2,
+      "against": 12
+    },
+    "spain": {
+      "for": 5,
       "against": 0
     },
-    "algeria": {
-      "for": 0,
+    "cape-verde": {
+      "for": 2,
+      "against": 2
+    },
+    "belgium": {
+      "for": 6,
+      "against": 2
+    },
+    "egypt": {
+      "for": 5,
       "against": 3
     },
-    "austria": {
+    "saudi-arabia": {
+      "for": 1,
+      "against": 5
+    },
+    "uruguay": {
       "for": 3,
+      "against": 4
+    },
+    "iran": {
+      "for": 3,
+      "against": 3
+    },
+    "new-zealand": {
+      "for": 4,
+      "against": 10
+    },
+    "france": {
+      "for": 10,
+      "against": 2
+    },
+    "senegal": {
+      "for": 8,
+      "against": 6
+    },
+    "iraq": {
+      "for": 1,
+      "against": 12
+    },
+    "norway": {
+      "for": 8,
+      "against": 7
+    },
+    "argentina": {
+      "for": 8,
       "against": 1
     },
+    "algeria": {
+      "for": 5,
+      "against": 7
+    },
+    "austria": {
+      "for": 6,
+      "against": 6
+    },
     "jordan": {
-      "for": 1,
-      "against": 3
+      "for": 3,
+      "against": 8
     },
     "portugal": {
-      "for": 1,
+      "for": 6,
       "against": 1
     },
     "dr-congo": {
-      "for": 1,
-      "against": 1
+      "for": 4,
+      "against": 3
     },
     "england": {
-      "for": 3,
+      "for": 6,
       "against": 2
     },
     "croatia": {
+      "for": 5,
+      "against": 5
+    },
+    "ghana": {
       "for": 2,
-      "against": 3
+      "against": 2
+    },
+    "panama": {
+      "for": 0,
+      "against": 4
+    },
+    "uzbekistan": {
+      "for": 2,
+      "against": 11
+    },
+    "colombia": {
+      "for": 4,
+      "against": 1
     }
   },
   "playerGoals": {
-    "365-44031": 1,
+    "365-44031": 2,
     "365-23": 1,
     "365-76040": 1,
     "365-62200": 1,
     "365-79888": 1,
     "365-173389": 1,
-    "365-26351": 1,
+    "365-26351": 2,
     "365-70641": 2,
     "365-67603": 1,
     "365-73261": 1,
     "365-7866": 1,
-    "365-83511": 1,
-    "365-48298": 1,
+    "365-83511": 3,
+    "365-48298": 4,
     "365-44992": 1,
     "365-104967": 1,
     "365-74997": 1,
@@ -444,11 +908,11 @@
     "365-45579": 2,
     "365-78061": 1,
     "365-113499": 1,
-    "365-97612": 1,
+    "365-97612": 3,
     "365-9104": 1,
     "365-66991": 1,
-    "365-70599": 1,
-    "365-49029": 1,
+    "365-70599": 2,
+    "365-49029": 2,
     "365-71851": 1,
     "365-96810": 2,
     "365-46509": 1,
@@ -457,26 +921,114 @@
     "365-38412": 1,
     "365-60463": 1,
     "365-54131": 1,
-    "365-57329": 1,
-    "365-66691": 2,
-    "365-80503": 1,
+    "365-57329": 2,
+    "365-66691": 3,
+    "365-80503": 2,
     "365-72054": 1,
-    "365-39820": 2,
+    "365-39820": 4,
     "365-102289": 1,
     "365-177975": 1,
-    "365-65760": 2,
+    "365-65760": 4,
     "365-51222": 1,
     "365-66833": 1,
-    "365-874": 3,
+    "365-874": 6,
     "365-56073": 1,
     "365-83868": 1,
-    "365-1603": 1,
+    "365-1603": 2,
     "365-124523": 1,
-    "365-43328": 1,
-    "365-1669": 2,
+    "365-43328": 3,
+    "365-1669": 3,
     "365-96780": 1,
     "365-75935": 1,
-    "365-73000": 1
+    "365-73000": 2,
+    "365-39803": 1,
+    "365-175640": 1,
+    "365-47747": 2,
+    "365-113393": 1,
+    "365-47123": 1,
+    "365-48374": 1,
+    "365-61963": 1,
+    "365-91144": 1,
+    "365-179809": 3,
+    "365-49938": 2,
+    "365-217142": 2,
+    "365-487": 1,
+    "365-59838": 3,
+    "365-127364": 1,
+    "365-45036": 1,
+    "365-153703": 1,
+    "365-50077": 3,
+    "365-90655": 1,
+    "365-82864": 3,
+    "365-55881": 2,
+    "365-91025": 2,
+    "365-41440": 1,
+    "365-67428": 2,
+    "365-62220": 1,
+    "365-131182": 1,
+    "365-39775": 2,
+    "365-115707": 1,
+    "365-47165": 1,
+    "365-136277": 1,
+    "365-106620": 1,
+    "365-122016": 1,
+    "365-1439": 1,
+    "365-39109": 1,
+    "365-39779": 4,
+    "365-78193": 1,
+    "365-44892": 3,
+    "365-83869": 1,
+    "365-147750": 1,
+    "365-53791": 1,
+    "365-817": 2,
+    "365-77441": 1,
+    "365-53910": 1,
+    "365-42614": 1,
+    "365-175827": 1,
+    "365-187933": 1,
+    "365-61723": 1,
+    "365-47349": 1,
+    "365-100196": 1,
+    "365-72311": 1,
+    "365-150363": 1,
+    "365-133252": 1,
+    "365-119841": 1,
+    "365-80893": 1,
+    "365-5461": 1,
+    "365-100177": 1,
+    "365-61732": 1,
+    "365-44477": 2,
+    "365-143623": 1,
+    "365-74563": 1,
+    "365-67427": 1,
+    "365-47826": 1,
+    "365-101365": 1,
+    "365-98697": 1,
+    "365-78789": 1,
+    "365-5449": 1,
+    "365-84058": 1,
+    "365-109665": 1,
+    "365-105890": 1,
+    "365-79039": 2,
+    "365-88064": 1,
+    "365-78052": 1,
+    "365-85495": 1,
+    "365-27537": 2,
+    "365-843": 1,
+    "365-844": 1,
+    "365-57203": 1,
+    "365-134118": 1,
+    "365-7194": 1,
+    "365-51240": 1,
+    "365-50529": 1,
+    "365-129494": 1,
+    "365-135456": 1,
+    "365-7915": 1,
+    "365-764": 2,
+    "365-59421": 1,
+    "365-26886": 1,
+    "365-38667": 1,
+    "365-60255": 1
   },
   "scorers": {
     "365-44031": {
@@ -698,18 +1250,370 @@
     "365-73000": {
       "name": "Jude Bellingham",
       "teamId": "england"
+    },
+    "365-39803": {
+      "name": "Marcus Rashford",
+      "teamId": "england"
+    },
+    "365-175640": {
+      "name": "Caleb Yirenkyi",
+      "teamId": "ghana"
+    },
+    "365-47747": {
+      "name": "Daniel Munoz",
+      "teamId": "colombia"
+    },
+    "365-113393": {
+      "name": "Abbosbek Fayzullaev",
+      "teamId": "uzbekistan"
+    },
+    "365-47123": {
+      "name": "Luis Diaz",
+      "teamId": "colombia"
+    },
+    "365-48374": {
+      "name": "Jaminton Campaz",
+      "teamId": "colombia"
+    },
+    "365-61963": {
+      "name": "Michal Sadilek",
+      "teamId": "czech-republic"
+    },
+    "365-91144": {
+      "name": "Teboho Mokoena",
+      "teamId": "south-africa"
+    },
+    "365-179809": {
+      "name": "Johan Manzambi",
+      "teamId": "switzerland"
+    },
+    "365-49938": {
+      "name": "Ruben Vargas",
+      "teamId": "switzerland"
+    },
+    "365-217142": {
+      "name": "Ermin Mahmic",
+      "teamId": "bosnia-herzegovina"
+    },
+    "365-487": {
+      "name": "Granit Xhaka",
+      "teamId": "switzerland"
+    },
+    "365-59838": {
+      "name": "Jonathan David",
+      "teamId": "canada"
+    },
+    "365-127364": {
+      "name": "Nathan-Dylan Saliba",
+      "teamId": "canada"
+    },
+    "365-45036": {
+      "name": "Luis Romo",
+      "teamId": "mexico"
+    },
+    "365-153703": {
+      "name": "Alex Freeman",
+      "teamId": "usa"
+    },
+    "365-50077": {
+      "name": "Matheus Cunha",
+      "teamId": "brazil"
+    },
+    "365-90655": {
+      "name": "Matias Galarza Fonda",
+      "teamId": "paraguay"
+    },
+    "365-82864": {
+      "name": "Brian Brobbey",
+      "teamId": "netherlands"
+    },
+    "365-55881": {
+      "name": "Cody Gakpo",
+      "teamId": "netherlands"
+    },
+    "365-91025": {
+      "name": "Anthony Elanga",
+      "teamId": "sweden"
+    },
+    "365-41440": {
+      "name": "Franck Kessié",
+      "teamId": "ivory-coast"
+    },
+    "365-67428": {
+      "name": "Ayase Ueda",
+      "teamId": "japan"
+    },
+    "365-62220": {
+      "name": "Junya Ito",
+      "teamId": "japan"
+    },
+    "365-131182": {
+      "name": "Lamine Yamal",
+      "teamId": "spain"
+    },
+    "365-39775": {
+      "name": "Mikel Oyarzabal",
+      "teamId": "spain"
+    },
+    "365-115707": {
+      "name": "Kevin Lenini",
+      "teamId": "cape-verde"
+    },
+    "365-47165": {
+      "name": "Agustin Canobbio",
+      "teamId": "uruguay"
+    },
+    "365-136277": {
+      "name": "Hélio Varela",
+      "teamId": "cape-verde"
+    },
+    "365-106620": {
+      "name": "Finn Surman",
+      "teamId": "new-zealand"
+    },
+    "365-122016": {
+      "name": "Mostafa Ziko",
+      "teamId": "egypt"
+    },
+    "365-1439": {
+      "name": "Mohamed Salah",
+      "teamId": "egypt"
+    },
+    "365-39109": {
+      "name": "Mahmoud Trézéguet",
+      "teamId": "egypt"
+    },
+    "365-39779": {
+      "name": "Ousmane Dembélé",
+      "teamId": "france"
+    },
+    "365-78193": {
+      "name": "Marcus Pedersen",
+      "teamId": "norway"
+    },
+    "365-44892": {
+      "name": "Ismaila Sarr",
+      "teamId": "senegal"
+    },
+    "365-83869": {
+      "name": "Nizar Al Rashdan",
+      "teamId": "jordan"
+    },
+    "365-147750": {
+      "name": "Nadhir Benbouali",
+      "teamId": "algeria"
+    },
+    "365-53791": {
+      "name": "Amine Gouiri",
+      "teamId": "algeria"
+    },
+    "365-817": {
+      "name": "Cristiano Ronaldo",
+      "teamId": "portugal"
+    },
+    "365-77441": {
+      "name": "Nuno Mendes",
+      "teamId": "portugal"
+    },
+    "365-53910": {
+      "name": "Rafael Leão",
+      "teamId": "portugal"
+    },
+    "365-42614": {
+      "name": "Ante Budimir",
+      "teamId": "croatia"
+    },
+    "365-175827": {
+      "name": "Promise David",
+      "teamId": "canada"
+    },
+    "365-187933": {
+      "name": "Kerim Alajbegovic",
+      "teamId": "bosnia-herzegovina"
+    },
+    "365-61723": {
+      "name": "Hasan Al-Haydos",
+      "teamId": "qatar"
+    },
+    "365-47349": {
+      "name": "Achraf Hakimi",
+      "teamId": "morocco"
+    },
+    "365-100196": {
+      "name": "Wilson Isidor",
+      "teamId": "haiti"
+    },
+    "365-72311": {
+      "name": "Soufiane Rahimi",
+      "teamId": "morocco"
+    },
+    "365-150363": {
+      "name": "Gessime Yassine",
+      "teamId": "morocco"
+    },
+    "365-133252": {
+      "name": "Thapelo Maseko",
+      "teamId": "south-africa"
+    },
+    "365-119841": {
+      "name": "Mateo Chavez",
+      "teamId": "mexico"
+    },
+    "365-80893": {
+      "name": "Alvaro Fidalgo",
+      "teamId": "mexico"
+    },
+    "365-5461": {
+      "name": "Leroy Sané",
+      "teamId": "germany"
+    },
+    "365-100177": {
+      "name": "Nilson Angulo",
+      "teamId": "ecuador"
+    },
+    "365-61732": {
+      "name": "Gonzalo Plata",
+      "teamId": "ecuador"
+    },
+    "365-44477": {
+      "name": "Nicolas Pépé",
+      "teamId": "ivory-coast"
+    },
+    "365-143623": {
+      "name": "Hazem Mastouri",
+      "teamId": "tunisia"
+    },
+    "365-74563": {
+      "name": "Jan Paul van Hecke",
+      "teamId": "netherlands"
+    },
+    "365-67427": {
+      "name": "Daizen Maeda",
+      "teamId": "japan"
+    },
+    "365-47826": {
+      "name": "Auston Trusty",
+      "teamId": "usa"
+    },
+    "365-101365": {
+      "name": "Arda Güler",
+      "teamId": "turkey"
+    },
+    "365-98697": {
+      "name": "Baris Yilmaz",
+      "teamId": "turkey"
+    },
+    "365-78789": {
+      "name": "Sebastian Berhalter",
+      "teamId": "usa"
+    },
+    "365-5449": {
+      "name": "Kaan Ayhan",
+      "teamId": "turkey"
+    },
+    "365-84058": {
+      "name": "Thelo Aasgaard",
+      "teamId": "norway"
+    },
+    "365-109665": {
+      "name": "Désiré Doué",
+      "teamId": "france"
+    },
+    "365-105890": {
+      "name": "Habib Diarra",
+      "teamId": "senegal"
+    },
+    "365-79039": {
+      "name": "Pape Gueye",
+      "teamId": "senegal"
+    },
+    "365-88064": {
+      "name": "Iliman Ndiaye",
+      "teamId": "senegal"
+    },
+    "365-78052": {
+      "name": "Álex Baena",
+      "teamId": "spain"
+    },
+    "365-85495": {
+      "name": "Mahmoud Saber",
+      "teamId": "egypt"
+    },
+    "365-27537": {
+      "name": "Leandro Trossard",
+      "teamId": "belgium"
+    },
+    "365-843": {
+      "name": "Kevin De Bruyne",
+      "teamId": "belgium"
+    },
+    "365-844": {
+      "name": "Romelu Lukaku",
+      "teamId": "belgium"
+    },
+    "365-57203": {
+      "name": "Alexis Saelemaekers",
+      "teamId": "belgium"
+    },
+    "365-134118": {
+      "name": "Petar Sucic",
+      "teamId": "croatia"
+    },
+    "365-7194": {
+      "name": "Derrick Luckassen",
+      "teamId": "ghana"
+    },
+    "365-51240": {
+      "name": "Nikola Vlašić",
+      "teamId": "croatia"
+    },
+    "365-50529": {
+      "name": "Eldor Shomurodov",
+      "teamId": "uzbekistan"
+    },
+    "365-129494": {
+      "name": "Fiston Mayele",
+      "teamId": "dr-congo"
+    },
+    "365-135456": {
+      "name": "Rafik Belghali",
+      "teamId": "algeria"
+    },
+    "365-7915": {
+      "name": "Marcel Sabitzer",
+      "teamId": "austria"
+    },
+    "365-764": {
+      "name": "Riyad Mahrez",
+      "teamId": "algeria"
+    },
+    "365-59421": {
+      "name": "Sasa Kalajdzic",
+      "teamId": "austria"
+    },
+    "365-26886": {
+      "name": "Giovani Lo Celso",
+      "teamId": "argentina"
+    },
+    "365-38667": {
+      "name": "Lautaro Martinez",
+      "teamId": "argentina"
+    },
+    "365-60255": {
+      "name": "Musa Al-Taamari",
+      "teamId": "jordan"
     }
   },
   "topScorerPlayerId": "",
-  "lastUpdated": "2026-06-17T21:12:47.094Z",
+  "lastUpdated": "2026-06-28T13:29:12.098Z",
   "source": "365scores",
-  "liveCount": 1,
+  "liveCount": 0,
   "sourceMeta": {
     "competitionId": 5930,
-    "games": 72,
-    "finishedGames": 21,
-    "liveGames": 1,
-    "groupGames": 22,
+    "games": 88,
+    "finishedGames": 72,
+    "liveGames": 0,
+    "groupGames": 72,
     "knockoutGames": 0,
     "skippedUnknownTeams": 0,
     "errors": [],
