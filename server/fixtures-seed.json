@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-05-26T18:39:30.109Z",
+  "updatedAt": "2026-07-10T08:40:30.870Z",
   "matches": {
     "A1": {
       "round": "group",
       "group": "A",
       "fixtureIdx": 0,
       "kickoff": "2026-06-11T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627866
@@ -16,7 +16,7 @@
       "group": "A",
       "fixtureIdx": 1,
       "kickoff": "2026-06-12T02:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697696
@@ -26,7 +26,7 @@
       "group": "B",
       "fixtureIdx": 0,
       "kickoff": "2026-06-12T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697699
@@ -36,7 +36,7 @@
       "group": "D",
       "fixtureIdx": 0,
       "kickoff": "2026-06-13T01:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627869
@@ -46,7 +46,7 @@
       "group": "B",
       "fixtureIdx": 1,
       "kickoff": "2026-06-13T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627868
@@ -56,7 +56,7 @@
       "group": "C",
       "fixtureIdx": 0,
       "kickoff": "2026-06-13T22:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627856
@@ -66,7 +66,7 @@
       "group": "C",
       "fixtureIdx": 1,
       "kickoff": "2026-06-14T01:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627891
@@ -76,7 +76,7 @@
       "group": "D",
       "fixtureIdx": 1,
       "kickoff": "2026-06-14T04:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697702
@@ -86,7 +86,7 @@
       "group": "E",
       "fixtureIdx": 0,
       "kickoff": "2026-06-14T17:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627884
@@ -96,7 +96,7 @@
       "group": "F",
       "fixtureIdx": 0,
       "kickoff": "2026-06-14T20:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627859
@@ -106,7 +106,7 @@
       "group": "E",
       "fixtureIdx": 1,
       "kickoff": "2026-06-14T23:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627871
@@ -116,7 +116,7 @@
       "group": "F",
       "fixtureIdx": 1,
       "kickoff": "2026-06-15T02:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697705
@@ -126,7 +126,7 @@
       "group": "H",
       "fixtureIdx": 0,
       "kickoff": "2026-06-15T16:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627904
@@ -136,7 +136,7 @@
       "group": "G",
       "fixtureIdx": 0,
       "kickoff": "2026-06-15T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627932
@@ -146,7 +146,7 @@
       "group": "H",
       "fixtureIdx": 1,
       "kickoff": "2026-06-15T22:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627876
@@ -156,7 +156,7 @@
       "group": "G",
       "fixtureIdx": 1,
       "kickoff": "2026-06-16T01:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627902
@@ -166,7 +166,7 @@
       "group": "I",
       "fixtureIdx": 0,
       "kickoff": "2026-06-16T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627862
@@ -176,7 +176,7 @@
       "group": "I",
       "fixtureIdx": 1,
       "kickoff": "2026-06-16T22:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697921
@@ -186,7 +186,7 @@
       "group": "J",
       "fixtureIdx": 0,
       "kickoff": "2026-06-17T01:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627879
@@ -196,7 +196,7 @@
       "group": "J",
       "fixtureIdx": 1,
       "kickoff": "2026-06-17T04:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627910
@@ -206,7 +206,7 @@
       "group": "K",
       "fixtureIdx": 0,
       "kickoff": "2026-06-17T17:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697734
@@ -216,7 +216,7 @@
       "group": "L",
       "fixtureIdx": 0,
       "kickoff": "2026-06-17T20:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627865
@@ -226,7 +226,7 @@
       "group": "L",
       "fixtureIdx": 1,
       "kickoff": "2026-06-17T23:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627918
@@ -236,7 +236,7 @@
       "group": "K",
       "fixtureIdx": 1,
       "kickoff": "2026-06-18T02:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627930
@@ -246,7 +246,7 @@
       "group": "A",
       "fixtureIdx": 3,
       "kickoff": "2026-06-18T16:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697697
@@ -256,7 +256,7 @@
       "group": "B",
       "fixtureIdx": 3,
       "kickoff": "2026-06-18T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697700
@@ -266,7 +266,7 @@
       "group": "B",
       "fixtureIdx": 2,
       "kickoff": "2026-06-18T22:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627937
@@ -276,7 +276,7 @@
       "group": "A",
       "fixtureIdx": 2,
       "kickoff": "2026-06-19T01:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627854
@@ -286,7 +286,7 @@
       "group": "D",
       "fixtureIdx": 2,
       "kickoff": "2026-06-19T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627857
@@ -296,7 +296,7 @@
       "group": "C",
       "fixtureIdx": 3,
       "kickoff": "2026-06-19T22:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627882
@@ -306,7 +306,7 @@
       "group": "C",
       "fixtureIdx": 2,
       "kickoff": "2026-06-20T00:30:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627883
@@ -316,7 +316,7 @@
       "group": "D",
       "fixtureIdx": 3,
       "kickoff": "2026-06-20T03:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697703
@@ -326,7 +326,7 @@
       "group": "F",
       "fixtureIdx": 2,
       "kickoff": "2026-06-20T17:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697706
@@ -336,7 +336,7 @@
       "group": "E",
       "fixtureIdx": 2,
       "kickoff": "2026-06-20T20:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627872
@@ -346,7 +346,7 @@
       "group": "E",
       "fixtureIdx": 3,
       "kickoff": "2026-06-21T00:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627896
@@ -356,7 +356,7 @@
       "group": "F",
       "fixtureIdx": 3,
       "kickoff": "2026-06-21T04:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627873
@@ -366,7 +366,7 @@
       "group": "H",
       "fixtureIdx": 2,
       "kickoff": "2026-06-21T16:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627877
@@ -376,7 +376,7 @@
       "group": "G",
       "fixtureIdx": 2,
       "kickoff": "2026-06-21T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627860
@@ -386,7 +386,7 @@
       "group": "H",
       "fixtureIdx": 3,
       "kickoff": "2026-06-21T22:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627905
@@ -396,7 +396,7 @@
       "group": "G",
       "fixtureIdx": 3,
       "kickoff": "2026-06-22T01:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627901
@@ -406,7 +406,7 @@
       "group": "J",
       "fixtureIdx": 2,
       "kickoff": "2026-06-22T17:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627863
@@ -416,7 +416,7 @@
       "group": "I",
       "fixtureIdx": 2,
       "kickoff": "2026-06-22T21:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697922
@@ -426,7 +426,7 @@
       "group": "I",
       "fixtureIdx": 3,
       "kickoff": "2026-06-23T00:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627927
@@ -436,7 +436,7 @@
       "group": "J",
       "fixtureIdx": 3,
       "kickoff": "2026-06-23T03:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627911
@@ -446,7 +446,7 @@
       "group": "K",
       "fixtureIdx": 2,
       "kickoff": "2026-06-23T17:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627929
@@ -456,7 +456,7 @@
       "group": "L",
       "fixtureIdx": 2,
       "kickoff": "2026-06-23T20:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627920
@@ -466,7 +466,7 @@
       "group": "L",
       "fixtureIdx": 3,
       "kickoff": "2026-06-23T23:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627935
@@ -476,7 +476,7 @@
       "group": "K",
       "fixtureIdx": 3,
       "kickoff": "2026-06-24T02:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697735
@@ -486,7 +486,7 @@
       "group": "B",
       "fixtureIdx": 4,
       "kickoff": "2026-06-24T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627855
@@ -496,7 +496,7 @@
       "group": "B",
       "fixtureIdx": 5,
       "kickoff": "2026-06-24T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697701
@@ -506,7 +506,7 @@
       "group": "C",
       "fixtureIdx": 4,
       "kickoff": "2026-06-24T22:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627881
@@ -516,7 +516,7 @@
       "group": "C",
       "fixtureIdx": 5,
       "kickoff": "2026-06-24T22:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627938
@@ -526,7 +526,7 @@
       "group": "A",
       "fixtureIdx": 5,
       "kickoff": "2026-06-25T01:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627867
@@ -536,7 +536,7 @@
       "group": "A",
       "fixtureIdx": 4,
       "kickoff": "2026-06-25T01:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697698
@@ -546,7 +546,7 @@
       "group": "E",
       "fixtureIdx": 4,
       "kickoff": "2026-06-25T20:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627858
@@ -556,7 +556,7 @@
       "group": "E",
       "fixtureIdx": 5,
       "kickoff": "2026-06-25T20:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627897
@@ -566,7 +566,7 @@
       "group": "F",
       "fixtureIdx": 4,
       "kickoff": "2026-06-25T23:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627874
@@ -576,7 +576,7 @@
       "group": "F",
       "fixtureIdx": 5,
       "kickoff": "2026-06-25T23:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697707
@@ -586,7 +586,7 @@
       "group": "D",
       "fixtureIdx": 5,
       "kickoff": "2026-06-26T02:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627870
@@ -596,7 +596,7 @@
       "group": "D",
       "fixtureIdx": 4,
       "kickoff": "2026-06-26T02:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697704
@@ -606,7 +606,7 @@
       "group": "I",
       "fixtureIdx": 4,
       "kickoff": "2026-06-26T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627924
@@ -616,7 +616,7 @@
       "group": "I",
       "fixtureIdx": 5,
       "kickoff": "2026-06-26T19:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697923
@@ -626,7 +626,7 @@
       "group": "H",
       "fixtureIdx": 4,
       "kickoff": "2026-06-27T00:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627861
@@ -636,7 +636,7 @@
       "group": "H",
       "fixtureIdx": 5,
       "kickoff": "2026-06-27T00:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627906
@@ -646,7 +646,7 @@
       "group": "G",
       "fixtureIdx": 5,
       "kickoff": "2026-06-27T03:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627875
@@ -656,7 +656,7 @@
       "group": "G",
       "fixtureIdx": 4,
       "kickoff": "2026-06-27T03:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627903
@@ -666,7 +666,7 @@
       "group": "L",
       "fixtureIdx": 5,
       "kickoff": "2026-06-27T21:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627921
@@ -676,7 +676,7 @@
       "group": "L",
       "fixtureIdx": 4,
       "kickoff": "2026-06-27T21:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627933
@@ -686,7 +686,7 @@
       "group": "K",
       "fixtureIdx": 4,
       "kickoff": "2026-06-27T23:30:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627864
@@ -696,7 +696,7 @@
       "group": "K",
       "fixtureIdx": 5,
       "kickoff": "2026-06-27T23:30:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4697736
@@ -706,7 +706,7 @@
       "group": "J",
       "fixtureIdx": 5,
       "kickoff": "2026-06-28T02:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627880
@@ -716,7 +716,7 @@
       "group": "J",
       "fixtureIdx": 4,
       "kickoff": "2026-06-28T02:00:00.000Z",
-      "statusText": "Scheduled",
+      "statusText": "Ended",
       "venueName": null,
       "venueCity": null,
       "sourceGameId": 4627912
@@ -725,7 +725,7 @@
   "sourceMeta": {
     "source": "365scores",
     "datesScanned": 39,
-    "totalGames": 72,
+    "totalGames": 100,
     "matchedGroup": 72,
     "errors": []
   }

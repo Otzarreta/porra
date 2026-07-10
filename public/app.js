@@ -469,7 +469,7 @@ function buildHomeMatches() {
     ['third', 'Tercer puesto'],
     ['final', 'Final'],
   ];
-  const realResolved = resolveBracketMatches(realGroupShape(state.realResults), {});
+  const realResolved = resolveBracketMatches(realGroupShape(state.realResults), realBracketWinners(state.realResults));
   const koScores = knockoutScoreIndex(state.realResults);
   container.innerHTML = rounds.map(([round, label]) => `
     <div class="home-match-group">
@@ -502,6 +502,38 @@ function buildHomeMatches() {
       }).join('')}
     </div>
   `).join('');
+}
+
+// Deriva los ganadores reales del cuadro ({M73: teamId, ...}) ronda a ronda:
+// los slots de cada ronda dependen de los ganadores de la anterior, así que
+// se itera hasta que ninguna pasada resuelva partidos nuevos.
+function realBracketWinners(realResults) {
+  const winnerIndex = {};
+  Object.entries(realResults?.knockoutMatches || {}).forEach(([round, list]) => {
+    (Array.isArray(list) ? list : []).forEach(entry => {
+      if (!entry?.homeId || !entry?.awayId || !entry?.winner) return;
+      winnerIndex[`${round}|${entry.homeId}|${entry.awayId}`] = entry.winner;
+      winnerIndex[`${round}|${entry.awayId}|${entry.homeId}`] = entry.winner;
+    });
+  });
+  const groupShape = realGroupShape(realResults);
+  const winners = {};
+  for (let pass = 0; pass < 6; pass++) {
+    const resolved = resolveBracketMatches(groupShape, winners);
+    let changed = false;
+    Object.values(resolved.matches).forEach(match => {
+      if (winners[match.id]) return;
+      const [a, b] = match.slots || [];
+      if (!a || !b) return;
+      const winner = winnerIndex[`${match.round}|${a}|${b}`];
+      if (winner) {
+        winners[match.id] = winner;
+        changed = true;
+      }
+    });
+    if (!changed) break;
+  }
+  return winners;
 }
 
 function knockoutScoreIndex(realResults) {
